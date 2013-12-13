@@ -12,6 +12,7 @@ package vazkii.recubed.common.core.handler;
 
 import java.util.List;
 
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EnumStatus;
@@ -40,7 +41,8 @@ public final class GeneralEventHandler {
 			EntityPlayer player = (EntityPlayer) event.source.getEntity();
 			String name = MiscHelper.getEntityString(event.entity);
 
-			ReCubedAPI.addValueToCategory(LibCategories.DAMAGE_DEALT, player.username, name, (int) event.ammount);
+			if(ReCubedAPI.validatePlayer(player))
+				ReCubedAPI.addValueToCategory(LibCategories.DAMAGE_DEALT, player.username, name, (int) event.ammount);
 		}
 	}
 
@@ -55,7 +57,8 @@ public final class GeneralEventHandler {
 			if(event.source.getEntity() instanceof EntityPlayer)
 				name = ((EntityPlayer) event.entity).username;
 
-			ReCubedAPI.addValueToCategory(LibCategories.DAMAGE_TAKEN, player.username, name, (int) event.ammount);
+			if(ReCubedAPI.validatePlayer(player))
+				ReCubedAPI.addValueToCategory(LibCategories.DAMAGE_TAKEN, player.username, name, (int) event.ammount);
 		}
 	}
 
@@ -63,7 +66,8 @@ public final class GeneralEventHandler {
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onItemPickedUp(EntityItemPickupEvent event) {
 		ItemStack stack = event.item.getEntityItem();
-		ReCubedAPI.addValueToCategory(LibCategories.ITEMS_PICKED_UP, event.entityPlayer.username, stack.getUnlocalizedName() + ".name", stack.stackSize);
+		if(ReCubedAPI.validatePlayer(event.entityPlayer))
+			ReCubedAPI.addValueToCategory(LibCategories.ITEMS_PICKED_UP, event.entityPlayer.username, stack.getUnlocalizedName() + ".name", stack.stackSize);
 	}
 
 	// JUMPS DONE
@@ -71,28 +75,34 @@ public final class GeneralEventHandler {
 	public void onPlayerJump(LivingJumpEvent event) {
 		if(event.entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entity;
-			ReCubedAPI.addValueToCategory(LibCategories.JUMPS_DONE, player.username, player.isSprinting() ? "recubed.misc.sprint_jump" : "recubed.misc.jump", 1);
+			System.out.println("jump");
+
+			if(ReCubedAPI.validatePlayer(player)) {
+				ReCubedAPI.addValueToCategory(LibCategories.JUMPS_DONE, player.username, player.isSprinting() ? "recubed.misc.sprint_jump" : "recubed.misc.jump", 1);
+			}
 		}
 	}
 
 	// MESSAGES SENT
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onMessageReceived(ServerChatEvent event) {
-		ReCubedAPI.addValueToCategory(LibCategories.MESSAGES_SENT, event.username, "recubed.misc.chat", 1);
+		if(ReCubedAPI.validatePlayer(event.player))
+			ReCubedAPI.addValueToCategory(LibCategories.MESSAGES_SENT, event.username, "recubed.misc.chat", 1);
 	}
 
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onMessageReceived(CommandEvent event) {
-		if(event.sender instanceof EntityPlayer)
+		if(event.sender instanceof EntityPlayer && ReCubedAPI.validatePlayer((EntityPlayer) event.sender))
 			ReCubedAPI.addValueToCategory(LibCategories.MESSAGES_SENT, event.sender.getCommandSenderName(), "recubed.misc.command", 1);
 	}
 	
 	// MOBS AGGROED
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onMobGetTarget(LivingSetAttackTargetEvent event) {
-		if(event.target instanceof EntityPlayer) {
+		if(event.target instanceof EntityPlayer && EntityList.getEntityString(event.entity) != null) {
 			EntityPlayer player = (EntityPlayer) event.target;
-			ReCubedAPI.addValueToCategory(LibCategories.MOBS_AGGROED, player.username, MiscHelper.getEntityString(event.entity), 1);
+			if(ReCubedAPI.validatePlayer(player));
+				ReCubedAPI.addValueToCategory(LibCategories.MOBS_AGGROED, player.username, MiscHelper.getEntityString(event.entity), 1);
 		}
 	}
 
@@ -103,7 +113,8 @@ public final class GeneralEventHandler {
 			EntityPlayer player = (EntityPlayer) event.source.getEntity();
 			String name = MiscHelper.getEntityString(event.entity);
 
-			ReCubedAPI.addValueToCategory(LibCategories.MOBS_KILLED, player.username, name, 1);
+			if(ReCubedAPI.validatePlayer(player));
+				ReCubedAPI.addValueToCategory(LibCategories.MOBS_KILLED, player.username, name, 1);
 		}
 	}
 
@@ -116,17 +127,23 @@ public final class GeneralEventHandler {
 			if(event.source.getEntity() != null)
 				name = MiscHelper.getEntityString(event.source.getEntity());
 			if(event.source.getEntity() instanceof EntityPlayer) {
-				name = ((EntityPlayer) event.entity).username;
-				ReCubedAPI.addValueToCategory(LibCategories.PLAYER_KILLS, name, player.username, 1);
+				name = ((EntityPlayer) event.source.getEntity()).username;
+				if(ReCubedAPI.validatePlayer((EntityPlayer) event.entity));
+					ReCubedAPI.addValueToCategory(LibCategories.PLAYER_KILLS, name, player.username, 1);
 			}
 
-			ReCubedAPI.addValueToCategory(LibCategories.TIMES_DIED, player.username, name, 1);
+			if(ReCubedAPI.validatePlayer(player));
+				ReCubedAPI.addValueToCategory(LibCategories.TIMES_DIED, player.username, name, 1);
 		}
 	}
 
 	// TIMES SLEPT
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onPlayerSleep(PlayerSleepInBedEvent event) {
+		if(!ReCubedAPI.validatePlayer(event.entityPlayer))
+			return;
+
+		
 		EnumStatus status = event.result;
 		if(status == null) {
 			findStatus : {

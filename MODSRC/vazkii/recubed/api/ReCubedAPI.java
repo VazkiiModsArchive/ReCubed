@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.common.FakePlayer;
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.PlayerCategoryData;
 import vazkii.recubed.api.internal.ServerData;
@@ -23,9 +25,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public final class ReCubedAPI {
 	
 	public static final List<String> categories = new ArrayList();
-	
-	@SideOnly(Side.CLIENT)
-	public static final HashMap<String, Category> clientData = new HashMap();
 	
 	public static void registerCategory(String category) {
 		if(!categories.contains(category))
@@ -55,6 +54,10 @@ public final class ReCubedAPI {
 			PlayerCategoryData data = category_.playerData.get(player);
 			data.stats.put(tag, value);
 		}
+	}
+
+	public static boolean validatePlayer(EntityPlayer player) {
+		return !player.worldObj.isRemote && !(player instanceof FakePlayer);
 	}
 
 }

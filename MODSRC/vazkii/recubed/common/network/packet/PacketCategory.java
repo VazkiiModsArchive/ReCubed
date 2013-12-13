@@ -18,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.api.internal.Category;
+import vazkii.recubed.api.internal.ClientData;
 import vazkii.recubed.api.internal.PlayerCategoryData;
 import vazkii.recubed.api.internal.ServerData;
 import cpw.mods.fml.common.network.Player;
@@ -32,7 +33,7 @@ public class PacketCategory implements IPacket {
 	
 	@Override
 	public void handle(INetworkManager manager, Player player) {
-		ReCubedAPI.clientData.put(category.name, category);
+		ClientData.categories.put(category.name, category);
 	}
 
 	public static Collection<IPacket> allCategoryPackets() {

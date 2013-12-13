@@ -20,6 +20,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.api.internal.Category;
+import vazkii.recubed.api.internal.ClientData;
 import vazkii.recubed.api.internal.PlayerCategoryData;
 import vazkii.recubed.client.renders.PieChartRender;
 import vazkii.recubed.client.renders.PieChartRender.Entry;
@@ -56,7 +57,7 @@ public class GuiStatViewer extends GuiCategoryList {
 	
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {
-		Category category = ReCubedAPI.clientData.get(ReCubedAPI.categories.get(selectedCategory));
+		Category category = fromCurrentCategoryInt();
 
 		if(par1GuiButton.id == 0) {
 			if(this.category instanceof PlayerCategoryData)
@@ -86,6 +87,6 @@ public class GuiStatViewer extends GuiCategoryList {
 	}
 	
 	private Category fromCurrentCategoryInt() {
-		return ReCubedAPI.clientData.get(ReCubedAPI.categories.get(indexes.get(selectedCategory)));
+		return ClientData.categories.get(ReCubedAPI.categories.get(indexes.get(selectedCategory)));
 	}
 }

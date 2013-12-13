@@ -25,7 +25,8 @@ public final class PlayerTracker implements IPlayerTracker {
 	public void onPlayerLogin(EntityPlayer player) {
 		ServerData.onPlayerLogin(player.username);
 		
-		ReCubedAPI.addValueToCategory(LibCategories.TIMES_PLAYED, player.username, "recubed.misc.login", 1);
+		if(ReCubedAPI.validatePlayer(player))
+			ReCubedAPI.addValueToCategory(LibCategories.TIMES_PLAYED, player.username, "recubed.misc.login", 1);
 		
 		for(IPacket packet : PacketCategory.allCategoryPackets())
 			PacketManager.dispatchToClient(packet, (Player) player);
