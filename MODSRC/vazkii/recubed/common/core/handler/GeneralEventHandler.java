@@ -10,12 +10,13 @@
  */
 package vazkii.recubed.common.core.handler;
 
-import vazkii.recubed.api.ReCubedAPI;
-import vazkii.recubed.common.lib.LibCategories;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.EventPriority;
 import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import vazkii.recubed.api.ReCubedAPI;
+import vazkii.recubed.common.lib.LibCategories;
 
 public final class GeneralEventHandler {
 
@@ -28,6 +29,18 @@ public final class GeneralEventHandler {
 				name = event.source.getEntity().getEntityName();
 			
 			ReCubedAPI.addValueToCategory(LibCategories.DAMAGE_TAKEN, player.username, name, (int) event.ammount);
+		}
+	}
+	
+	@ForgeSubscribe(priority = EventPriority.LOWEST)
+	public void onPlayerDie(LivingDeathEvent event) {
+		if(event.entity instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) event.entity;
+			String name = "recubed.misc.envDamage";
+			if(event.source.getEntity() != null)
+				name = event.source.getEntity().getEntityName();
+			
+			ReCubedAPI.addValueToCategory(LibCategories.TIMES_DIED, player.username, name, 1);
 		}
 	}
 	
