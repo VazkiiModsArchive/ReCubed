@@ -13,12 +13,38 @@ package vazkii.recubed.api;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import vazkii.recubed.api.internal.Category;
+import vazkii.recubed.api.internal.PlayerCategoryData;
+import vazkii.recubed.api.internal.ServerData;
+
 public final class ReCubedAPI {
 	
 	public static final Set<String> categories = new LinkedHashSet();
 	
 	public static void registerCategory(String category) {
 		categories.add(category);
+	}
+	
+	public static int getValueFromCategory(String category, String player, String tag) {
+		Category category_ = ServerData.categories.get(category);
+		PlayerCategoryData data = category_.playerData.get(player);
+		return data.stats.get(tag);
+	}
+	
+	public static void addValueToCategory(String category, String player, String tag, int value) {
+		int val = getValueFromCategory(category, player, tag);
+		setValueToCategory(category, player, tag, val + value);
+	}
+	
+	public static void sbtValueFromCategory(String category, String player, String tag, int value) {
+		int val = getValueFromCategory(category, player, tag);
+		setValueToCategory(category, player, tag, val - value);
+	}
+	
+	public static void setValueToCategory(String category, String player, String tag, int value) {
+		Category category_ = ServerData.categories.get(category);
+		PlayerCategoryData data = category_.playerData.get(player);
+		data.stats.put(tag, value);
 	}
 
 }
