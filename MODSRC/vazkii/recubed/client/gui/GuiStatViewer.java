@@ -35,8 +35,8 @@ public class GuiStatViewer extends GuiCategoryList {
 		super.initGui();
 
 		buttonList.clear();
-		buttonList.add(new GuiButton(0, x + 310, y + 170, 80, 20, StatCollector.translateToLocal("recubed.misc.back")));
-		buttonList.add(new GuiButton(1, x + 310, y + 10, 80, 20, StatCollector.translateToLocal("recubed.misc.your_stats")));		
+		buttonList.add(new GuiButton(0, x + 340, y + 145, 50, 20, StatCollector.translateToLocal("recubed.misc.back")));
+		buttonList.add(new GuiButton(1, x + 310, y + 170, 80, 20, StatCollector.translateToLocal("recubed.misc.your_stats")));		
 	}
 	
 	@Override
