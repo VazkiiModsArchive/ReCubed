@@ -16,6 +16,7 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
+import vazkii.recubed.client.core.handler.ClientCacheHandler;
 import vazkii.recubed.common.lib.LibMisc;
 
 public class GuiReCubedMenu extends GuiScreen {
@@ -35,6 +36,26 @@ public class GuiReCubedMenu extends GuiScreen {
 		buttonList.add(new GuiButton(0, x + 20, y + 60, 160, 20, StatCollector.translateToLocal("recubed.misc.view_stats")));
 		buttonList.add(new GuiButton(1, x + 20, y + 90, 160, 20, StatCollector.translateToLocal("recubed.misc.set_tracked")));
 		buttonList.add(new GuiButton(2, x + 20, y + 120, 160, 20, StatCollector.translateToLocal("recubed.misc.move_hud")));
+		buttonList.add(new GuiShowHUDCheckboxButton(3, x + 20, y + 150));
+	}
+	
+	@Override
+	protected void actionPerformed(GuiButton par1GuiButton) {
+		switch(par1GuiButton.id) {
+			case 0 : {
+				
+			}
+			case 1 : {
+				
+			}
+			case 2 : {
+				
+			}
+			case 3 : {
+				ClientCacheHandler.drawHud = !ClientCacheHandler.drawHud;
+				ClientCacheHandler.findCompoundAndWrite();
+			}
+		}
 	}
 	
 	@Override

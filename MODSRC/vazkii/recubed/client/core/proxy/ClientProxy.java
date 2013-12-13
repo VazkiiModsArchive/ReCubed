@@ -11,6 +11,7 @@
 package vazkii.recubed.client.core.proxy;
 
 import net.minecraft.network.INetworkManager;
+import vazkii.recubed.client.core.handler.ClientCacheHandler;
 import vazkii.recubed.client.core.handler.ClientTickHandler;
 import vazkii.recubed.client.core.handler.LocalizationHandler;
 import vazkii.recubed.common.core.proxy.CommonProxy;
@@ -27,6 +28,8 @@ public class ClientProxy extends CommonProxy {
 		super.init(event);
 		LocalizationHandler.loadLangs();
 		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
+		
+		ClientCacheHandler.findCompoundAndLoad();
 	}
 	
 	@Override
