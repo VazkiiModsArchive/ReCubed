@@ -10,6 +10,15 @@
  */
 package vazkii.recubed.api;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 public final class ReCubedAPI {
+	
+	public static final Set<String> categories = new LinkedHashSet();
+	
+	public static void registerCategory(String category) {
+		categories.add(category);
+	}
 
 }

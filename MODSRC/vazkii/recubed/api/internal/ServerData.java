@@ -13,8 +13,32 @@ package vazkii.recubed.api.internal;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import net.minecraft.nbt.NBTTagCompound;
+import vazkii.recubed.api.ReCubedAPI;
+
 public final class ServerData implements Serializable {
 
 	public static final HashMap<String, Category> categories = new HashMap();
+	
+	public static void reset() {
+		categories.clear();
+	}
+	
+	public static void init() {
+		for(String cat : ReCubedAPI.categories)
+			registerCategory(cat);
+	}
+	
+	public static void registerCategory(String name) {
+		categories.put(name, new Category(name));
+	}
+	
+	public static void loadFromNBT(NBTTagCompound cmp) {
+		
+	}
+	
+	public static void writeToNBT(NBTTagCompound cmp) {
+		
+	}
 	
 }

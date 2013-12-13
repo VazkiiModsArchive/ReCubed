@@ -11,7 +11,15 @@
 package vazkii.recubed.api.internal;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public final class PlayerCategoryData implements Serializable {
 
+	public final HashMap<String, Integer> stats = new HashMap();
+	public final String name;
+	
+	public PlayerCategoryData(String name) {
+		this.name = name;
+	}
+	
 }

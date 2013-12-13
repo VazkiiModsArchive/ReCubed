@@ -16,5 +16,10 @@ import java.util.HashMap;
 public final class Category implements Serializable {
 
 	public final HashMap<String, PlayerCategoryData> playerData = new HashMap();
+	public final String name;
+	
+	public Category(String name) {
+		this.name = name;
+	}
 	
 }
