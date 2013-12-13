@@ -20,7 +20,7 @@ public class GuiCategorySlot extends GuiScrollingList {
 	GuiCategoryList parent;
 	
 	public GuiCategorySlot(GuiCategoryList parent) {
-		super(Minecraft.getMinecraft(), 100, parent.guiHeight, parent.y, parent.y + parent.guiHeight, parent.x, 16);
+		super(Minecraft.getMinecraft(), 125, parent.guiHeight, parent.y + 16, parent.y + parent.guiHeight - 16, parent.x, 16);
 		this.parent = parent;
 	}
 
@@ -51,6 +51,6 @@ public class GuiCategorySlot extends GuiScrollingList {
 
 	@Override
 	protected void drawSlot(int i, int j, int k, int l, Tessellator tessellator) {
-		Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(StatCollector.translateToLocal(ReCubedAPI.categories.get(parent.indexes.get(i))), j - 85, k + 2, 0xFFFFFF);
+		Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(StatCollector.translateToLocal(ReCubedAPI.categories.get(parent.indexes.get(i))), j - 110, k + 2, 0xFFFFFF);
 	}
 }

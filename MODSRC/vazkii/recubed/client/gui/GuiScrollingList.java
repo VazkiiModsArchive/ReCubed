@@ -366,6 +366,43 @@ public abstract class GuiScrollingList {
 			var18.draw();
 		}
 
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+//        var18.startDrawingQuads();
+//        GL11.glEnable(GL11.GL_BLEND);
+//        var18.setColorRGBA_I(0x000000, 0x99);
+//        var18.addVertex(0, bottom, 0.0D);
+//        var18.addVertex(250, bottom, 0.0D);
+//        var18.addVertex(250, top, 0.0D);
+//        var18.addVertex(0, top, 0.0D);
+//        var18.draw();
+
+        var18.startDrawingQuads();
+        var18.setColorRGBA_I(0x000000, 0xFF);
+        var18.addVertex(left, top, 0.0D);
+        var18.addVertex(right, top, 0.0D);
+        var18.addVertex(right, top - 16, 0.0D);
+        var18.addVertex(left, top - 16, 0.0D);
+        var18.draw();
+        
+        var18.startDrawingQuads();
+        var18.setColorRGBA_I(0x000000, 0xFF);
+        var18.addVertex(left, bottom + 16, 0.0D);
+        var18.addVertex(right, bottom + 16, 0.0D);
+        var18.addVertex(right, bottom, 0.0D);
+        var18.addVertex(left, bottom, 0.0D);
+        var18.draw();
+        
+        var18.startDrawingQuads();
+        var18.setColorRGBA_I(0x000000, 0xFF);
+        var18.addVertex(right, bottom + 16, 0.0D);
+        var18.addVertex(right + 5, bottom + 16, 0.0D);
+        var18.addVertex(right + 5, top - 16, 0.0D);
+        var18.addVertex(right, top - 16, 0.0D);
+        var18.draw();
+        
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_BLEND);
+		
 		this.func_27257_b(mouseX, mouseY);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glShadeModel(GL11.GL_FLAT);

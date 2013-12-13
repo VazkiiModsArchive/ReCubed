@@ -68,6 +68,7 @@ public class GuiCategoryList extends GuiScreen {
 	
 	
 	private void sortIndexMappings() {
+		indexes.clear();
 		for(int i = 0; i < ReCubedAPI.categories.size(); i++)
 			indexes.add(i);
 		
