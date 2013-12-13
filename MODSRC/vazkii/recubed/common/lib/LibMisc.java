@@ -19,4 +19,6 @@ public final class LibMisc {
 	public static final String COMMON_PROXY = "vazkii.recubed.common.core.proxy.CommonProxy";
 	public static final String CLIENT_PROXY = "vazkii.recubed.client.core.proxy.ClientProxy";
 	
+	public static final String NETWORK_CHANNEL = "ReCubed";
+	
 }

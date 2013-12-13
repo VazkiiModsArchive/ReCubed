@@ -11,6 +11,9 @@
 package vazkii.recubed.client.core.proxy;
 
 import vazkii.recubed.common.core.proxy.CommonProxy;
+import vazkii.recubed.common.network.packet.IPacket;
+import cpw.mods.fml.common.INetworkHandler;
+import cpw.mods.fml.common.network.Player;
 
 public class ClientProxy extends CommonProxy {
 
@@ -19,4 +22,8 @@ public class ClientProxy extends CommonProxy {
 		// NO-OP
 	}
 	
+	@Override
+	public void handlePacket(INetworkHandler handler, Player player, IPacket packet) {
+		packet.handle(manager, player);
+	}
 }

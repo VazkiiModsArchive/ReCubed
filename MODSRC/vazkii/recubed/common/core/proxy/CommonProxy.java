@@ -10,10 +10,13 @@
  */
 package vazkii.recubed.common.core.proxy;
 
+import net.minecraft.network.INetworkManager;
 import vazkii.recubed.api.internal.ServerData;
 import vazkii.recubed.common.core.helper.CacheHelper;
+import vazkii.recubed.common.network.packet.IPacket;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.Player;
 
 public class CommonProxy {
 
@@ -35,5 +38,9 @@ public class CommonProxy {
 	
 	public void serverStopped() {
 		ServerData.reset();
+	}
+	
+	public void handlePacket(INetworkManager manager, Player player, IPacket packet) {
+		// NO-OP
 	}
 }
