@@ -10,9 +10,9 @@
  */
 package vazkii.recubed.client.core.proxy;
 
+import net.minecraft.network.INetworkManager;
 import vazkii.recubed.common.core.proxy.CommonProxy;
 import vazkii.recubed.common.network.packet.IPacket;
-import cpw.mods.fml.common.INetworkHandler;
 import cpw.mods.fml.common.network.Player;
 
 public class ClientProxy extends CommonProxy {
@@ -23,7 +23,7 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	@Override
-	public void handlePacket(INetworkHandler handler, Player player, IPacket packet) {
+	public void handlePacket(INetworkManager manager, Player player, IPacket packet) {
 		packet.handle(manager, player);
 	}
 }
