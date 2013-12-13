@@ -238,6 +238,7 @@ public strictfp class PieChartRender {
 		if(tooltip != null)
 			RenderHelper.renderTooltip(mx, my, Arrays.asList(StatCollector.translateToLocal(tooltip.name), EnumChatFormatting.GRAY + "" + (int) tooltip.val + " (" + (int) Math.round(tooltip.angle / 3.6F) + "%)"));
 		
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glPopMatrix();
 		
 		return tooltip;

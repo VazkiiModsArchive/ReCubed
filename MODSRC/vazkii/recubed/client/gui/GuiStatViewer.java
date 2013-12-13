@@ -10,6 +10,8 @@
  */
 package vazkii.recubed.client.gui;
 
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.api.internal.Category;
@@ -23,6 +25,14 @@ public class GuiStatViewer extends GuiCategoryList {
 	Entry hoveredEntry;
 	
 	@Override
+	public void initGui() {
+		super.initGui();
+		
+		buttonList.clear();
+		buttonList.add(new GuiButton(0, x + 310, y + 170, 80, 20, StatCollector.translateToLocal("recubed.misc.back")));
+	}
+	
+	@Override
 	public void drawScreen(int par1, int par2, float par3) {
 		super.drawScreen(par1, par2, par3);
 		
@@ -31,6 +41,20 @@ public class GuiStatViewer extends GuiCategoryList {
 		if(pie == null)
 			drawCenteredString(fontRenderer, StatCollector.translateToLocal("recubed.no_data"), x + 250, y + 95, 0xFF7777);
 		else hoveredEntry = pie.renderChart(80, x + 250, y + 100, par1, par2);
+		
+		String displayString = StatCollector.translateToLocal(ReCubedAPI.clientData.get(ReCubedAPI.categories.get(selectedCategory)).name);
+		if(category instanceof PlayerCategoryData)
+			displayString = displayString + " - " + EnumChatFormatting.AQUA + ((PlayerCategoryData) category).name;
+		drawCenteredString(fontRenderer, displayString, x + 250, y + 5, 0xFFFFFF);
+	}
+	
+	@Override
+	protected void actionPerformed(GuiButton par1GuiButton) {
+		if(par1GuiButton.id == 0) {
+			if(category instanceof PlayerCategoryData)
+				category = ReCubedAPI.clientData.get(ReCubedAPI.categories.get(selectedCategory));
+			else mc.displayGuiScreen(new GuiReCubedMenu()); 
+		}
 	}
 	
 	@Override
