@@ -12,9 +12,11 @@ package vazkii.recubed.common.core.proxy;
 
 import net.minecraft.network.INetworkManager;
 import net.minecraftforge.common.MinecraftForge;
+import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.api.internal.ServerData;
 import vazkii.recubed.common.core.handler.WorldSaveHandler;
 import vazkii.recubed.common.core.helper.CacheHelper;
+import vazkii.recubed.common.lib.LibCategories;
 import vazkii.recubed.common.network.PlayerTracker;
 import vazkii.recubed.common.network.packet.IPacket;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -25,7 +27,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
-		
+		ReCubedAPI.registerCategory(LibCategories.DAMAGE_TAKEN);
+		ReCubedAPI.registerCategory(LibCategories.TIMES_DIED);
 	}
 	
 	public void init(FMLInitializationEvent event) {
