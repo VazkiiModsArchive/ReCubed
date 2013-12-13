@@ -23,7 +23,7 @@ public final class GeneralEventHandler {
 	public void onPlayerTakeDamage(LivingHurtEvent event) {
 		if(event.entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entity;
-			String name = "death.attack." + event.source.getDamageType();
+			String name = "recubed.misc.envDamage";
 			if(event.source.getEntity() != null)
 				name = event.source.getEntity().getEntityName();
 			
