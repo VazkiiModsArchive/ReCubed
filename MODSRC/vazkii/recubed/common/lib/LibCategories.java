@@ -11,8 +11,11 @@
 package vazkii.recubed.common.lib;
 
 public final class LibCategories {
+	
+	public static final String CATEGORY = "recubed.category.";
 
-	public static final String DAMAGE_TAKEN = "recubed.category.damage_taken";
-	public static final String TIMES_DIED = "recubed.category.times_died";
+	public static final String DAMAGE_DEALT = CATEGORY + "damage_dealt";
+	public static final String DAMAGE_TAKEN = CATEGORY + "damage_taken";
+	public static final String TIMES_DIED = CATEGORY + "times_died";
 
 }

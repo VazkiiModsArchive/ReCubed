@@ -23,6 +23,16 @@ import vazkii.recubed.common.lib.LibCategories;
 public final class GeneralEventHandler {
 
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
+	public void onEntityTakeDamage(LivingHurtEvent event) {
+		if(event.source.getEntity() instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) event.source.getEntity();
+			String name = MiscHelper.getEntityString(event.entity);
+			
+			ReCubedAPI.addValueToCategory(LibCategories.DAMAGE_DEALT, player.username, name, (int) event.ammount);
+		}
+	}
+	
+	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onPlayerTakeDamage(LivingHurtEvent event) {
 		if(event.entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entity;
