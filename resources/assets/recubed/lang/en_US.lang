@@ -1,6 +1,7 @@
 # CATEGORIES
 recubed.category.damage_dealt=Damage Dealt
 recubed.category.damage_taken=Damage Taken
+recubed.category.mobs_killed=Entities Killed
 recubed.category.times_died=Times Died
 
 # MISC

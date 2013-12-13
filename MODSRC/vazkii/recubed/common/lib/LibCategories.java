@@ -16,6 +16,7 @@ public final class LibCategories {
 
 	public static final String DAMAGE_DEALT = CATEGORY + "damage_dealt";
 	public static final String DAMAGE_TAKEN = CATEGORY + "damage_taken";
+	public static final String MOBS_KILLED = CATEGORY + "mobs_killed";
 	public static final String TIMES_DIED = CATEGORY + "times_died";
 
 }

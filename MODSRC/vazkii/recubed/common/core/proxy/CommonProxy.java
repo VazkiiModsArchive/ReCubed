@@ -30,6 +30,7 @@ public class CommonProxy {
 	public void preInit(FMLPreInitializationEvent event) {
 		ReCubedAPI.registerCategory(LibCategories.DAMAGE_DEALT);
 		ReCubedAPI.registerCategory(LibCategories.DAMAGE_TAKEN);
+		ReCubedAPI.registerCategory(LibCategories.MOBS_KILLED);
 		ReCubedAPI.registerCategory(LibCategories.TIMES_DIED);
 	}
 	

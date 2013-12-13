@@ -22,6 +22,7 @@ import vazkii.recubed.common.lib.LibCategories;
 
 public final class GeneralEventHandler {
 
+	// DAMAGE DEALT
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onEntityTakeDamage(LivingHurtEvent event) {
 		if(event.source.getEntity() instanceof EntityPlayer) {
@@ -32,6 +33,7 @@ public final class GeneralEventHandler {
 		}
 	}
 	
+	// DAMAGE TAKEN
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onPlayerTakeDamage(LivingHurtEvent event) {
 		if(event.entity instanceof EntityPlayer) {
@@ -46,6 +48,18 @@ public final class GeneralEventHandler {
 		}
 	}
 	
+	// MOBS KILLED
+	@ForgeSubscribe(priority = EventPriority.LOWEST)
+	public void onEntityDie(LivingDeathEvent event) {
+		if(event.source.getEntity() instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) event.source.getEntity();
+			String name = MiscHelper.getEntityString(event.entity);
+			
+			ReCubedAPI.addValueToCategory(LibCategories.MOBS_KILLED, player.username, name, 1);
+		}
+	}
+	
+	// TIMES DIED
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onPlayerDie(LivingDeathEvent event) {
 		if(event.entity instanceof EntityPlayer) {
