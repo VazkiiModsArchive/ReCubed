@@ -16,11 +16,6 @@ import vazkii.recubed.common.network.packet.IPacket;
 import cpw.mods.fml.common.network.Player;
 
 public class ClientProxy extends CommonProxy {
-
-	@Override
-	public void serverStarted() {
-		// NO-OP
-	}
 	
 	@Override
 	public void handlePacket(INetworkManager manager, Player player, IPacket packet) {

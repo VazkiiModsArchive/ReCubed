@@ -11,8 +11,10 @@
 package vazkii.recubed.api.internal;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashMap;
 
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 
 public final class Category implements Serializable {
@@ -25,12 +27,15 @@ public final class Category implements Serializable {
 	}
 	
 	public void loadFromNBT(NBTTagCompound cmp) {
-		for(String s : playerData.keySet()) {
-			if(cmp.hasKey(s)) {
-				System.out.println("load player " + s);
+		Collection<NBTBase> tags = cmp.getTags();
+		for(NBTBase nbt : tags) {
+			String name = nbt.getName();
+			if(cmp.hasKey(name)) {
+				NBTTagCompound cmp1 = cmp.getCompoundTag(name);
+				if(!playerData.containsKey(name))
+					playerData.put(name, new PlayerCategoryData(name));
 				
-				NBTTagCompound cmp1 = cmp.getCompoundTag(s);
-				playerData.get(s).loadFromNBT(cmp1);
+				playerData.get(name).loadFromNBT(cmp1);
 			}
 		}
 	}

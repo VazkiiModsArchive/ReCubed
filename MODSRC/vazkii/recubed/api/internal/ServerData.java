@@ -43,6 +43,7 @@ public final class ServerData implements Serializable {
 	
 	public static void loadFromNBT(NBTTagCompound cmp) {
 		for(String s : categories.keySet()) {
+			System.out.println("tryload category " + s);
 			if(cmp.hasKey(s)) {
 				System.out.println("load category " + s);
 				NBTTagCompound cmp1 = cmp.getCompoundTag(s);

@@ -44,7 +44,6 @@ public class CommonProxy {
 	}
 	
 	public void serverStarted() {
-		System.out.println("call serverStarted");
 		CacheHelper.findCompoundAndLoad();
 	}
 	
