@@ -17,6 +17,7 @@ import net.minecraftforge.event.EventPriority;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import vazkii.recubed.api.ReCubedAPI;
@@ -56,6 +57,15 @@ public final class GeneralEventHandler {
 	public void onItemPickedUp(EntityItemPickupEvent event) {
 		ItemStack stack = event.item.getEntityItem();
 		ReCubedAPI.addValueToCategory(LibCategories.ITEMS_PICKED_UP, event.entityPlayer.username, stack.getUnlocalizedName() + ".name", stack.stackSize);
+	}
+	
+	// JUMPS DONE
+	@ForgeSubscribe(priority = EventPriority.LOWEST)
+	public void onPlayerJump(LivingJumpEvent event) {
+		if(event.entity instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) event.entity;
+			ReCubedAPI.addValueToCategory(LibCategories.JUMPS_DONE, player.username, player.isSprinting() ? "recubed.misc.sprint_jump" : "recubed.misc.jump", 1);
+		}
 	}
 	
 	// MESSAGES SENT
