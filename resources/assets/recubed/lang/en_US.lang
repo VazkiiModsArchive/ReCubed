@@ -2,6 +2,7 @@
 recubed.category.damage_dealt=Damage Dealt
 recubed.category.damage_taken=Damage Taken
 recubed.category.items_picked_up=Items Picked Up
+recubed.category.messages_sent=Messages Sent
 recubed.category.mobs_killed=Entities Killed
 recubed.category.times_died=Times Died
 recubed.category.times_played=Times Logged In
@@ -19,3 +20,5 @@ recubed.misc.set_tracked=Set HUD Tracked Stat
 recubed.misc.move_hud=Move HUD
 recubed.misc.hud_enabled=HUD Enabled
 recubed.misc.login=Login
+recubed.misc.command=Command
+recubed.misc.chat=Chat Message

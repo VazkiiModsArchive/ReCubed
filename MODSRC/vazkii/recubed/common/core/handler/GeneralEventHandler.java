@@ -12,8 +12,10 @@ package vazkii.recubed.common.core.handler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.event.EventPriority;
 import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
@@ -54,7 +56,18 @@ public final class GeneralEventHandler {
 	public void onItemPickedUp(EntityItemPickupEvent event) {
 		ItemStack stack = event.item.getEntityItem();
 		ReCubedAPI.addValueToCategory(LibCategories.ITEMS_PICKED_UP, event.entityPlayer.username, stack.getUnlocalizedName() + ".name", stack.stackSize);
-
+	}
+	
+	// MESSAGES SENT
+	@ForgeSubscribe(priority = EventPriority.LOWEST)
+	public void onMessageReceived(ServerChatEvent event) {
+		ReCubedAPI.addValueToCategory(LibCategories.MESSAGES_SENT, event.username, "recubed.misc.chat", 1);
+	}
+	
+	@ForgeSubscribe(priority = EventPriority.LOWEST)
+	public void onMessageReceived(CommandEvent event) {
+		if(event.sender instanceof EntityPlayer)
+			ReCubedAPI.addValueToCategory(LibCategories.MESSAGES_SENT, event.sender.getCommandSenderName(), "recubed.misc.command", 1);
 	}
 	
 	// MOBS KILLED
