@@ -18,6 +18,9 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.event.FMLServerStoppedEvent;
 
 @Mod(modid = LibMisc.MOD_ID, name = LibMisc.MOD_NAME, version = LibMisc.MOD_VERSION)
 public class ReCubed {
@@ -38,4 +41,18 @@ public class ReCubed {
 		proxy.init(event);
 	}
 	
+	@EventHandler
+	public void onServerStarting(FMLServerStartingEvent event) {
+		proxy.serverStarting();
+	}
+	
+	@EventHandler
+	public void onServerStarting(FMLServerStartedEvent event) {
+		proxy.serverStarted();
+	}
+	
+	@EventHandler
+	public void onServerStarting(FMLServerStoppedEvent event) {
+		proxy.serverStopped();
+	}
 }
