@@ -14,6 +14,7 @@ import net.minecraft.network.INetworkManager;
 import net.minecraftforge.common.MinecraftForge;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.api.internal.ServerData;
+import vazkii.recubed.common.core.handler.GeneralEventHandler;
 import vazkii.recubed.common.core.handler.WorldSaveHandler;
 import vazkii.recubed.common.core.helper.CacheHelper;
 import vazkii.recubed.common.lib.LibCategories;
@@ -29,11 +30,13 @@ public class CommonProxy {
 	public void preInit(FMLPreInitializationEvent event) {
 		ReCubedAPI.registerCategory(LibCategories.DAMAGE_TAKEN);
 		ReCubedAPI.registerCategory(LibCategories.TIMES_DIED);
+		ReCubedAPI.registerCategory(LibCategories.DAMAGE_TAKEN);
 	}
 	
 	public void init(FMLInitializationEvent event) {
 		GameRegistry.registerPlayerTracker(new PlayerTracker());
 		MinecraftForge.EVENT_BUS.register(new WorldSaveHandler());
+		MinecraftForge.EVENT_BUS.register(new GeneralEventHandler());
 	}
 	
 	public void serverStarting() {
@@ -41,7 +44,12 @@ public class CommonProxy {
 	}
 	
 	public void serverStarted() {
+		System.out.println("call serverStarted");
 		CacheHelper.findCompoundAndLoad();
+	}
+	
+	public void serverStopping() {
+		CacheHelper.findCompoundAndWrite();
 	}
 	
 	public void serverStopped() {

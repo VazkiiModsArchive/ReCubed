@@ -43,8 +43,11 @@ public final class ReCubedAPI {
 	
 	public static void setValueToCategory(String category, String player, String tag, int value) {
 		Category category_ = ServerData.categories.get(category);
-		PlayerCategoryData data = category_.playerData.get(player);
-		data.stats.put(tag, value);
+		
+		if(category != null) {
+			PlayerCategoryData data = category_.playerData.get(player);
+			data.stats.put(tag, value);
+		}
 	}
 
 }

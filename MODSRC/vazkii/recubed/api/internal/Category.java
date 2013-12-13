@@ -27,6 +27,8 @@ public final class Category implements Serializable {
 	public void loadFromNBT(NBTTagCompound cmp) {
 		for(String s : playerData.keySet()) {
 			if(cmp.hasKey(s)) {
+				System.out.println("load player " + s);
+				
 				NBTTagCompound cmp1 = cmp.getCompoundTag(s);
 				playerData.get(s).loadFromNBT(cmp1);
 			}

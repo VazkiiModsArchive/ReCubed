@@ -34,6 +34,8 @@ public final class PlayerCategoryData implements Serializable {
 		for(NBTBase nbt : tags) {
 			if(nbt instanceof NBTTagInt) {
 				String name = nbt.getName();
+				System.out.println("load val " + name);
+				
 				int val = ((NBTTagInt) nbt).data;
 				stats.put(name, val);
 			}
@@ -44,6 +46,4 @@ public final class PlayerCategoryData implements Serializable {
 		for(String s : stats.keySet())
 			cmp.setInteger(s, stats.get(s));
 	}
-	
-	
 }
