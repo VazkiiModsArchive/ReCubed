@@ -26,6 +26,13 @@ public final class Category implements Serializable {
 		this.name = name;
 	}
 	
+	public int getTotalValueFromPlayerData(String data) {
+		if(playerData.containsKey(data))
+			return playerData.get(data).getTotalValue();
+		
+		return 0;	
+	}
+	
 	public void loadFromNBT(NBTTagCompound cmp) {
 		Collection<NBTBase> tags = cmp.getTags();
 		for(NBTBase nbt : tags) {

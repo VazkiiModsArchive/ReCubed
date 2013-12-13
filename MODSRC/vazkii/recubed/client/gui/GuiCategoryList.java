@@ -34,6 +34,7 @@ public class GuiCategoryList extends GuiScreen {
 		y = height / 2 - guiHeight / 2;
 		
 		slot = new GuiCategorySlot(this);
+		selectCategory(0);
 	}
 	
 	public void selectCategory(int category) {

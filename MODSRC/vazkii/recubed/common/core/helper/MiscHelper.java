@@ -10,6 +10,9 @@
  */
 package vazkii.recubed.common.core.helper;
 
+import java.awt.Color;
+import java.util.Random;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 
@@ -19,4 +22,12 @@ public final class MiscHelper {
 		return "entity." + EntityList.getEntityString(entity) + ".name";
 	}
 	
+	public static int generateColorFromString(String seed) {
+		Random rand = new Random(seed.hashCode());
+		int red = rand.nextInt(256);
+		int green = rand.nextInt(256);
+		int blue = rand.nextInt(256);
+
+		return new Color(red, green, blue).getRGB();
+	}
 }

@@ -27,6 +27,14 @@ public final class PlayerCategoryData implements Serializable {
 		this.name = name;
 	}
 	
+	public int getTotalValue() {
+		int val = 0;
+		for(int i : stats.values())
+			val += i;
+		
+		return val;
+	}
+	
 	public void loadFromNBT(NBTTagCompound cmp) {
 		stats.clear();
 		
