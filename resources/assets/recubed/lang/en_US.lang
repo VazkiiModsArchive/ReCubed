@@ -4,6 +4,7 @@ recubed.category.damage_taken=Damage Taken
 recubed.category.items_picked_up=Items Picked Up
 recubed.category.jumps_done=Jumps Done
 recubed.category.messages_sent=Messages Sent
+recubed.category.mobs_aggroed=Mobs Aggroed
 recubed.category.mobs_killed=Entities Killed
 recubed.category.times_died=Times Died
 recubed.category.times_played=Times Logged In

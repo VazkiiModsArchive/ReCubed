@@ -29,9 +29,8 @@ public class GuiStatViewer extends GuiCategoryList {
 	Object category;
 	Entry hoveredEntry;
 	
-	
 	@Override
-	public void initGui() {			
+	public void initGui() {
 		super.initGui();
 
 		buttonList.clear();

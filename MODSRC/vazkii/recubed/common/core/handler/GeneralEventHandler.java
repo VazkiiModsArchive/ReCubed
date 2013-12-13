@@ -24,6 +24,7 @@ import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import vazkii.recubed.api.ReCubedAPI;
@@ -84,6 +85,15 @@ public final class GeneralEventHandler {
 	public void onMessageReceived(CommandEvent event) {
 		if(event.sender instanceof EntityPlayer)
 			ReCubedAPI.addValueToCategory(LibCategories.MESSAGES_SENT, event.sender.getCommandSenderName(), "recubed.misc.command", 1);
+	}
+	
+	// MOBS AGGROED
+	@ForgeSubscribe(priority = EventPriority.LOWEST)
+	public void onMobGetTarget(LivingSetAttackTargetEvent event) {
+		if(event.target instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) event.target;
+			ReCubedAPI.addValueToCategory(LibCategories.MOBS_AGGROED, player.username, MiscHelper.getEntityString(event.entity), 1);
+		}
 	}
 
 	// MOBS KILLED
