@@ -22,4 +22,12 @@ public final class Category implements Serializable {
 		this.name = name;
 	}
 	
+	public static void writeFromNBT() {
+		
+	}
+	
+	public static void writeToNBT() {
+		
+	}
+	
 }

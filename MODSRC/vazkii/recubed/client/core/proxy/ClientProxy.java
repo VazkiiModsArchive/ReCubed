@@ -14,4 +14,9 @@ import vazkii.recubed.common.core.proxy.CommonProxy;
 
 public class ClientProxy extends CommonProxy {
 
+	@Override
+	public void serverStarted() {
+		// NO-OP
+	}
+	
 }

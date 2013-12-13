@@ -11,6 +11,7 @@
 package vazkii.recubed.common.core.proxy;
 
 import vazkii.recubed.api.internal.ServerData;
+import vazkii.recubed.common.core.helper.CacheHelper;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
@@ -29,7 +30,7 @@ public class CommonProxy {
 	}
 	
 	public void serverStarted() {
-		
+		CacheHelper.findCompoundAndLoad();
 	}
 	
 	public void serverStopped() {
