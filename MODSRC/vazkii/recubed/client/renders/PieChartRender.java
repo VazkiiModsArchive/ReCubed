@@ -94,10 +94,12 @@ public strictfp class PieChartRender {
 		float angle = mouseAngle(x, y, mx, my);
 		int highlight = 5;
 		
+		GL11.glShadeModel(GL11.GL_SMOOTH);
 		int totalDeg = 0;
 		for(Entry entry : entries) {
 			boolean mouseInSector = mouseIn && angle > totalDeg && angle < totalDeg + entry.angle;
-			Color color = new Color(entry.color);
+			Color color = new Color(entry.color).brighter();
+			Color color1 = new Color(entry.color).darker().darker();
 			
 			if(mouseInSector) {
 				tooltip = entry;
@@ -111,6 +113,7 @@ public strictfp class PieChartRender {
 			GL11.glColor4ub((byte) color.getRed(), (byte) color.getGreen(), (byte) color.getBlue(), (byte) 255);
 			GL11.glVertex2i(x, y);			
 			
+			GL11.glColor4ub((byte) color1.getRed(), (byte) color1.getGreen(), (byte) color1.getBlue(), (byte) 255);
 			for(int i = entry.angle; i >= 0; i--) {
 				float rad = (float) ((i + totalDeg) / 180F * Math.PI);
 				GL11.glVertex2d(x + Math.cos(rad) * radius, y + Math.sin(rad) * radius);
@@ -124,6 +127,33 @@ public strictfp class PieChartRender {
 			if(mouseInSector)
 				radius -= highlight;
 		}
+		GL11.glShadeModel(GL11.GL_FLAT);
+		
+		totalDeg = 0;
+		GL11.glLineWidth(2F);
+		GL11.glColor4f(0F, 0F, 0F, 1F);
+		for(Entry entry : entries) {
+			if(entry.angle == 360)
+				break;
+			
+			boolean mouseInSector = mouseIn && angle > totalDeg && angle < totalDeg + entry.angle;
+			
+			if(mouseInSector)
+				radius += highlight;
+			
+			float rad = (float) ((totalDeg) / 180F * Math.PI);
+			
+			GL11.glBegin(GL11.GL_LINES);
+			GL11.glVertex2i(x, y);
+			GL11.glVertex2d(x + Math.cos(rad) * radius, y + Math.sin(rad) * radius);
+			GL11.glEnd();
+			
+			if(mouseInSector)
+				radius -= highlight;
+			
+			totalDeg += entry.angle;
+		}
+		
 		
 		GL11.glLineWidth(3F);
 		GL11.glColor4f(0F, 0F, 0F, 1F);
@@ -131,8 +161,8 @@ public strictfp class PieChartRender {
 		GL11.glBegin(GL11.GL_LINE_LOOP);		
 		for(int i = 0; i < 360; i++) {
 			boolean sectorHighlighted = tooltip != null && i >= tooltipDeg && i < tooltip.angle + tooltipDeg;
-			boolean first = tooltip != null && i - tooltipDeg == 0;
-			boolean last = tooltip != null && i - (tooltipDeg + tooltip.angle) == -1;
+			boolean first = tooltip != null && tooltip.angle != 360 && i - tooltipDeg == 0;
+			boolean last = tooltip != null && tooltip.angle != 360 && i - (tooltipDeg + tooltip.angle) == -1;
 			
 			if(first)
 				addVertexForAngle(x, y, i, radius);
