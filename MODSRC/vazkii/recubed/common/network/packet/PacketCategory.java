@@ -33,16 +33,6 @@ public class PacketCategory implements IPacket {
 	@Override
 	public void handle(INetworkManager manager, Player player) {
 		ReCubedAPI.clientData.put(category.name, category);
-		
-		// Debug
-		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
-		p.addChatMessage(category.name);
-		for(String s : category.playerData.keySet()) {
-			p.addChatMessage(" Player: " + s);
-			PlayerCategoryData data = category.playerData.get(s);
-			for(String s1 : data.stats.keySet())
-				p.addChatMessage("  Stat: " + s1 + " - " + data.stats.get(s1));
-		}
 	}
 
 	public static Collection<IPacket> allCategoryPackets() {
