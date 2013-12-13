@@ -22,6 +22,7 @@ import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.event.EventPriority;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.ServerChatEvent;
+import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -60,6 +61,15 @@ public final class GeneralEventHandler {
 			if(ReCubedAPI.validatePlayer(player))
 				ReCubedAPI.addValueToCategory(LibCategories.DAMAGE_TAKEN, player.username, name, (int) event.ammount);
 		}
+	}
+	
+	// ITEMS DROPPED
+	@ForgeSubscribe(priority = EventPriority.LOWEST)
+	public void onPlayerTossItem(ItemTossEvent event) {
+		ItemStack stack = event.entityItem.getEntityItem();
+		if(ReCubedAPI.validatePlayer(event.player))
+			ReCubedAPI.addValueToCategory(LibCategories.ITEMS_DROPPED, event.player.username, stack.getUnlocalizedName() + ".name", stack.stackSize);
+
 	}
 
 	// ITEMS PICKED UP
