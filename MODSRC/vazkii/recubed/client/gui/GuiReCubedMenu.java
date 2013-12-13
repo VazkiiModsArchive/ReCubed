@@ -43,7 +43,8 @@ public class GuiReCubedMenu extends GuiScreen {
 	protected void actionPerformed(GuiButton par1GuiButton) {
 		switch(par1GuiButton.id) {
 			case 0 : {
-				
+				mc.displayGuiScreen(new GuiStatViewer());
+				return;
 			}
 			case 1 : {
 				

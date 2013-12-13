@@ -66,8 +66,6 @@ public final class ClientCacheHandler {
 				return null;
 			}
 		}
-
-		
 	}
 	
 	public static void injectNBTToFile(NBTTagCompound cmp) {
