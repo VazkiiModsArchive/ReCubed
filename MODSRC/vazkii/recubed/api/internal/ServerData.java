@@ -33,6 +33,14 @@ public final class ServerData implements Serializable {
 		categories.put(name, new Category(name));
 	}
 	
+	public static void onPlayerLogin(String name) {
+		for(Category cat : categories.values()) {
+			HashMap<String, PlayerCategoryData> data = cat.playerData;
+			if(!data.containsKey(name))
+				data.put(name, new PlayerCategoryData(name));
+		}
+	}
+	
 	public static void loadFromNBT(NBTTagCompound cmp) {
 		
 	}
