@@ -39,7 +39,8 @@ public final class PlayerTracker implements IPlayerTracker {
 
 	@Override
 	public void onPlayerChangedDimension(EntityPlayer player) {
-		// NO-OP
+		if(ReCubedAPI.validatePlayer(player))
+			ReCubedAPI.addValueToCategory(LibCategories.DIMENSIONS_CHANGED, player.username, player.worldObj.provider.getDimensionName(), 1);
 	}
 
 	@Override
