@@ -28,7 +28,9 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
+import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.common.core.helper.MiscHelper;
@@ -72,6 +74,13 @@ public final class GeneralEventHandler {
 			if(ReCubedAPI.validatePlayer(player))
 				ReCubedAPI.addValueToCategory(LibCategories.DAMAGE_TAKEN, player.username, name, (int) event.ammount);
 		}
+	}
+	
+	// ITEMS BROKEN
+	@ForgeSubscribe(priority = EventPriority.LOWEST)
+	public void onItemBroken(PlayerDestroyItemEvent event) {
+		if(ReCubedAPI.validatePlayer(event.entityPlayer))
+			ReCubedAPI.addValueToCategory(LibCategories.ITEMS_BROKEN, event.entityPlayer.username, event.original.getUnlocalizedName() + ".name", 1);
 	}
 	
 	// ITEMS DROPPED
