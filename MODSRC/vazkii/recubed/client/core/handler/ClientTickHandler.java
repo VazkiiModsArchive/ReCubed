@@ -27,14 +27,19 @@ public class ClientTickHandler implements ITickHandler {
 
 	@Override
 	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-		World world = Minecraft.getMinecraft().theWorld;
-		if(world == null)
-			ReCubedAPI.clientData.clear();
+		if(type.equals(EnumSet.of(TickType.CLIENT))) {
+			World world = Minecraft.getMinecraft().theWorld;
+			if(world == null)
+				ReCubedAPI.clientData.clear();
+		} else {
+			
+		}
+
 	}
 
 	@Override
 	public EnumSet<TickType> ticks() {
-		return EnumSet.of(TickType.CLIENT);
+		return EnumSet.of(TickType.CLIENT, TickType.RENDER);
 	}
 
 	@Override
