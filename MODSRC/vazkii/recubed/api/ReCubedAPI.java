@@ -28,7 +28,7 @@ public final class ReCubedAPI {
 	public static int getValueFromCategory(String category, String player, String tag) {
 		Category category_ = ServerData.categories.get(category);
 		PlayerCategoryData data = category_.playerData.get(player);
-		return data.stats.get(tag);
+		return data.stats.containsKey(tag) ? data.stats.get(tag) : 0;
 	}
 	
 	public static void addValueToCategory(String category, String player, String tag, int value) {
