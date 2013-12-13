@@ -77,8 +77,14 @@ public class CacheHelper {
 	}
 	
 	public static void findCompoundAndLoad() {
-		NBTTagCompound cmp = new NBTTagCompound();
+		NBTTagCompound cmp = getCacheCompound();
 		ServerData.loadFromNBT(cmp);
+	}
+	
+	public static void findCompoundAndWrite() {
+		NBTTagCompound cmp = new NBTTagCompound();
+		ServerData.writeToNBT(cmp);
+		injectNBTToFile(cmp);
 	}
 	
 }

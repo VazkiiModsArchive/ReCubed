@@ -51,7 +51,11 @@ public final class ServerData implements Serializable {
 	}
 	
 	public static void writeToNBT(NBTTagCompound cmp) {
-		
+		for(String s : categories.keySet()) {
+			NBTTagCompound cmp1 = new NBTTagCompound();
+			categories.get(s).writeToNBT(cmp1);
+			cmp.setCompoundTag(s, cmp1);
+		}
 	}
 	
 }

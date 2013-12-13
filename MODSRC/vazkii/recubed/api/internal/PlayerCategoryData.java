@@ -41,7 +41,8 @@ public final class PlayerCategoryData implements Serializable {
 	}
 	
 	public void writeToNBT(NBTTagCompound cmp) {
-		
+		for(String s : stats.keySet())
+			cmp.setInteger(s, stats.get(s));
 	}
 	
 	

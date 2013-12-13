@@ -34,7 +34,11 @@ public final class Category implements Serializable {
 	}
 	
 	public void writeToNBT(NBTTagCompound cmp) {
-		
+		for(String s : playerData.keySet()) {
+			NBTTagCompound cmp1 = new NBTTagCompound();
+			playerData.get(s).writeToNBT(cmp1);
+			cmp.setCompoundTag(s, cmp1);
+		}
 	}
 	
 }
