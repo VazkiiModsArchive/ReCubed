@@ -11,12 +11,17 @@
 package vazkii.recubed.client.renders;
 
 import java.awt.Color;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.TreeSet;
 
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
@@ -30,13 +35,13 @@ public strictfp class PieChartRender {
 
 	public boolean clickable;
 	
-	public List<Entry> entries = new ArrayList();
+	public Collection<Entry> entries = new TreeSet();
 	
-	public static class Entry {
+	public static class Entry implements Comparable<Entry> {
 		int val;
 		int angle;
 		int color;
-		String name;
+		public String name;
 
 		public Entry(int val, String name) {
 			this(val, MiscHelper.generateColorFromString(name), name);
@@ -47,6 +52,11 @@ public strictfp class PieChartRender {
 			this.color = color;
 			this.name = name;
 		}
+
+		@Override
+		public int compareTo(Entry e) {
+			return name.compareTo(e.name);
+		}
 		
 	}
 
@@ -54,7 +64,11 @@ public strictfp class PieChartRender {
 		PieChartRender render = new PieChartRender(true);
 		for(String s : category.playerData.keySet())
 			render.entries.add(new Entry(category.getTotalValueFromPlayerData(s), s));
-		render.buildAngles();
+		
+		int totalVal = render.buildAngles();
+		if(totalVal == 0)
+			return null;
+		render.truncateSmallValues(totalVal);
 		
 		return render;
 	}
@@ -63,7 +77,11 @@ public strictfp class PieChartRender {
 		PieChartRender render = new PieChartRender(false);
 			for(String s : data.stats.keySet())
 				render.entries.add(new Entry(data.stats.get(s), s));
-		render.buildAngles();
+		
+			int totalVal = render.buildAngles();
+			if(totalVal == 0)
+				return null;
+			render.truncateSmallValues(totalVal);
 
 		return render;
 	}
@@ -73,7 +91,7 @@ public strictfp class PieChartRender {
 		this.clickable = clickable;
 	}
 	
-	private void buildAngles() {
+	private int buildAngles() {
 		int totalValue = 0;
 		for(Entry entry : entries)
 			totalValue += entry.val;
@@ -81,9 +99,46 @@ public strictfp class PieChartRender {
 		float mul = 360F / totalValue;
 		for(Entry entry : entries)
 			entry.angle = Math.round(entry.val * mul);
+		
+		return totalValue;
 	}
 	
-	public void renderChart(int radius, int x, int y, int mx, int my) {
+	private void truncateSmallValues(int totalValue) {
+		List<Entry> sortedEntries = new ArrayList(this.entries);
+
+		Collections.sort(sortedEntries, new Comparator<Entry>() {
+
+			@Override
+			public int compare(Entry a, Entry b) {
+				return b.val - a.val;
+			}
+			
+		});
+		
+		List<Entry> newEntries = new ArrayList();
+		int totalAngle = 0;
+		int totalVal = 0;
+		int size = 9;
+		int i = 0;
+		for(Entry entry : sortedEntries) {
+			if(i >= size) {
+				Entry othersEntry = new Entry(totalValue - totalVal, "recubed.misc.others");
+				othersEntry.angle = 360 - totalAngle;
+				newEntries.add(othersEntry);
+				
+				break;
+			}
+			totalAngle += entry.angle;
+			totalVal += entry.val;
+			newEntries.add(entry);
+			
+			i++;
+		}
+		
+		this.entries = newEntries;
+	}
+	
+	public Entry renderChart(int radius, int x, int y, int mx, int my) {
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		
@@ -181,9 +236,11 @@ public strictfp class PieChartRender {
 		GL11.glEnd();
 		
 		if(tooltip != null)
-			RenderHelper.renderTooltip(mx, my, Arrays.asList(tooltip.name, EnumChatFormatting.GRAY + "" + (int) Math.round(tooltip.angle / 3.6F) + "%"));
+			RenderHelper.renderTooltip(mx, my, Arrays.asList(StatCollector.translateToLocal(tooltip.name), EnumChatFormatting.GRAY + "" + (int) tooltip.val + " (" + (int) Math.round(tooltip.angle / 3.6F) + "%)"));
 		
 		GL11.glPopMatrix();
+		
+		return tooltip;
 	}
 	
 	private static void addVertexForAngle(int x, int y, int i, int radius) {

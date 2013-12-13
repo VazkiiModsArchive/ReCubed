@@ -58,5 +58,10 @@ public class PacketManager implements IPacketHandler {
 		Packet250CustomPayload packet = buildPacket(ipacket);
 		PacketDispatcher.sendPacketToPlayer(packet, player);
 	}
+	
+	public static void dispatchToAllClients(IPacket ipacket) {
+		Packet250CustomPayload packet = buildPacket(ipacket);
+		PacketDispatcher.sendPacketToAllPlayers(packet);
+	}
 
 }

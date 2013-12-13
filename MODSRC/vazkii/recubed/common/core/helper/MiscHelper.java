@@ -11,7 +11,10 @@
 package vazkii.recubed.common.core.helper;
 
 import java.awt.Color;
+import java.util.Comparator;
+import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -29,5 +32,13 @@ public final class MiscHelper {
 		int blue = rand.nextInt(256);
 
 		return new Color(red, green, blue).getRGB();
+	}
+	
+	public static <K, V> TreeMap<K, V> sortMap(Map<K, V> map, Comparator<K> comparator) {
+		TreeMap<K, V> treemap = new TreeMap(comparator);
+		for(K key : map.keySet())
+			treemap.put(key, map.get(key));
+		
+		return treemap;
 	}
 }

@@ -10,7 +10,11 @@
  */
 package vazkii.recubed.common.core.handler;
 
+import cpw.mods.fml.common.network.Player;
 import vazkii.recubed.common.core.helper.CacheHelper;
+import vazkii.recubed.common.network.PacketManager;
+import vazkii.recubed.common.network.packet.IPacket;
+import vazkii.recubed.common.network.packet.PacketCategory;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.world.WorldEvent;
@@ -21,8 +25,12 @@ public final class WorldSaveHandler {
 	public void onWorldSave(WorldEvent.Save event) {
 		MinecraftServer server = MinecraftServer.getServer();
 		
-		if(event.world == server.worldServers[0])
+		if(event.world == server.worldServers[0]) {
 			CacheHelper.findCompoundAndWrite();
+			
+			for(IPacket packet : PacketCategory.allCategoryPackets())
+				PacketManager.dispatchToAllClients(packet);
+		}
 	}
 	
 }
