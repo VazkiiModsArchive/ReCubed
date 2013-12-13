@@ -11,7 +11,9 @@
 package vazkii.recubed.common.network;
 
 import net.minecraft.entity.player.EntityPlayer;
+import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.api.internal.ServerData;
+import vazkii.recubed.common.lib.LibCategories;
 import vazkii.recubed.common.network.packet.IPacket;
 import vazkii.recubed.common.network.packet.PacketCategory;
 import cpw.mods.fml.common.IPlayerTracker;
@@ -22,6 +24,8 @@ public final class PlayerTracker implements IPlayerTracker {
 	@Override
 	public void onPlayerLogin(EntityPlayer player) {
 		ServerData.onPlayerLogin(player.username);
+		
+		ReCubedAPI.addValueToCategory(LibCategories.TIMES_PLAYED, player.username, "recubed.misc.login", 1);
 		
 		for(IPacket packet : PacketCategory.allCategoryPackets())
 			PacketManager.dispatchToClient(packet, (Player) player);

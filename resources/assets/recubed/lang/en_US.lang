@@ -4,6 +4,7 @@ recubed.category.damage_taken=Damage Taken
 recubed.category.items_picked_up=Items Picked Up
 recubed.category.mobs_killed=Entities Killed
 recubed.category.times_died=Times Died
+recubed.category.times_played=Times Logged In
 
 # MISC
 recubed.misc.envDamage=Environmental Damage
@@ -16,3 +17,4 @@ recubed.misc.view_stats=View Stats
 recubed.misc.set_tracked=Set HUD Tracked Stat
 recubed.misc.move_hud=Move HUD
 recubed.misc.hud_enabled=HUD Enabled
+recubed.misc.login=Login
