@@ -10,15 +10,21 @@
  */
 package vazkii.recubed.common.network;
 
-import vazkii.recubed.api.internal.ServerData;
 import net.minecraft.entity.player.EntityPlayer;
+import vazkii.recubed.api.internal.ServerData;
+import vazkii.recubed.common.network.packet.IPacket;
+import vazkii.recubed.common.network.packet.PacketCategory;
 import cpw.mods.fml.common.IPlayerTracker;
+import cpw.mods.fml.common.network.Player;
 
 public final class PlayerTracker implements IPlayerTracker {
 
 	@Override
 	public void onPlayerLogin(EntityPlayer player) {
 		ServerData.onPlayerLogin(player.username);
+		
+		for(IPacket packet : PacketCategory.allCategoryPackets())
+			PacketManager.dispatchToClient(packet, (Player) player);
 	}
 
 	@Override

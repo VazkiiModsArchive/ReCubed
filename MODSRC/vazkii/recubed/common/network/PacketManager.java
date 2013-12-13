@@ -22,6 +22,7 @@ import vazkii.recubed.common.ReCubed;
 import vazkii.recubed.common.lib.LibMisc;
 import vazkii.recubed.common.network.packet.IPacket;
 import cpw.mods.fml.common.network.IPacketHandler;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 
 public class PacketManager implements IPacketHandler {
@@ -51,6 +52,11 @@ public class PacketManager implements IPacketHandler {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public static void dispatchToClient(IPacket ipacket, Player player) {
+		Packet250CustomPayload packet = buildPacket(ipacket);
+		PacketDispatcher.sendPacketToPlayer(packet, player);
 	}
 
 }

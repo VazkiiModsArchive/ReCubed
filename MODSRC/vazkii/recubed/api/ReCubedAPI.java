@@ -10,16 +10,22 @@
  */
 package vazkii.recubed.api;
 
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.PlayerCategoryData;
 import vazkii.recubed.api.internal.ServerData;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public final class ReCubedAPI {
 	
 	public static final Set<String> categories = new LinkedHashSet();
+	
+	@SideOnly(Side.CLIENT)
+	public static final HashMap<String, Category> clientData = new HashMap();
 	
 	public static void registerCategory(String category) {
 		categories.add(category);

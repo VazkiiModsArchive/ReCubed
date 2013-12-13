@@ -11,11 +11,14 @@
 package vazkii.recubed.client.core.proxy;
 
 import net.minecraft.network.INetworkManager;
+import vazkii.recubed.client.core.handler.ClientTickHandler;
 import vazkii.recubed.client.core.handler.LocalizationHandler;
 import vazkii.recubed.common.core.proxy.CommonProxy;
 import vazkii.recubed.common.network.packet.IPacket;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.Player;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 public class ClientProxy extends CommonProxy {
 	
@@ -23,10 +26,12 @@ public class ClientProxy extends CommonProxy {
 	public void init(FMLInitializationEvent event) {
 		super.init(event);
 		LocalizationHandler.loadLangs();
+		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
 	}
 	
 	@Override
 	public void handlePacket(INetworkManager manager, Player player, IPacket packet) {
 		packet.handle(manager, player);
 	}
+	
 }
