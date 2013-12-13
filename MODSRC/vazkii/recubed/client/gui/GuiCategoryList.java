@@ -10,21 +10,29 @@
  */
 package vazkii.recubed.client.gui;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 
+import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.common.lib.LibMisc;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.StatCollector;
 
 public class GuiCategoryList extends GuiScreen {
 
-	private GuiCategorySlot slot;
+	GuiCategorySlot slot;
 	
 	int selectedCategory = 0; 
 	
 	public int guiWidth = 400;
 	public int guiHeight = 200;
 	public int x, y;
+	
+	List<Integer> indexes = new ArrayList();
 	
 	@Override
 	public void initGui() {
@@ -33,6 +41,7 @@ public class GuiCategoryList extends GuiScreen {
 		x = width / 2 - guiWidth / 2;
 		y = height / 2 - guiHeight / 2;
 		
+		sortIndexMappings();
 		slot = new GuiCategorySlot(this);
 		selectCategory(0);
 	}
@@ -55,5 +64,23 @@ public class GuiCategoryList extends GuiScreen {
 		slot.drawScreen(par1, par2, par3);
 		
 		super.drawScreen(par1, par2, par3);
+	}
+	
+	
+	private void sortIndexMappings() {
+		for(int i = 0; i < ReCubedAPI.categories.size(); i++)
+			indexes.add(i);
+		
+		Collections.sort(indexes, new Comparator<Integer>() {
+
+			@Override
+			public int compare(Integer a, Integer b) {
+				String categoryA = StatCollector.translateToLocal(ReCubedAPI.categories.get(a));
+				String categoryB = StatCollector.translateToLocal(ReCubedAPI.categories.get(b));
+	
+				return categoryA.compareTo(categoryB);
+			}
+		
+		});
 	}
 }

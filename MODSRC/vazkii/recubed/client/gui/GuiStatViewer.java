@@ -10,6 +10,11 @@
  */
 package vazkii.recubed.client.gui;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
@@ -24,13 +29,14 @@ public class GuiStatViewer extends GuiCategoryList {
 	Object category;
 	Entry hoveredEntry;
 	
+	
 	@Override
-	public void initGui() {
+	public void initGui() {			
 		super.initGui();
-		
+
 		buttonList.clear();
 		buttonList.add(new GuiButton(0, x + 310, y + 170, 80, 20, StatCollector.translateToLocal("recubed.misc.back")));
-		buttonList.add(new GuiButton(1, x + 310, y + 10, 80, 20, StatCollector.translateToLocal("recubed.misc.your_stats")));
+		buttonList.add(new GuiButton(1, x + 310, y + 10, 80, 20, StatCollector.translateToLocal("recubed.misc.your_stats")));		
 	}
 	
 	@Override
@@ -43,7 +49,7 @@ public class GuiStatViewer extends GuiCategoryList {
 			drawCenteredString(fontRenderer, StatCollector.translateToLocal("recubed.no_data"), x + 250, y + 95, 0xFF7777);
 		else hoveredEntry = pie.renderChart(80, x + 250, y + 100, par1, par2);
 		
-		String displayString = StatCollector.translateToLocal(ReCubedAPI.clientData.get(ReCubedAPI.categories.get(selectedCategory)).name);
+		String displayString = StatCollector.translateToLocal(fromCurrentCategoryInt().name);
 		if(category instanceof PlayerCategoryData)
 			displayString = displayString + " - " + EnumChatFormatting.AQUA + ((PlayerCategoryData) category).name;
 		drawCenteredString(fontRenderer, displayString, x + 250, y + 5, 0xFFFFFF);
@@ -77,7 +83,10 @@ public class GuiStatViewer extends GuiCategoryList {
 	@Override
 	public void selectCategory(int category) {
 		super.selectCategory(category);
-		this.category = ReCubedAPI.clientData.get(ReCubedAPI.categories.get(category));
+		this.category = fromCurrentCategoryInt();
 	}
 	
+	private Category fromCurrentCategoryInt() {
+		return ReCubedAPI.clientData.get(ReCubedAPI.categories.get(indexes.get(selectedCategory)));
+	}
 }

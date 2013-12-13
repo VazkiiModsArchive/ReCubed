@@ -26,7 +26,7 @@ public class GuiCategorySlot extends GuiScrollingList {
 
 	@Override
 	protected int getSize() {
-		return ReCubedAPI.clientData.size();
+		return parent.indexes.size();
 	}
 	
 	@Override
@@ -51,6 +51,6 @@ public class GuiCategorySlot extends GuiScrollingList {
 
 	@Override
 	protected void drawSlot(int i, int j, int k, int l, Tessellator tessellator) {
-		Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(StatCollector.translateToLocal(ReCubedAPI.categories.get(i)), j - 85, k + 2, 0xFFFFFF);
+		Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(StatCollector.translateToLocal(ReCubedAPI.categories.get(parent.indexes.get(i))), j - 85, k + 2, 0xFFFFFF);
 	}
 }
