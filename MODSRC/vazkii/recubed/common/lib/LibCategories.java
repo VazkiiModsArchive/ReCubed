@@ -14,6 +14,7 @@ public final class LibCategories {
 	
 	public static final String CATEGORY = "recubed.category.";
 
+	public static final String ARROWS_SHOT = CATEGORY + "arrows_shot";
 	public static final String DAMAGE_DEALT = CATEGORY + "damage_dealt";
 	public static final String DAMAGE_TAKEN = CATEGORY + "damage_taken";
 	public static final String ITEMS_DROPPED = CATEGORY + "items_dropped";

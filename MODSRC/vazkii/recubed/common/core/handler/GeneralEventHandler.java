@@ -27,6 +27,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
+import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import vazkii.recubed.api.ReCubedAPI;
@@ -35,6 +36,16 @@ import vazkii.recubed.common.lib.LibCategories;
 
 public final class GeneralEventHandler {
 
+	// ARROWS SHOT
+	@ForgeSubscribe(priority = EventPriority.LOWEST)
+	public void onEntityTakeDamage(ArrowLooseEvent event) {
+        float f = (float) event.charge / 20.0F;
+        f = (f * f + f * 2.0F) / 3.0F;
+        
+        if(ReCubedAPI.validatePlayer(event.entityPlayer))
+			ReCubedAPI.addValueToCategory(LibCategories.ARROWS_SHOT, event.entityPlayer.username, f >= 1F ? "recubed.misc.critical_shot" : "recubed.misc.shot", (int) 1);
+	}
+	
 	// DAMAGE DEALT
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onEntityTakeDamage(LivingHurtEvent event) {

@@ -28,6 +28,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
+		ReCubedAPI.registerCategory(LibCategories.ARROWS_SHOT);
 		ReCubedAPI.registerCategory(LibCategories.DAMAGE_DEALT);
 		ReCubedAPI.registerCategory(LibCategories.DAMAGE_TAKEN);
 		ReCubedAPI.registerCategory(LibCategories.ITEMS_DROPPED);
