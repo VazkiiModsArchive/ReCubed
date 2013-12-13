@@ -21,7 +21,10 @@ import org.lwjgl.opengl.GL12;
 
 public final class RenderHelper {
 
-	public static void renderTooltip(int x, int y, int color, int color2, List<String> tooltipData) {
+	public static void renderTooltip(int x, int y, List<String> tooltipData) {
+		int color = 1347420415;
+		int color2 = -267386864;
+		
 		GL11.glPushMatrix();
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 		net.minecraft.client.renderer.RenderHelper.disableStandardItemLighting();

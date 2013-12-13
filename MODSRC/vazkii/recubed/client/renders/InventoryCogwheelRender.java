@@ -10,6 +10,8 @@
  */
 package vazkii.recubed.client.renders;
 
+import java.util.Arrays;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
@@ -17,8 +19,11 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import vazkii.recubed.client.lib.LibResources;
@@ -65,8 +70,13 @@ public final class InventoryCogwheelRender {
 			
 			GL11.glScalef(2F, 2F, 2F);
 			GL11.glDisable(GL11.GL_BLEND);
-			RenderHelper.enableStandardItemLighting();
-		}
+			
+			int mouseX = Mouse.getX() * res.getScaledWidth() / mc.displayWidth;
+			int mouseY = res.getScaledHeight() - Mouse.getY() * res.getScaledHeight() / mc.displayHeight;
+			
+			if(mouseX >= x && mouseX < x + 8 && mouseY >= y && mouseY < y + 8)
+				vazkii.recubed.client.core.helper.RenderHelper.renderTooltip(mouseX, mouseY, Arrays.asList(EnumChatFormatting.RED + StatCollector.translateToLocal("recubed.misc.openMenu")));
+ 		}
 	}
 	
 }
