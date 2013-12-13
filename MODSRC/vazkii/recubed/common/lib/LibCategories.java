@@ -22,5 +22,6 @@ public final class LibCategories {
 	public static final String MOBS_KILLED = CATEGORY + "mobs_killed";
 	public static final String TIMES_DIED = CATEGORY + "times_died";
 	public static final String TIMES_PLAYED = CATEGORY + "times_played";
+	public static final String TIMES_SLEPT = CATEGORY + "times_slept";
 	
 }

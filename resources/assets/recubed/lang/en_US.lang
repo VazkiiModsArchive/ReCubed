@@ -7,6 +7,7 @@ recubed.category.messages_sent=Messages Sent
 recubed.category.mobs_killed=Entities Killed
 recubed.category.times_died=Times Died
 recubed.category.times_played=Times Logged In
+recubed.category.times_slept=Times Slept
 
 # MISC
 recubed.misc.envDamage=Environmental Damage
@@ -25,3 +26,4 @@ recubed.misc.command=Command
 recubed.misc.chat=Chat Message
 recubed.misc.jump=Jump
 recubed.misc.sprint_jump=Sprint Jump
+recubed.misc.sleep=Sleep
