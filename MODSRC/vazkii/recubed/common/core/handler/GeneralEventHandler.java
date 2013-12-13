@@ -99,7 +99,7 @@ public final class GeneralEventHandler {
 	// MOBS KILLED
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onEntityDie(LivingDeathEvent event) {
-		if(event.source.getEntity() instanceof EntityPlayer) {
+		if(event.source.getEntity() instanceof EntityPlayer && !(event.entity instanceof EntityPlayer)) {
 			EntityPlayer player = (EntityPlayer) event.source.getEntity();
 			String name = MiscHelper.getEntityString(event.entity);
 
@@ -107,7 +107,7 @@ public final class GeneralEventHandler {
 		}
 	}
 
-	// TIMES DIED
+	// TIMES DIED + PLAYER KILLS
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onPlayerDie(LivingDeathEvent event) {
 		if(event.entity instanceof EntityPlayer) {
@@ -115,8 +115,10 @@ public final class GeneralEventHandler {
 			String name = "recubed.misc.envDamage";
 			if(event.source.getEntity() != null)
 				name = MiscHelper.getEntityString(event.source.getEntity());
-			if(event.source.getEntity() instanceof EntityPlayer)
+			if(event.source.getEntity() instanceof EntityPlayer) {
 				name = ((EntityPlayer) event.entity).username;
+				ReCubedAPI.addValueToCategory(LibCategories.PLAYER_KILLS, name, player.username, 1);
+			}
 
 			ReCubedAPI.addValueToCategory(LibCategories.TIMES_DIED, player.username, name, 1);
 		}
