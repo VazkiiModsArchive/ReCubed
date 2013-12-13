@@ -30,6 +30,7 @@ public class GuiStatViewer extends GuiCategoryList {
 		
 		buttonList.clear();
 		buttonList.add(new GuiButton(0, x + 310, y + 170, 80, 20, StatCollector.translateToLocal("recubed.misc.back")));
+		buttonList.add(new GuiButton(1, x + 310, y + 10, 80, 20, StatCollector.translateToLocal("recubed.misc.your_stats")));
 	}
 	
 	@Override
@@ -50,16 +51,18 @@ public class GuiStatViewer extends GuiCategoryList {
 	
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {
+		Category category = ReCubedAPI.clientData.get(ReCubedAPI.categories.get(selectedCategory));
+
 		if(par1GuiButton.id == 0) {
-			if(category instanceof PlayerCategoryData)
-				category = ReCubedAPI.clientData.get(ReCubedAPI.categories.get(selectedCategory));
+			if(this.category instanceof PlayerCategoryData)
+				this.category = category;
 			else mc.displayGuiScreen(new GuiReCubedMenu()); 
-		}
+		} else this.category = category.playerData.get(mc.thePlayer.username);
 	}
 	
 	@Override
 	protected void mouseClicked(int par1, int par2, int par3) {
-		if(category instanceof Category && par3 == 0 && hoveredEntry != null && shouldVisitStats()) {
+		if(category instanceof Category && par3 == 0 && hoveredEntry != null && shouldVisitStats() && !hoveredEntry.name.equals("recubed.misc.others")) {
 			Category category = (Category) this.category;
 			this.category = category.playerData.get(hoveredEntry.name);
 		}
