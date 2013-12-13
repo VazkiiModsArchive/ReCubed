@@ -10,10 +10,32 @@
  */
 package vazkii.recubed.common;
 
+import vazkii.recubed.common.core.proxy.CommonProxy;
 import vazkii.recubed.common.lib.LibMisc;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = LibMisc.MOD_ID, name = LibMisc.MOD_NAME, version = LibMisc.MOD_VERSION)
 public class ReCubed {
 
+	@SidedProxy(clientSide = LibMisc.CLIENT_PROXY, serverSide = LibMisc.COMMON_PROXY)
+	public static CommonProxy proxy;
+	
+	@Instance(LibMisc.MOD_ID)
+	public static ReCubed instance;
+	
+	@EventHandler
+	public void onPreInit(FMLPreInitializationEvent event) {
+		proxy.preInit(event);
+	}
+	
+	@EventHandler
+	public void onInit(FMLInitializationEvent event) {
+		proxy.init(event);
+	}
+	
 }
