@@ -47,7 +47,7 @@ public class ReCubed {
 
 	@EventHandler
 	public void onServerStarting(FMLServerStartingEvent event) {
-		proxy.serverStarting();
+		proxy.serverStarting(event);
 	}
 
 	@EventHandler

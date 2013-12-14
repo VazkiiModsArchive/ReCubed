@@ -14,6 +14,10 @@ import net.minecraft.network.INetworkManager;
 import net.minecraftforge.common.MinecraftForge;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.api.internal.ServerData;
+import vazkii.recubed.common.command.CommandClearCategory;
+import vazkii.recubed.common.command.CommandClearPlayer;
+import vazkii.recubed.common.command.CommandWipeData;
+import vazkii.recubed.common.command.CommandWipePlayer;
 import vazkii.recubed.common.core.handler.ConfigHandler;
 import vazkii.recubed.common.core.handler.GeneralEventHandler;
 import vazkii.recubed.common.core.handler.ServerTickHandler;
@@ -24,6 +28,7 @@ import vazkii.recubed.common.network.PlayerTracker;
 import vazkii.recubed.common.network.packet.IPacket;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
@@ -79,8 +84,13 @@ public class CommonProxy {
 		MinecraftForge.EVENT_BUS.register(new GeneralEventHandler());
 	}
 
-	public void serverStarting() {
+	public void serverStarting(FMLServerStartingEvent event) {
 		ServerData.init();
+		
+		event.registerServerCommand(new CommandClearCategory());
+		event.registerServerCommand(new CommandClearPlayer());
+		event.registerServerCommand(new CommandWipeData());
+		event.registerServerCommand(new CommandWipePlayer());
 	}
 
 	public void serverStarted() {
