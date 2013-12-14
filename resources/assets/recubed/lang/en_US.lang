@@ -1,6 +1,7 @@
 # CATEGORIES
 recubed.category.arrows_shot=Arrows Shot
 recubed.category.boss_kills=Boss Kills
+recubed.category.blocks_broken=Blocks Broken
 recubed.category.damage_dealt=Damage Dealt
 recubed.category.damage_taken=Damage Taken
 recubed.category.dimensions_changed=Dimensions Travelled
@@ -47,6 +48,7 @@ recubed.misc.click_to_set=Left Click to set position
 recubed.misc.escape_to_reset=Press ESCAPE to reset position
 recubed.misc.hud_enabled=HUD Enabled
 recubed.misc.use_gradients=Use Gradients
+recubed.misc.contrast_text=Contrast HUD Text
 recubed.misc.login=Login
 recubed.misc.command=Command
 recubed.misc.chat=Chat Message

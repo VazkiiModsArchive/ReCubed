@@ -17,6 +17,7 @@ import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EnumStatus;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.event.CommandEvent;
@@ -29,11 +30,10 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
-import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
-import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.common.core.helper.MiscHelper;
 import vazkii.recubed.common.lib.LibCategories;
@@ -49,6 +49,14 @@ public final class GeneralEventHandler {
         if(ReCubedAPI.validatePlayer(event.entityPlayer))
 			ReCubedAPI.addValueToCategory(LibCategories.ARROWS_SHOT, event.entityPlayer.username, f >= 1F ? "recubed.misc.critical_shot" : "recubed.misc.shot", 1);
 	}
+	
+	// BLOCKS BROKEN
+	@ForgeSubscribe(priority = EventPriority.LOWEST)
+	public void onBlockBroken(BlockEvent.BreakEvent event) {
+        if(ReCubedAPI.validatePlayer(event.getPlayer()))
+			ReCubedAPI.addValueToCategory(LibCategories.BLOCKS_BROKEN, event.getPlayer().username, Item.itemsList[event.block.blockID].getUnlocalizedName(new ItemStack(event.block.blockID, 1, event.blockMetadata)) + ".name", 1);
+	}
+
 	
 	// DAMAGE DEALT
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
@@ -138,7 +146,7 @@ public final class GeneralEventHandler {
 		}
 	}
 
-	// MOBS KILLED
+	// MOBS KILLED + BOSS KILLS
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onEntityDie(LivingDeathEvent event) {
 		if(event.source.getEntity() instanceof EntityPlayer && !(event.entity instanceof EntityPlayer)) {

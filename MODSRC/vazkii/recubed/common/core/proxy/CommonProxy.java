@@ -35,7 +35,8 @@ public class CommonProxy {
 		ConfigHandler.load(event.getSuggestedConfigurationFile());
 		
 		ReCubedAPI.registerCategory(LibCategories.ARROWS_SHOT);
-		ReCubedAPI.registerCategory(LibCategories.BOSS_KILLS);
+		ReCubedAPI.registerCategory(LibCategories.BOSS_KILLS);		
+		ReCubedAPI.registerCategory(LibCategories.BLOCKS_BROKEN);
 		ReCubedAPI.registerCategory(LibCategories.DAMAGE_DEALT);
 		ReCubedAPI.registerCategory(LibCategories.DAMAGE_TAKEN);	
 		ReCubedAPI.registerCategory(LibCategories.DIMENSIONS_CHANGED);
