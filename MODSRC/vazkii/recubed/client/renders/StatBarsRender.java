@@ -31,6 +31,7 @@ import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.PlayerCategoryData;
 import vazkii.recubed.client.core.helper.RenderHelper;
 import vazkii.recubed.client.lib.LibResources;
+import vazkii.recubed.client.renders.PieChartRender.Entry;
 import vazkii.recubed.common.core.handler.ConfigHandler;
 import vazkii.recubed.common.core.helper.MiscHelper;
 import vazkii.recubed.common.lib.LibMisc;
@@ -47,7 +48,8 @@ public final class StatBarsRender {
 	public static class Entry implements Comparable<Entry> {
 		int val;
 		int color;
-		int pos; 
+		int pos;
+		float percentage;
 		
 		public String name;
 
@@ -101,6 +103,10 @@ public final class StatBarsRender {
 		int totalValue = 0;
 		for(Entry entry : entries)
 			totalValue += entry.val;
+		
+		float mul = 100F / totalValue;
+		for(Entry entry : entries)
+			entry.percentage = Math.round(entry.val * mul * 100F) / 100F;
 		
 		return totalValue;
 	}
@@ -214,8 +220,8 @@ public final class StatBarsRender {
 		mc.fontRenderer.drawStringWithShadow(displayName, x + 8, y + 4, 0xFFFFFF);		
 		yp = 9;
 		for(Entry entry : entries) {
-			String s1 = "#" + entry.pos + " - " + StatCollector.translateToLocal(entry.name) + ": " + entry.val;
-			mc.fontRenderer.drawStringWithShadow(s1, (x + 4) * 2, (y + yp) * 2, 0xFFFFFF);
+			String s1 = "#" + entry.pos + " - " + StatCollector.translateToLocal(entry.name) + ": " + entry.val + " (" + entry.percentage + "%)";
+			mc.fontRenderer.drawStringWithShadow(s1, (x + 2) * 2, (y + yp) * 2, 0xFFFFFF);
 			
 			yp += 6;
 		}
