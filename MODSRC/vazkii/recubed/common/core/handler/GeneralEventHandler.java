@@ -13,6 +13,7 @@ package vazkii.recubed.common.core.handler;
 import java.util.List;
 
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EnumStatus;
@@ -31,6 +32,7 @@ import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
+import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.common.core.helper.MiscHelper;
@@ -45,7 +47,7 @@ public final class GeneralEventHandler {
         f = (f * f + f * 2.0F) / 3.0F;
         
         if(ReCubedAPI.validatePlayer(event.entityPlayer))
-			ReCubedAPI.addValueToCategory(LibCategories.ARROWS_SHOT, event.entityPlayer.username, f >= 1F ? "recubed.misc.critical_shot" : "recubed.misc.shot", (int) 1);
+			ReCubedAPI.addValueToCategory(LibCategories.ARROWS_SHOT, event.entityPlayer.username, f >= 1F ? "recubed.misc.critical_shot" : "recubed.misc.shot", 1);
 	}
 	
 	// DAMAGE DEALT
@@ -144,7 +146,7 @@ public final class GeneralEventHandler {
 			String name = MiscHelper.getEntityString(event.entity);
 
 			if(ReCubedAPI.validatePlayer(player));
-				ReCubedAPI.addValueToCategory(LibCategories.MOBS_KILLED, player.username, name, 1);
+				ReCubedAPI.addValueToCategory(event.entity instanceof IBossDisplayData ? LibCategories.BOSS_KILLS : LibCategories.MOBS_KILLED, player.username, name, 1);
 		}
 	}
 
