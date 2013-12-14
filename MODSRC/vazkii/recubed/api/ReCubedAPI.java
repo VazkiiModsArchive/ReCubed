@@ -44,7 +44,7 @@ public final class ReCubedAPI {
 	
 	public static void sbtValueFromCategory(String category, String player, String tag, int value) {
 		int val = getValueFromCategory(category, player, tag);
-		setValueToCategory(category, player, tag, val - value);
+		setValueToCategory(category, player, tag, Math.max(0, val - value));
 	}
 	
 	public static void setValueToCategory(String category, String player, String tag, int value) {
