@@ -42,9 +42,6 @@ public final class InventoryCogwheelRender {
 			int x = res.getScaledWidth() / 2 - 19;
 			int y = res.getScaledHeight() / 2 - 75;
 			
-			if(!mc.thePlayer.getActivePotionEffects().isEmpty())
-				x += 60;
-			
 			if(creative) {
 				GuiContainerCreative container = (GuiContainerCreative) mc.currentScreen;
 				if(container.getCurrentTabIndex() == CreativeTabs.tabInventory.getTabIndex()) {

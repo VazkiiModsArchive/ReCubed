@@ -123,6 +123,7 @@ public final class StatBarsRender {
 		List<Entry> newEntries = new ArrayList();
 		
 		int totalVal = 0;
+		float totalPercentage = 0F;
 		int size = 14;
 		int i = 0;
 		boolean addedClientPlayer = false;
@@ -143,6 +144,7 @@ public final class StatBarsRender {
 				if(!isCategory) {
 					Entry othersEntry = new Entry(totalValue - totalVal, "recubed.misc.others");
 					othersEntry.pos = 15;
+					othersEntry.percentage = Math.round((100F - totalPercentage) * 100F) / 100F;
 					newEntries.add(othersEntry);
 					
 					break;
@@ -157,6 +159,7 @@ public final class StatBarsRender {
 			}
 			
 			totalVal += entry.val;
+			totalPercentage += entry.percentage;
 			entry.pos = i + 1;
 			newEntries.add(entry);
 			
