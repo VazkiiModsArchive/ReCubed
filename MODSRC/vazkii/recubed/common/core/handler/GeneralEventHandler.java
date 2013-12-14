@@ -153,7 +153,7 @@ public final class GeneralEventHandler {
 	public void onPlayerDie(LivingDeathEvent event) {
 		if(event.entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entity;
-			String name = "recubed.damage" + event.source.getDamageType();
+			String name = "recubed.damage." + event.source.getDamageType();
 			if(event.source.getEntity() != null)
 				name = MiscHelper.getEntityString(event.source.getEntity());
 			if(event.source.getEntity() instanceof EntityPlayer) {
