@@ -41,6 +41,7 @@ public final class LibCategories {
 	public static final String SHEEP_DYED = CATEGORY + "sheep_dyed";
 	public static final String SNOWBALLS_THROWN = CATEGORY + "snowballs_thrown";
 	public static final String TIMES_DIED = CATEGORY + "times_died";
+	public static final String TIMES_FISHED = CATEGORY + "times_fished";
 	public static final String TIMES_PLAYED = CATEGORY + "times_played";
 	public static final String TIMES_SLEPT = CATEGORY + "times_slept";
 

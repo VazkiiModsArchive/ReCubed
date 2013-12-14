@@ -12,6 +12,7 @@ package vazkii.recubed.common.core.handler;
 
 import java.util.List;
 
+import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandGive;
@@ -22,6 +23,7 @@ import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EnumStatus;
+import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemRecord;
@@ -47,6 +49,7 @@ import net.minecraftforge.event.world.BlockEvent;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.common.core.helper.MiscHelper;
 import vazkii.recubed.common.lib.LibCategories;
+import vazkii.recubed.common.lib.LibObfuscation;
 
 public final class GeneralEventHandler {
 
@@ -68,7 +71,7 @@ public final class GeneralEventHandler {
 	}
 
 	
-	// COWS MILKED
+	// COWS MILKED + ANIMALS SHEARED + SHEEP DYED
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onEntityInteracted(EntityInteractEvent event) {
         if(ReCubedAPI.validatePlayer(event.entityPlayer)) {
@@ -81,7 +84,6 @@ public final class GeneralEventHandler {
 
         	if(currentItem != null && currentItem.getItem() instanceof ItemDye && event.target instanceof EntitySheep && !((EntitySheep) event.target).getSheared() && 15 - ((EntitySheep) event.target).getFleeceColor() != currentItem.getItemDamage())
         		ReCubedAPI.addValueToCategory(LibCategories.SHEEP_DYED, event.entityPlayer.username, currentItem.getUnlocalizedName() + ".name", 1);
-
         }
 	}
 
@@ -212,7 +214,7 @@ public final class GeneralEventHandler {
 		}
 	}
 
-	// SNOWBALLS THROWN + ENDER PEARLS THROWN + ENDER EYES USED
+	// SNOWBALLS THROWN + ENDER PEARLS THROWN + ENDER EYES USED + TIMES FISHED
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		if(ReCubedAPI.validatePlayer(event.entityPlayer)) {
@@ -230,6 +232,13 @@ public final class GeneralEventHandler {
 			
 				if(event.entityPlayer.dimension == 0 && stack.itemID == Item.eyeOfEnder.itemID)
 					ReCubedAPI.addValueToCategory(LibCategories.ENDER_EYES_USED, event.entityPlayer.username, "item.eyeOfEnder.name", 1);
+			
+				if(stack.itemID == Item.fishingRod.itemID)
+					if(event.entityPlayer.fishEntity == null)
+						ReCubedAPI.addValueToCategory(LibCategories.TIMES_FISHED, event.entityPlayer.username, "recubed.misc.hook_casted", 1);
+					else if((Integer) ReflectionHelper.getPrivateValue(EntityFishHook.class, event.entityPlayer.fishEntity, LibObfuscation.TICKS_CATCHABLE) > 0)
+						ReCubedAPI.addValueToCategory(LibCategories.TIMES_FISHED, event.entityPlayer.username, "recubed.misc.fish_caught", 1);
+
 			}
 		}
 	}

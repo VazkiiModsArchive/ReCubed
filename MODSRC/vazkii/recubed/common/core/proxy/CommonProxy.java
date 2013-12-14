@@ -61,6 +61,7 @@ public class CommonProxy {
 		ReCubedAPI.registerCategory(LibCategories.SHEEP_DYED);
 		ReCubedAPI.registerCategory(LibCategories.SNOWBALLS_THROWN);
 		ReCubedAPI.registerCategory(LibCategories.TIMES_DIED);
+		ReCubedAPI.registerCategory(LibCategories.TIMES_FISHED);
 		ReCubedAPI.registerCategory(LibCategories.TIMES_PLAYED);
 		ReCubedAPI.registerCategory(LibCategories.TIMES_SLEPT);
 	}

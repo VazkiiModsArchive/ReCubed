@@ -26,6 +26,7 @@ recubed.category.potions_gotten=Potions Affected By
 recubed.category.sheep_dyed=Sheep Dyed
 recubed.category.snowballs_thrown=Snowballs Thrown
 recubed.category.times_died=Deaths
+recubed.category.times_fished=Times Fished
 recubed.category.times_played=Times Logged In
 recubed.category.times_slept=Times Slept
 
@@ -74,6 +75,8 @@ recubed.misc.shot=Shot
 recubed.misc.critical_shot=Critical Shot
 recubed.misc.experience=Experience
 recubed.misc.level=Level
+recubed.misc.hook_casted=Hook Casted
+recubed.misc.fish_caught=Fish Caught
 
 # VANILLA LOCALIZATIONS
 entity.MinecartRideable.name=Minecart
