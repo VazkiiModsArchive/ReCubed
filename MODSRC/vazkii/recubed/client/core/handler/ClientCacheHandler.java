@@ -20,7 +20,9 @@ import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
+import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.ServerData;
+import vazkii.recubed.common.lib.LibCategories;
 import vazkii.recubed.common.lib.LibMisc;
 
 public final class ClientCacheHandler {
@@ -29,6 +31,9 @@ public final class ClientCacheHandler {
 	public static int hudRelativeTo = 0;
 	public static int hudPosX = 0;
 	public static int hudPosY = 0;
+	
+	public static String hudCategory = LibCategories.DAMAGE_DEALT;
+	public static String hudPlayer = "";
 	
 	public static File getCacheFile() throws IOException {
 		File loc = new File(".");
@@ -91,6 +96,8 @@ public final class ClientCacheHandler {
 			hudRelativeTo = cmp.getInteger("hudRelativeTo");
 			hudPosX = cmp.getInteger("hudPosX");
 			hudPosY = cmp.getInteger("hudPosY");
+			hudCategory = cmp.getString("hudCategory");
+			hudPlayer = cmp.getString("hudPlayer");
 		}
 	}
 	
@@ -101,6 +108,8 @@ public final class ClientCacheHandler {
 		cmp.setInteger("hudRelativeTo", hudRelativeTo);
 		cmp.setInteger("hudPosX", hudPosX);
 		cmp.setInteger("hudPosY", hudPosY);
+		cmp.setString("hudCategory", hudCategory);
+		cmp.setString("hudPlayer", hudPlayer);
 		
 		injectNBTToFile(cmp);
 	}
