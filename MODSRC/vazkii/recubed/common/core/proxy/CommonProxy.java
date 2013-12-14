@@ -34,38 +34,42 @@ public class CommonProxy {
 	public void preInit(FMLPreInitializationEvent event) {
 		ConfigHandler.load(event.getSuggestedConfigurationFile());
 
-		ReCubedAPI.registerCategory(LibCategories.ANIMALS_SHEARED);
-		ReCubedAPI.registerCategory(LibCategories.ARROWS_SHOT);
-		ReCubedAPI.registerCategory(LibCategories.BOSS_KILLS);
-		ReCubedAPI.registerCategory(LibCategories.BLOCKS_BROKEN);
-		ReCubedAPI.registerCategory(LibCategories.COWS_MILKED);
-		ReCubedAPI.registerCategory(LibCategories.DAMAGE_DEALT);
-		ReCubedAPI.registerCategory(LibCategories.DAMAGE_TAKEN);
-		ReCubedAPI.registerCategory(LibCategories.DIMENSIONS_CHANGED);
-		ReCubedAPI.registerCategory(LibCategories.DISCS_PLAYED);
-		ReCubedAPI.registerCategory(LibCategories.ENDER_EYES_USED);
-		ReCubedAPI.registerCategory(LibCategories.ENDER_PEARLS_THROWN);
-		ReCubedAPI.registerCategory(LibCategories.ENTITIES_RIDDEN);
-		ReCubedAPI.registerCategory(LibCategories.EXPERIENCE_GATHERED);
-		ReCubedAPI.registerCategory(LibCategories.FOOD_EATEN);
-		ReCubedAPI.registerCategory(LibCategories.ITEMS_BROKEN);
-		ReCubedAPI.registerCategory(LibCategories.ITEMS_DROPPED);
-		ReCubedAPI.registerCategory(LibCategories.ITEMS_PICKED_UP);
-		ReCubedAPI.registerCategory(LibCategories.ITEMS_SPAWNED);
-		ReCubedAPI.registerCategory(LibCategories.LEVELS_GAINED);
-		ReCubedAPI.registerCategory(LibCategories.MOBS_AGGROED);
-		ReCubedAPI.registerCategory(LibCategories.MOBS_KILLED);
-		ReCubedAPI.registerCategory(LibCategories.MESSAGES_SENT);
-		ReCubedAPI.registerCategory(LibCategories.PLAYER_KILLS);
-		ReCubedAPI.registerCategory(LibCategories.POTIONS_GOTTEN);
-		ReCubedAPI.registerCategory(LibCategories.SHEEP_DYED);
-		ReCubedAPI.registerCategory(LibCategories.SNOWBALLS_THROWN);
-		ReCubedAPI.registerCategory(LibCategories.TIMES_DIED);
-		ReCubedAPI.registerCategory(LibCategories.TIMES_FISHED);
-		ReCubedAPI.registerCategory(LibCategories.TIMES_PLAYED);
-		ReCubedAPI.registerCategory(LibCategories.TIMES_SLEPT);
+		registerCategory(LibCategories.ANIMALS_SHEARED);
+		registerCategory(LibCategories.ARROWS_SHOT);
+		registerCategory(LibCategories.BOSS_KILLS);
+		registerCategory(LibCategories.BLOCKS_BROKEN);
+		registerCategory(LibCategories.COWS_MILKED);
+		registerCategory(LibCategories.DAMAGE_DEALT);
+		registerCategory(LibCategories.DAMAGE_TAKEN);
+		registerCategory(LibCategories.DIMENSIONS_CHANGED);
+		registerCategory(LibCategories.DISCS_PLAYED);
+		registerCategory(LibCategories.ENDER_EYES_USED);
+		registerCategory(LibCategories.ENDER_PEARLS_THROWN);
+		registerCategory(LibCategories.ENTITIES_RIDDEN);
+		registerCategory(LibCategories.EXPERIENCE_GATHERED);
+		registerCategory(LibCategories.FOOD_EATEN);
+		registerCategory(LibCategories.ITEMS_BROKEN);
+		registerCategory(LibCategories.ITEMS_DROPPED);
+		registerCategory(LibCategories.ITEMS_PICKED_UP);
+		registerCategory(LibCategories.ITEMS_SPAWNED);
+		registerCategory(LibCategories.LEVELS_GAINED);
+		registerCategory(LibCategories.MOBS_AGGROED);
+		registerCategory(LibCategories.MOBS_KILLED);
+		registerCategory(LibCategories.MESSAGES_SENT);
+		registerCategory(LibCategories.PLAYER_KILLS);
+		registerCategory(LibCategories.POTIONS_GOTTEN);
+		registerCategory(LibCategories.SHEEP_DYED);
+		registerCategory(LibCategories.SNOWBALLS_THROWN);
+		registerCategory(LibCategories.TIMES_DIED);
+		registerCategory(LibCategories.TIMES_FISHED);
+		registerCategory(LibCategories.TIMES_PLAYED);
+		registerCategory(LibCategories.TIMES_SLEPT);
 	}
 
+	private static void registerCategory(String category) {
+		ReCubedAPI.registerCategory(category, category.substring(LibCategories.CATEGORY.length()));
+	}
+	
 	public void init(FMLInitializationEvent event) {
 		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
 

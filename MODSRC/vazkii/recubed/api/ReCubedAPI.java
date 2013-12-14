@@ -11,7 +11,9 @@
 package vazkii.recubed.api;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.FakePlayer;
@@ -22,10 +24,13 @@ import vazkii.recubed.api.internal.ServerData;
 public final class ReCubedAPI {
 
 	public static final List<String> categories = new ArrayList();
-
-	public static void registerCategory(String category) {
-		if(!categories.contains(category))
+	public static final Map<String, String> shortTerms = new HashMap();
+		
+	public static void registerCategory(String category, String shortTerm) {
+		if(!categories.contains(category)) {
 			categories.add(category);
+			shortTerms.put(shortTerm, category);
+		}
 	}
 
 	public static int getValueFromCategory(String category, String player, String tag) {
