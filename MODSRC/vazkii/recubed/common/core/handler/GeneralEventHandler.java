@@ -18,6 +18,7 @@ import net.minecraft.command.CommandGive;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EnumStatus;
 import net.minecraft.item.Item;
@@ -33,6 +34,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
+import net.minecraftforge.event.entity.player.EntityInteractEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -62,6 +64,18 @@ public final class GeneralEventHandler {
 			ReCubedAPI.addValueToCategory(LibCategories.BLOCKS_BROKEN, event.getPlayer().username, Item.itemsList[event.block.blockID].getUnlocalizedName(new ItemStack(event.block.blockID, 1, event.blockMetadata)) + ".name", 1);
 	}
 
+	
+	// COWS MILKED
+	@ForgeSubscribe(priority = EventPriority.LOWEST)
+	public void onEntityInteracted(EntityInteractEvent event) {
+        if(ReCubedAPI.validatePlayer(event.entityPlayer)) {
+        	ItemStack currentItem = event.entityPlayer.getCurrentEquippedItem();
+        	if(currentItem != null && currentItem.itemID == Item.bucketEmpty.itemID && event.target instanceof EntityCow)
+        		ReCubedAPI.addValueToCategory(LibCategories.COWS_MILKED, event.entityPlayer.username, "item.milk.name", 1);
+
+        	
+        }
+	}
 
 	// DAMAGE DEALT
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
