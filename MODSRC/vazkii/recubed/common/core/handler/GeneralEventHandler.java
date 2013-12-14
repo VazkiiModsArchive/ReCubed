@@ -12,6 +12,7 @@ package vazkii.recubed.common.core.handler;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandGive;
 import net.minecraft.entity.EntityList;
@@ -20,6 +21,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EnumStatus;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.event.CommandEvent;
@@ -35,6 +37,7 @@ import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import vazkii.recubed.api.ReCubedAPI;
@@ -214,6 +217,8 @@ public final class GeneralEventHandler {
 				if(!event.entityPlayer.capabilities.isCreativeMode && stack.itemID == Item.enderPearl.itemID)
 					ReCubedAPI.addValueToCategory(LibCategories.ENDER_PEARLS_THROWN, event.entityPlayer.username, "item.enderPearl.name", 1);
 			
+				if(stack.getItem() instanceof ItemRecord && event.action == Action.RIGHT_CLICK_BLOCK && event.entityPlayer.worldObj.getBlockId(event.x, event.y, event.z) == Block.jukebox.blockID)
+					ReCubedAPI.addValueToCategory(LibCategories.DISCS_PLAYED, event.entityPlayer.username, ((ItemRecord) stack.getItem()).recordName, 1);
 			}
 		}
 	}

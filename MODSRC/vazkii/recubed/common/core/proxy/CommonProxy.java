@@ -40,6 +40,7 @@ public class CommonProxy {
 		ReCubedAPI.registerCategory(LibCategories.DAMAGE_DEALT);
 		ReCubedAPI.registerCategory(LibCategories.DAMAGE_TAKEN);	
 		ReCubedAPI.registerCategory(LibCategories.DIMENSIONS_CHANGED);
+		ReCubedAPI.registerCategory(LibCategories.DISCS_PLAYED);
 		ReCubedAPI.registerCategory(LibCategories.ENDER_PEARLS_THROWN);
 		ReCubedAPI.registerCategory(LibCategories.ITEMS_BROKEN);
 		ReCubedAPI.registerCategory(LibCategories.ITEMS_DROPPED);
