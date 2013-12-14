@@ -31,6 +31,7 @@ public class GuiStatViewer extends GuiCategoryList {
 	Entry hoveredEntry;
 	
 	GuiTextField searchBar;
+	GuiButton visit;
 
 	@Override
 	public void initGui() {
@@ -46,6 +47,9 @@ public class GuiStatViewer extends GuiCategoryList {
 		searchBar.setCanLoseFocus(false);
 		searchBar.setMaxStringLength(32);
 		searchBar.setVisible(false);
+		
+		buttonList.add(visit = new GuiButton(2, x + fontRenderer.getStringWidth(search) + 205, y - 45, 70, 20, StatCollector.translateToLocal("recubed.misc.see_stats")));
+		visit.drawButton = false;
 	}
 
 	@Override
@@ -76,6 +80,7 @@ public class GuiStatViewer extends GuiCategoryList {
 			GL11.glEnable(GL11.GL_BLEND);
 			fontRenderer.drawStringWithShadow(StatCollector.translateToLocal("recubed.misc.type_to_search"), x + length + 10, y- 15, 0x66FFFFFF);
 			GL11.glDisable(GL11.GL_BLEND);
+			visit.drawButton = false;
 		} else {
 			fontRenderer.drawStringWithShadow(search, x, y - 15, 0xFFFFFF);
 			Category currentCategory = fromCurrentCategoryInt();
@@ -109,7 +114,11 @@ public class GuiStatViewer extends GuiCategoryList {
 				float percentage = Math.round((float) value / (float) total * 100F * 100F) / 100F;
 				
 				fontRenderer.drawStringWithShadow(value + " (" + percentage + "%)", x + length + 210, y - 15, 0xFFFFFF);
-			} else fontRenderer.drawStringWithShadow("0 (0%)", x + length + 210, y - 15, 0xFFFFFF);
+				visit.drawButton = category instanceof Category;
+			} else {
+				fontRenderer.drawStringWithShadow("0 (0%)", x + length + 210, y - 15, 0xFFFFFF);
+				visit.drawButton = false;
+			}
 		}
 	}
 	
@@ -143,14 +152,25 @@ public class GuiStatViewer extends GuiCategoryList {
 	protected void actionPerformed(GuiButton par1GuiButton) {
 		Category category = fromCurrentCategoryInt();
 
-		if(par1GuiButton.id == 0) {
-			if(this.category instanceof PlayerCategoryData) {
-				this.category = category;
+		switch(par1GuiButton.id) {
+			case 0 : {
+				if(this.category instanceof PlayerCategoryData) {
+					this.category = category;
+					clearSearchBar();
+				} else mc.displayGuiScreen(new GuiReCubedMenu());
+				return;
+			}
+			case 1 : {
+				this.category = category.playerData.get(mc.thePlayer.username);
 				clearSearchBar();
-			} else mc.displayGuiScreen(new GuiReCubedMenu());
-		} else {
-			this.category = category.playerData.get(mc.thePlayer.username);
-			clearSearchBar();
+				return;
+			}
+			case 2 : {
+				String text = unlocalized;
+				this.category = fromCurrentCategoryInt().playerData.get(text);
+				clearSearchBar();
+				return;
+			}
 		}
 	}
 

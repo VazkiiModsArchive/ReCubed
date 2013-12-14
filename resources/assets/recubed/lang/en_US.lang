@@ -46,6 +46,7 @@ recubed.misc.openMenu=Open ReCubed Menu
 recubed.misc.credits=By Vazkii, for #ModJam 3
 recubed.misc.enter=Press ENTER to track this stat.
 recubed.misc.type_to_search=(Type to search)
+recubed.misc.see_stats=View Stats
 recubed.misc.total=Total: %s
 recubed.misc.others=Others
 recubed.misc.back=Back
