@@ -43,6 +43,7 @@ public class CommonProxy {
 		ReCubedAPI.registerCategory(LibCategories.ITEMS_BROKEN);
 		ReCubedAPI.registerCategory(LibCategories.ITEMS_DROPPED);
 		ReCubedAPI.registerCategory(LibCategories.ITEMS_PICKED_UP);
+		ReCubedAPI.registerCategory(LibCategories.ITEMS_SPAWNED);
 		ReCubedAPI.registerCategory(LibCategories.JUMPS_DONE);
 		ReCubedAPI.registerCategory(LibCategories.MOBS_AGGROED);
 		ReCubedAPI.registerCategory(LibCategories.MOBS_KILLED);

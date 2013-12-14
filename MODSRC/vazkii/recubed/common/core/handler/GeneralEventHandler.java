@@ -12,6 +12,8 @@ package vazkii.recubed.common.core.handler;
 
 import java.util.List;
 
+import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandGive;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityMob;
@@ -123,7 +125,7 @@ public final class GeneralEventHandler {
 		}
 	}
 
-	// MESSAGES SENT
+	// MESSAGES SENT + ITEMS SPAWNED
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onMessageReceived(ServerChatEvent event) {
 		if(ReCubedAPI.validatePlayer(event.player))
@@ -132,8 +134,28 @@ public final class GeneralEventHandler {
 
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onMessageReceived(CommandEvent event) {
-		if(event.sender instanceof EntityPlayer && ReCubedAPI.validatePlayer((EntityPlayer) event.sender))
+		if(event.sender instanceof EntityPlayer && ReCubedAPI.validatePlayer((EntityPlayer) event.sender)) {
 			ReCubedAPI.addValueToCategory(LibCategories.MESSAGES_SENT, event.sender.getCommandSenderName(), "recubed.misc.command", 1);
+			
+			if(event.command instanceof CommandGive) {
+				int i = CommandBase.parseIntWithMin(event.sender, event.parameters[1], 1);
+	            int j = 1;
+	            int k = 0;
+
+	            if (Item.itemsList[i] == null)
+	                return;
+	           
+                if (event.parameters.length >= 3)
+                    j = CommandBase.parseIntBounded(event.sender, event.parameters[2], 1, 64);
+
+                if (event.parameters.length >= 4)
+                    k = CommandBase.parseInt(event.sender, event.parameters[3]);
+
+                ItemStack stack = new ItemStack(i, j, k);
+                
+    			ReCubedAPI.addValueToCategory(LibCategories.ITEMS_SPAWNED, event.sender.getCommandSenderName(), stack.getUnlocalizedName() + ".name", 1);
+			}
+		}
 	}
 	
 	// MOBS AGGROED
