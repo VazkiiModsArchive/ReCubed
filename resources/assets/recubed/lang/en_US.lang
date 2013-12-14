@@ -19,6 +19,7 @@ recubed.category.times_slept=Times Slept
 recubed.misc.envDamage=Environmental Damage
 recubed.misc.openMenu=Open ReCubed Menu
 recubed.misc.credits=By Vazkii, for #ModJam 3
+recubed.misc.total=Total: %s
 recubed.misc.others=Others
 recubed.misc.back=Back
 recubed.misc.your_stats=Your Stats

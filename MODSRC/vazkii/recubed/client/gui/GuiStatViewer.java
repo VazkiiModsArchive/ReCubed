@@ -47,7 +47,10 @@ public class GuiStatViewer extends GuiCategoryList {
 		PieChartRender pie = category instanceof Category ? PieChartRender.fromCategory((Category) category) : PieChartRender.fromPlayerData((PlayerCategoryData) category);
 		if(pie == null)
 			drawCenteredString(fontRenderer, StatCollector.translateToLocal("recubed.no_data"), x + 250, y + 95, 0xFF7777);
-		else hoveredEntry = pie.renderChart(80, x + 250, y + 100, par1, par2);
+		else{
+			hoveredEntry = pie.renderChart(80, x + 250, y + 100, par1, par2);
+			fontRenderer.drawStringWithShadow(String.format(StatCollector.translateToLocal("recubed.misc.total"), pie.totalVal), x + 134, y + 185, 0xFFFFFF);
+		}
 		
 		String displayString = StatCollector.translateToLocal(fromCurrentCategoryInt().name);
 		if(category instanceof PlayerCategoryData)

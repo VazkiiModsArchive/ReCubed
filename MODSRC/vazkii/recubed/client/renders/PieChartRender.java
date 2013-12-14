@@ -34,6 +34,7 @@ import vazkii.recubed.common.core.helper.MiscHelper;
 public strictfp class PieChartRender {
 
 	public boolean clickable;
+	public int totalVal;
 	
 	public Collection<Entry> entries = new TreeSet();
 	
@@ -135,6 +136,7 @@ public strictfp class PieChartRender {
 			i++;
 		}
 		
+		this.totalVal = totalVal;
 		this.entries = newEntries;
 	}
 	
