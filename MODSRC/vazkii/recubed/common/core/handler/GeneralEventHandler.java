@@ -200,6 +200,21 @@ public final class GeneralEventHandler {
 				ReCubedAPI.addValueToCategory(LibCategories.TIMES_DIED, player.username, name, 1);
 		}
 	}
+	
+	// SNOWBALLS THROWN
+	@ForgeSubscribe(priority = EventPriority.LOWEST)
+	public void onPlayerInteract(PlayerInteractEvent event) {
+		if(ReCubedAPI.validatePlayer(event.entityPlayer)) {
+			ItemStack stack = event.entityPlayer.getCurrentEquippedItem();
+			
+			if(stack != null) {
+				if(stack.itemID == Item.snowball.itemID)
+					ReCubedAPI.addValueToCategory(LibCategories.SNOWBALLS_THROWN, event.entityPlayer.username, "item.snowball.name", 1);
+				
+//				if(!event.entityPlayer.capabilities.isCreativeMode)
+			}
+		}
+	}
 
 	// TIMES SLEPT
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
