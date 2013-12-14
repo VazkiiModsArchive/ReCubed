@@ -18,5 +18,6 @@ public final class LibResources {
 	
 	public static final String RESOURCE_COGWHEEL = "recubed:textures/cogwheel.png";
 	public static final String RESOURCE_CHECK = "recubed:textures/check.png";
+	public static final String RESOURCE_HUD_BAR = "recubed:textures/hudBar.png";
 	
 }

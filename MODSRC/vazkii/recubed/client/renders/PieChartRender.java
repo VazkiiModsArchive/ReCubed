@@ -32,7 +32,7 @@ import vazkii.recubed.client.core.helper.RenderHelper;
 import vazkii.recubed.common.core.handler.ConfigHandler;
 import vazkii.recubed.common.core.helper.MiscHelper;
 
-public strictfp class PieChartRender {
+public strictfp final class PieChartRender {
 
 	public boolean clickable;
 	public int totalVal;
