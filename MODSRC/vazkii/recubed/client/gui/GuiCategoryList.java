@@ -16,7 +16,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
@@ -36,7 +35,7 @@ public class GuiCategoryList extends GuiScreen {
 	public int x, y;
 
 	List<Integer> indexes = new ArrayList();
-	
+
 	@Override
 	public void initGui() {
 		super.initGui();
@@ -65,7 +64,7 @@ public class GuiCategoryList extends GuiScreen {
 		GL11.glDisable(GL11.GL_BLEND);
 
 		slot.drawScreen(par1, par2, par3);
-		
+
 		super.drawScreen(par1, par2, par3);
 	}
 
@@ -86,7 +85,7 @@ public class GuiCategoryList extends GuiScreen {
 
 		});
 	}
-	
+
 	Category fromCurrentCategoryInt() {
 		return ClientData.categories.get(ReCubedAPI.categories.get(indexes.get(selectedCategory)));
 	}

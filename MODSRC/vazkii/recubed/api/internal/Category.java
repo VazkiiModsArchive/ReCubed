@@ -31,10 +31,10 @@ public final class Category implements Serializable {
 		int total = 0;
 		for(String s : playerData.keySet())
 			total += getTotalValueFromPlayerData(s);
-		
+
 		return total;
 	}
-	
+
 	public int getTotalValueFromPlayerData(String data) {
 		if(playerData.containsKey(data))
 			return playerData.get(data).getTotalValue();

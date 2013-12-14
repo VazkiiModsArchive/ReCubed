@@ -56,11 +56,11 @@ public class GuiCategorySlot extends GuiScrollingList {
 		Minecraft mc = Minecraft.getMinecraft();
 		String categoryName = ReCubedAPI.categories.get(parent.indexes.get(i));
 		Category category = ClientData.categories.get(categoryName);
-		
+
 		int color = 0xFFFFFF;
 		if(category.playerData.get(mc.thePlayer.username).getTotalValue() == 0)
 			color = 0x777777;
-		
+
 		mc.fontRenderer.drawStringWithShadow(StatCollector.translateToLocal(categoryName), j - 110, k + 2, color);
 	}
 }

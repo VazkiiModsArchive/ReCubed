@@ -29,7 +29,7 @@ public class GuiStatViewer extends GuiCategoryList {
 
 	Object category;
 	Entry hoveredEntry;
-	
+
 	GuiTextField searchBar;
 	GuiButton visit;
 
@@ -40,14 +40,14 @@ public class GuiStatViewer extends GuiCategoryList {
 		buttonList.clear();
 		buttonList.add(new GuiButton(0, x + 340, y + 145, 50, 20, StatCollector.translateToLocal("recubed.misc.back")));
 		buttonList.add(new GuiButton(1, x + 310, y + 170, 80, 20, StatCollector.translateToLocal("recubed.misc.your_stats")));
-		
+
 		String search = StatCollector.translateToLocal("recubed.misc.search");
 		searchBar = new GuiTextField(fontRenderer, x + fontRenderer.getStringWidth(search) + 5, y - 20, 200, 18);
 		searchBar.setFocused(true);
 		searchBar.setCanLoseFocus(false);
 		searchBar.setMaxStringLength(32);
 		searchBar.setVisible(false);
-		
+
 		buttonList.add(visit = new GuiButton(2, x + fontRenderer.getStringWidth(search) + 205, y - 45, 70, 20, StatCollector.translateToLocal("recubed.misc.see_stats")));
 		visit.drawButton = false;
 	}
@@ -69,13 +69,13 @@ public class GuiStatViewer extends GuiCategoryList {
 		if(category instanceof PlayerCategoryData)
 			displayString = displayString + " - " + EnumChatFormatting.AQUA + ((PlayerCategoryData) category).name;
 		drawCenteredString(fontRenderer, displayString, x + 250, y + 5, 0xFFFFFF);
-		
+
 		searchBar.drawTextBox();
-		
+
 		String search = StatCollector.translateToLocal("recubed.misc.search");
 		int length = fontRenderer.getStringWidth(search);
-		String text = searchBar.getText(); 
-		
+		String text = searchBar.getText();
+
 		if(text.isEmpty()) {
 			GL11.glEnable(GL11.GL_BLEND);
 			fontRenderer.drawStringWithShadow(StatCollector.translateToLocal("recubed.misc.type_to_search"), x + length + 10, y- 15, 0x66FFFFFF);
@@ -84,12 +84,12 @@ public class GuiStatViewer extends GuiCategoryList {
 		} else {
 			fontRenderer.drawStringWithShadow(search, x, y - 15, 0xFFFFFF);
 			Category currentCategory = fromCurrentCategoryInt();
-			
+
 			boolean found = false;
 			int color = 0;
 			int value = 0;
 			int total = 0;
-			
+
 			if(category instanceof Category) {
 				PlayerCategoryData data = getValueFromCaseInsensitveString(currentCategory.playerData, text);
 				if(data != null) {
@@ -108,11 +108,11 @@ public class GuiStatViewer extends GuiCategoryList {
 					total = data.getTotalValue();
 				}
 			}
-			
+
 			if(found) {
 				drawRect(x + length + 187, y - 20, x + length + 205, y - 2, color);
 				float percentage = Math.round((float) value / (float) total * 100F * 100F) / 100F;
-				
+
 				fontRenderer.drawStringWithShadow(value + " (" + percentage + "%)", x + length + 210, y - 15, 0xFFFFFF);
 				visit.drawButton = category instanceof Category;
 			} else {
@@ -121,7 +121,7 @@ public class GuiStatViewer extends GuiCategoryList {
 			}
 		}
 	}
-	
+
 	String unlocalized;
 	public <T> T getValueFromCaseInsensitveString(Map<String, T> map, String key) {
 		for(String k : map.keySet())
@@ -129,18 +129,18 @@ public class GuiStatViewer extends GuiCategoryList {
 				unlocalized = k;
 				return map.get(k);
 			}
-		
+
 		return null;
 	}
-	
+
 	@Override
 	protected void keyTyped(char par1, int par2) {
 		super.keyTyped(par1, par2);
-		
+
 		searchBar.textboxKeyTyped(par1, par2);
 		searchBar.setVisible(!searchBar.getText().isEmpty());
 	}
-	
+
 	public void clearSearchBar() {
 		if(searchBar != null) {
 			searchBar.setText("");
@@ -183,7 +183,7 @@ public class GuiStatViewer extends GuiCategoryList {
 		}
 
 		searchBar.mouseClicked(par1, par2, par3);
-		
+
 		super.mouseClicked(par1, par2, par3);
 	}
 
@@ -194,10 +194,10 @@ public class GuiStatViewer extends GuiCategoryList {
 	@Override
 	public void selectCategory(int category) {
 		boolean isCurrentCategory = this.category instanceof Category;
-		
+
 		super.selectCategory(category);
 		this.category = fromCurrentCategoryInt();
-		
+
 		if(!isCurrentCategory)
 			clearSearchBar();
 	}
