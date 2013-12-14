@@ -15,6 +15,22 @@ recubed.category.times_died=Deaths
 recubed.category.times_played=Times Logged In
 recubed.category.times_slept=Times Slept
 
+# DAMAGE
+recubed.damage.inFire=Standing on Fire
+recubed.damage.onFire=Fire
+recubed.damage.lava=Lava
+recubed.damage.inWall=Suffocation
+recubed.damage.drown=Drowning
+recubed.damage.starve=Starvation
+recubed.damage.cactus=Prickling
+recubed.damage.fall=Falling
+recubed.damage.outOfWorld=Out of the World
+recubed.damage.generic=Generic Damage
+recubed.damage.magic=Magic
+recubed.damage.wither=Withering
+recubed.damage.anvil=Anvil
+recubed.damage.fallingBlock=Falling Blocks
+
 # MISC
 recubed.misc.envDamage=Environmental Damage
 recubed.misc.openMenu=Open ReCubed Menu
