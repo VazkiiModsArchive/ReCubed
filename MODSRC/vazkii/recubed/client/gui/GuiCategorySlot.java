@@ -14,6 +14,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.StatCollector;
 import vazkii.recubed.api.ReCubedAPI;
+import vazkii.recubed.api.internal.Category;
+import vazkii.recubed.api.internal.ClientData;
 
 public class GuiCategorySlot extends GuiScrollingList {
 
@@ -51,6 +53,14 @@ public class GuiCategorySlot extends GuiScrollingList {
 
 	@Override
 	protected void drawSlot(int i, int j, int k, int l, Tessellator tessellator) {
-		Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(StatCollector.translateToLocal(ReCubedAPI.categories.get(parent.indexes.get(i))), j - 110, k + 2, 0xFFFFFF);
+		Minecraft mc = Minecraft.getMinecraft();
+		String categoryName = ReCubedAPI.categories.get(parent.indexes.get(i));
+		Category category = ClientData.categories.get(categoryName);
+		
+		int color = 0xFFFFFF;
+		if(category.playerData.get(mc.thePlayer.username).getTotalValue() == 0)
+			color = 0x777777;
+		
+		mc.fontRenderer.drawStringWithShadow(StatCollector.translateToLocal(categoryName), j - 110, k + 2, color);
 	}
 }
