@@ -33,7 +33,7 @@ public final class HUDHandler {
 			Category category = ClientData.categories.get(categoryName);
 			if(category != null) {
 				String playerName = ClientCacheHandler.hudPlayer;
-				if(playerName != null && !playerName.isEmpty())
+				if(playerName == null || playerName.isEmpty())
 					StatBarsRender.fromCategory(category).renderStatBars(coords.x, coords.y);
 				else {
 					PlayerCategoryData data = category.playerData.get(playerName);

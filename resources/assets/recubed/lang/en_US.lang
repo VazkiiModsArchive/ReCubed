@@ -35,6 +35,7 @@ recubed.damage.fallingBlock=Falling Blocks
 recubed.misc.envDamage=Environmental Damage
 recubed.misc.openMenu=Open ReCubed Menu
 recubed.misc.credits=By Vazkii, for #ModJam 3
+recubed.misc.enter=Press ENTER to track this stat.
 recubed.misc.total=Total: %s
 recubed.misc.others=Others
 recubed.misc.back=Back

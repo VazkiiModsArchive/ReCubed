@@ -47,7 +47,8 @@ public class GuiReCubedMenu extends GuiScreen {
 				return;
 			}
 			case 1 : {
-				
+				mc.displayGuiScreen(new GuiStatSelector());
+				return;
 			}
 			case 2 : {
 				

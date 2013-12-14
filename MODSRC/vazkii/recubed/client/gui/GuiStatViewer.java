@@ -89,7 +89,7 @@ public class GuiStatViewer extends GuiCategoryList {
 		this.category = fromCurrentCategoryInt();
 	}
 	
-	private Category fromCurrentCategoryInt() {
+	Category fromCurrentCategoryInt() {
 		return ClientData.categories.get(ReCubedAPI.categories.get(indexes.get(selectedCategory)));
 	}
 }
