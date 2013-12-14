@@ -201,7 +201,7 @@ public final class GeneralEventHandler {
 		}
 	}
 	
-	// SNOWBALLS THROWN
+	// SNOWBALLS THROWN + ENDER PEARLS THROWN
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		if(ReCubedAPI.validatePlayer(event.entityPlayer)) {
@@ -211,7 +211,9 @@ public final class GeneralEventHandler {
 				if(stack.itemID == Item.snowball.itemID)
 					ReCubedAPI.addValueToCategory(LibCategories.SNOWBALLS_THROWN, event.entityPlayer.username, "item.snowball.name", 1);
 				
-//				if(!event.entityPlayer.capabilities.isCreativeMode)
+				if(!event.entityPlayer.capabilities.isCreativeMode && stack.itemID == Item.enderPearl.itemID)
+					ReCubedAPI.addValueToCategory(LibCategories.ENDER_PEARLS_THROWN, event.entityPlayer.username, "item.enderPearl.name", 1);
+			
 			}
 		}
 	}
