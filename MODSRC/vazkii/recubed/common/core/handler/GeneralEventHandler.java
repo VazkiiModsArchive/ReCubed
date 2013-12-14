@@ -66,7 +66,7 @@ public final class GeneralEventHandler {
 	// BLOCKS BROKEN
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onBlockBroken(BlockEvent.BreakEvent event) {
-        if(ReCubedAPI.validatePlayer(event.getPlayer()))
+        if(ReCubedAPI.validatePlayer(event.getPlayer()) && event.block != null && Item.itemsList[event.block.blockID] != null)
 			ReCubedAPI.addValueToCategory(LibCategories.BLOCKS_BROKEN, event.getPlayer().username, Item.itemsList[event.block.blockID].getUnlocalizedName(new ItemStack(event.block.blockID, 1, event.blockMetadata)) + ".name", 1);
 	}
 
