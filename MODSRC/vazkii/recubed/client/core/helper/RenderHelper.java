@@ -1,11 +1,11 @@
 /**
  * This class was created by <Vazkii>. It's distributed as
  * part of the ReCubed Mod.
- * 
+ *
  * ReCubed is Open Source and distributed under a
  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- * 
+ *
  * File Created @ [Dec 13, 2013, 4:38:18 PM (GMT)]
  */
 package vazkii.recubed.client.core.helper;
@@ -24,7 +24,7 @@ public final class RenderHelper {
 	public static void renderTooltip(int x, int y, List<String> tooltipData) {
 		int color = 1347420415;
 		int color2 = -267386864;
-		
+
 		GL11.glPushMatrix();
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 		net.minecraft.client.renderer.RenderHelper.disableStandardItemLighting();

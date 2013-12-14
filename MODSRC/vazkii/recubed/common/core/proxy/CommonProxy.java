@@ -1,11 +1,11 @@
 /**
  * This class was created by <Vazkii>. It's distributed as
  * part of the ReCubed Mod.
- * 
+ *
  * ReCubed is Open Source and distributed under a
  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- * 
+ *
  * File Created @ [Dec 13, 2013, 2:32:54 PM (GMT)]
  */
 package vazkii.recubed.common.core.proxy;
@@ -33,12 +33,12 @@ public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
 		ConfigHandler.load(event.getSuggestedConfigurationFile());
-		
+
 		ReCubedAPI.registerCategory(LibCategories.ARROWS_SHOT);
-		ReCubedAPI.registerCategory(LibCategories.BOSS_KILLS);		
+		ReCubedAPI.registerCategory(LibCategories.BOSS_KILLS);
 		ReCubedAPI.registerCategory(LibCategories.BLOCKS_BROKEN);
 		ReCubedAPI.registerCategory(LibCategories.DAMAGE_DEALT);
-		ReCubedAPI.registerCategory(LibCategories.DAMAGE_TAKEN);	
+		ReCubedAPI.registerCategory(LibCategories.DAMAGE_TAKEN);
 		ReCubedAPI.registerCategory(LibCategories.DIMENSIONS_CHANGED);
 		ReCubedAPI.registerCategory(LibCategories.DISCS_PLAYED);
 		ReCubedAPI.registerCategory(LibCategories.ENDER_PEARLS_THROWN);
@@ -60,32 +60,32 @@ public class CommonProxy {
 		ReCubedAPI.registerCategory(LibCategories.TIMES_PLAYED);
 		ReCubedAPI.registerCategory(LibCategories.TIMES_SLEPT);
 	}
-	
+
 	public void init(FMLInitializationEvent event) {
 		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
-		
+
 		GameRegistry.registerPlayerTracker(new PlayerTracker());
-		
+
 		MinecraftForge.EVENT_BUS.register(new WorldSaveHandler());
 		MinecraftForge.EVENT_BUS.register(new GeneralEventHandler());
 	}
-	
+
 	public void serverStarting() {
 		ServerData.init();
 	}
-	
+
 	public void serverStarted() {
 		CacheHelper.findCompoundAndLoad();
 	}
-	
+
 	public void serverStopping() {
 		CacheHelper.findCompoundAndWrite();
 	}
-	
+
 	public void serverStopped() {
 		ServerData.reset();
 	}
-	
+
 	public void handlePacket(INetworkManager manager, Player player, IPacket packet) {
 		// NO-OP
 	}

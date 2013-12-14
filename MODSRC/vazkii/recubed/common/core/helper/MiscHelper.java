@@ -1,11 +1,11 @@
 /**
  * This class was created by <Vazkii>. It's distributed as
  * part of the ReCubed Mod.
- * 
+ *
  * ReCubed is Open Source and distributed under a
  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- * 
+ *
  * File Created @ [Dec 13, 2013, 4:18:48 PM (GMT)]
  */
 package vazkii.recubed.common.core.helper;
@@ -24,7 +24,7 @@ public final class MiscHelper {
 	public static String getEntityString(Entity entity) {
 		return "entity." + EntityList.getEntityString(entity) + ".name";
 	}
-	
+
 	public static int generateColorFromString(String seed) {
 		Random rand = new Random(seed.hashCode());
 		int red = rand.nextInt(256);
@@ -33,12 +33,12 @@ public final class MiscHelper {
 
 		return new Color(red, green, blue).getRGB();
 	}
-	
+
 	public static <K, V> TreeMap<K, V> sortMap(Map<K, V> map, Comparator<K> comparator) {
 		TreeMap<K, V> treemap = new TreeMap(comparator);
 		for(K key : map.keySet())
 			treemap.put(key, map.get(key));
-		
+
 		return treemap;
 	}
 }

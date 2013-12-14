@@ -1,11 +1,11 @@
 /**
  * This class was created by <Vazkii>. It's distributed as
  * part of the ReCubed Mod.
- * 
+ *
  * ReCubed is Open Source and distributed under a
  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- * 
+ *
  * File Created @ [Dec 13, 2013, 2:45:24 PM (GMT)]
  */
 package vazkii.recubed.common.network;
@@ -30,10 +30,10 @@ public final class PlayerTracker implements IPlayerTracker {
 		PlayerLastTickData data = new PlayerLastTickData();
 		data.setData(player);
 		PlayerTickHandler.playerData.put(player.username, data);
-		
+
 		if(ReCubedAPI.validatePlayer(player))
 			ReCubedAPI.addValueToCategory(LibCategories.TIMES_PLAYED, player.username, "recubed.misc.login", 1);
-		
+
 		for(IPacket packet : PacketCategory.allCategoryPackets())
 			PacketManager.dispatchToClient(packet, (Player) player);
 	}

@@ -1,11 +1,11 @@
 /**
  * This class was created by <Vazkii>. It's distributed as
  * part of the ReCubed Mod.
- * 
+ *
  * ReCubed is Open Source and distributed under a
  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- * 
+ *
  * File Created @ [Dec 13, 2013, 5:37:44 PM (GMT)]
  */
 package vazkii.recubed.client.gui;
@@ -18,7 +18,7 @@ import vazkii.recubed.api.ReCubedAPI;
 public class GuiCategorySlot extends GuiScrollingList {
 
 	GuiCategoryList parent;
-	
+
 	public GuiCategorySlot(GuiCategoryList parent) {
 		super(Minecraft.getMinecraft(), 125, parent.guiHeight, parent.y + 16, parent.y + parent.guiHeight - 16, parent.x, 16);
 		this.parent = parent;
@@ -28,7 +28,7 @@ public class GuiCategorySlot extends GuiScrollingList {
 	protected int getSize() {
 		return parent.indexes.size();
 	}
-	
+
 	@Override
 	protected int getContentHeight() {
 		return getSize() * 16;

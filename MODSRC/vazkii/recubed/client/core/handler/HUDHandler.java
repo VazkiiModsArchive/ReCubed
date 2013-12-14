@@ -1,11 +1,11 @@
 /**
  * This class was created by <Vazkii>. It's distributed as
  * part of the ReCubed Mod.
- * 
+ *
  * ReCubed is Open Source and distributed under a
  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- * 
+ *
  * File Created @ [Dec 14, 2013, 1:55:25 PM (GMT)]
  */
 package vazkii.recubed.client.core.handler;
@@ -25,10 +25,10 @@ import vazkii.recubed.client.renders.StatBarsRender;
 public final class HUDHandler {
 
 	@ForgeSubscribe
-	public void onDrawScreen(RenderGameOverlayEvent.Post event) {		
+	public void onDrawScreen(RenderGameOverlayEvent.Post event) {
 		if(event.type == ElementType.ALL && shouldRenderHUD()) {
 			Point coords = getCoords(event.resolution.getScaledWidth(), event.resolution.getScaledHeight(), ClientCacheHandler.hudRelativeTo, ClientCacheHandler.hudPosX, ClientCacheHandler.hudPosY);
-			
+
 			String categoryName = ClientCacheHandler.hudCategory;
 
 			Category category = ClientData.categories.get(categoryName);
@@ -43,14 +43,14 @@ public final class HUDHandler {
 			}
 		}
 	}
-	
+
 	private static boolean shouldRenderHUD() {
 		Minecraft mc = Minecraft.getMinecraft();
-		if(mc.currentScreen != null && mc.currentScreen instanceof GuiMoveHUD) 
+		if(mc.currentScreen != null && mc.currentScreen instanceof GuiMoveHUD)
 			return true;
 		return ClientCacheHandler.drawHud;
 	}
-	
+
 	public static Point getCoords(int screenX, int screenY, int relativePos, int posX, int posY) {
 		switch(relativePos) {
 			case 0 : return new Point(screenX - posX, posY);
@@ -59,5 +59,5 @@ public final class HUDHandler {
 			default : return new Point(screenX - posX, screenY - posY);
 		}
 	}
-	
+
 }
