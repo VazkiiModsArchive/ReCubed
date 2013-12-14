@@ -17,6 +17,7 @@ import net.minecraft.entity.player.EntityPlayer;
 public final class PlayerLastTickData {
 
 	int xp;
+	int level;
 	
 	public void tickPlayer(EntityPlayer player) {
 		if(player.experienceTotal > xp) {
@@ -24,11 +25,17 @@ public final class PlayerLastTickData {
 			ReCubedAPI.addValueToCategory(LibCategories.EXPERIENCE_GATHERED, player.username, "recubed.misc.experience", extra);
 		}
 		
+		if(player.experienceLevel > level) {
+			int extra = player.experienceLevel - level;
+			ReCubedAPI.addValueToCategory(LibCategories.LEVELS_GAINED, player.username, "recubed.misc.level", extra);
+		}
+		
 		setData(player);
 	}
 	
 	public void setData(EntityPlayer player) {
 		xp = player.experienceTotal;
+		level = player.experienceLevel;
 	}
 	
 }
