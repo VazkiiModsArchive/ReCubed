@@ -13,6 +13,8 @@ package vazkii.recubed.common.network;
 import net.minecraft.entity.player.EntityPlayer;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.api.internal.ServerData;
+import vazkii.recubed.common.core.handler.PlayerTickHandler;
+import vazkii.recubed.common.core.helper.PlayerLastTickData;
 import vazkii.recubed.common.lib.LibCategories;
 import vazkii.recubed.common.network.packet.IPacket;
 import vazkii.recubed.common.network.packet.PacketCategory;
@@ -24,6 +26,10 @@ public final class PlayerTracker implements IPlayerTracker {
 	@Override
 	public void onPlayerLogin(EntityPlayer player) {
 		ServerData.onPlayerLogin(player.username);
+
+		PlayerLastTickData data = new PlayerLastTickData();
+		data.setData(player);
+		PlayerTickHandler.playerData.put(player.username, data);
 		
 		if(ReCubedAPI.validatePlayer(player))
 			ReCubedAPI.addValueToCategory(LibCategories.TIMES_PLAYED, player.username, "recubed.misc.login", 1);
@@ -34,7 +40,7 @@ public final class PlayerTracker implements IPlayerTracker {
 
 	@Override
 	public void onPlayerLogout(EntityPlayer player) {
-		// NO-OP
+		PlayerTickHandler.playerData.remove(player.username);
 	}
 
 	@Override

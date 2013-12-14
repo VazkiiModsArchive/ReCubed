@@ -10,12 +10,18 @@
  */
 package vazkii.recubed.common.core.handler;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.minecraft.entity.player.EntityPlayer;
+import vazkii.recubed.common.core.helper.PlayerLastTickData;
 
 public final class PlayerTickHandler {
 
+	public static Map<String, PlayerLastTickData> playerData = new HashMap();
+	
 	public static void playerTicked(EntityPlayer player) {
-		
+		playerData.get(player.username).tickPlayer(player);
 	}
 	
 }

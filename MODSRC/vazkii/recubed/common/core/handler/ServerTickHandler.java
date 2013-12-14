@@ -32,7 +32,7 @@ public final class ServerTickHandler implements ITickHandler {
 
 	@Override
 	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-		if(type.equals(TickType.PLAYER))
+		if(type.equals(EnumSet.of(TickType.PLAYER)))
 			PlayerTickHandler.playerTicked((EntityPlayer) tickData[0]);
 		else {
 			if(ticksElapsed % ConfigHandler.packetInterval == 0) {
