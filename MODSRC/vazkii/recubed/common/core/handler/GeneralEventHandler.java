@@ -25,6 +25,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraftforge.common.IShearable;
 import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.event.EventPriority;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -73,7 +74,9 @@ public final class GeneralEventHandler {
         	if(currentItem != null && currentItem.itemID == Item.bucketEmpty.itemID && event.target instanceof EntityCow)
         		ReCubedAPI.addValueToCategory(LibCategories.COWS_MILKED, event.entityPlayer.username, "item.milk.name", 1);
 
-        	
+        	if(currentItem != null && currentItem.itemID == Item.shears.itemID && event.target instanceof IShearable && ((IShearable) event.target).isShearable(currentItem, event.target.worldObj, (int) event.target.posX, (int) event.target.posY, (int) event.target.posZ))
+        		ReCubedAPI.addValueToCategory(LibCategories.ANIMALS_SHEARED, event.entityPlayer.username, MiscHelper.getEntityString(event.target), 1);
+
         }
 	}
 

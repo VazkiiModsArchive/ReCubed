@@ -34,6 +34,7 @@ public class CommonProxy {
 	public void preInit(FMLPreInitializationEvent event) {
 		ConfigHandler.load(event.getSuggestedConfigurationFile());
 
+		ReCubedAPI.registerCategory(LibCategories.ANIMALS_SHEARED);
 		ReCubedAPI.registerCategory(LibCategories.ARROWS_SHOT);
 		ReCubedAPI.registerCategory(LibCategories.BOSS_KILLS);
 		ReCubedAPI.registerCategory(LibCategories.BLOCKS_BROKEN);
