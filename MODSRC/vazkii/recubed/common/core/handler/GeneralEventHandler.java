@@ -19,9 +19,11 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EnumStatus;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -76,6 +78,9 @@ public final class GeneralEventHandler {
 
         	if(currentItem != null && currentItem.itemID == Item.shears.itemID && event.target instanceof IShearable && ((IShearable) event.target).isShearable(currentItem, event.target.worldObj, (int) event.target.posX, (int) event.target.posY, (int) event.target.posZ))
         		ReCubedAPI.addValueToCategory(LibCategories.ANIMALS_SHEARED, event.entityPlayer.username, MiscHelper.getEntityString(event.target), 1);
+
+        	if(currentItem != null && currentItem.getItem() instanceof ItemDye && event.target instanceof EntitySheep && !((EntitySheep) event.target).getSheared() && 15 - ((EntitySheep) event.target).getFleeceColor() != currentItem.getItemDamage())
+        		ReCubedAPI.addValueToCategory(LibCategories.SHEEP_DYED, event.entityPlayer.username, currentItem.getUnlocalizedName() + ".name", 1);
 
         }
 	}
