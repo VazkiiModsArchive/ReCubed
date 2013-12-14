@@ -99,9 +99,9 @@ public strictfp final class PieChartRender {
 		for(Entry entry : entries)
 			totalValue += entry.val;
 		
-		float mul = 360F / totalValue;
+		float mul = 360F / (float) totalValue;
 		for(Entry entry : entries)
-			entry.angle = Math.round(entry.val * mul);
+			entry.angle = (float) entry.val * mul;
 		
 		return totalValue;
 	}
@@ -119,14 +119,14 @@ public strictfp final class PieChartRender {
 		});
 		
 		List<Entry> newEntries = new ArrayList();
-		int totalAngle = 0;
+		float totalAngle = 0;
 		int totalVal = 0;
 		int size = 9;
 		int i = 0;
 		for(Entry entry : sortedEntries) {
 			if(i >= size) {
 				Entry othersEntry = new Entry(totalValue - totalVal, "recubed.misc.others");
-				othersEntry.angle = 360 - totalAngle;
+				othersEntry.angle = 360F - totalAngle;
 				newEntries.add(othersEntry);
 				
 				break;
@@ -147,14 +147,14 @@ public strictfp final class PieChartRender {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		
 		Entry tooltip = null;
-		int tooltipDeg = 0;
+		float tooltipDeg = 0;
 		
 		boolean mouseIn = (x - mx) * (x - mx) + (y - my) * (y - my) <= radius * radius;
 		float angle = mouseAngle(x, y, mx, my);
 		int highlight = 5;
 		
 		GL11.glShadeModel(GL11.GL_SMOOTH);
-		int totalDeg = 0;
+		float totalDeg = 0;
 		for(Entry entry : entries) {
 			boolean mouseInSector = mouseIn && angle > totalDeg && angle < totalDeg + entry.angle;
 			Color color = new Color(entry.color).brighter();
@@ -173,7 +173,7 @@ public strictfp final class PieChartRender {
 			GL11.glVertex2i(x, y);			
 			
 			GL11.glColor4ub((byte) color1.getRed(), (byte) color1.getGreen(), (byte) color1.getBlue(), (byte) 255);
-			for(int i = (int) entry.angle; i >= 0; i--) {
+			for(float i = entry.angle; i >= 0; i -= 0.01) {
 				float rad = (float) ((i + totalDeg) / 180F * Math.PI);
 				GL11.glVertex2d(x + Math.cos(rad) * radius, y + Math.sin(rad) * radius);
 			}
@@ -186,13 +186,14 @@ public strictfp final class PieChartRender {
 			if(mouseInSector)
 				radius -= highlight;
 		}
+		System.out.println(totalDeg);
 		GL11.glShadeModel(GL11.GL_FLAT);
 		
 		totalDeg = 0;
 		GL11.glLineWidth(2F);
 		GL11.glColor4f(0F, 0F, 0F, 1F);
 		for(Entry entry : entries) {
-			if(entry.angle == 360)
+			if((int) Math.round(entry.angle) == 360)
 				break;
 			
 			boolean mouseInSector = mouseIn && angle > totalDeg && angle < totalDeg + entry.angle;
@@ -218,7 +219,7 @@ public strictfp final class PieChartRender {
 		GL11.glColor4f(0F, 0F, 0F, 1F);
 
 		GL11.glBegin(GL11.GL_LINE_LOOP);		
-		for(int i = 0; i < 360; i++) {
+		for(float i = 0; i < 360; i++) {
 			boolean sectorHighlighted = tooltip != null && i >= tooltipDeg && i < tooltip.angle + tooltipDeg;
 			boolean first = tooltip != null && tooltip.angle != 360 && i - tooltipDeg == 0;
 			boolean last = tooltip != null && tooltip.angle != 360 && i - (tooltipDeg + tooltip.angle) == -1;
@@ -248,7 +249,7 @@ public strictfp final class PieChartRender {
 		return tooltip;
 	}
 	
-	private static void addVertexForAngle(int x, int y, int i, int radius) {
+	private static void addVertexForAngle(int x, int y, float i, int radius) {
 		double rad = i / 180F * Math.PI;
 		GL11.glVertex2d(x + Math.cos(rad) * radius, y + Math.sin(rad) * radius);
 	}
