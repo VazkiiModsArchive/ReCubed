@@ -10,6 +10,7 @@
  */
 package vazkii.recubed.client.renders;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -20,13 +21,17 @@ import java.util.TreeSet;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import scala.collection.parallel.ParIterableLike.Min;
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.PlayerCategoryData;
+import vazkii.recubed.client.core.helper.RenderHelper;
 import vazkii.recubed.client.lib.LibResources;
+import vazkii.recubed.common.core.handler.ConfigHandler;
 import vazkii.recubed.common.core.helper.MiscHelper;
 import vazkii.recubed.common.lib.LibMisc;
 
@@ -36,6 +41,7 @@ public final class StatBarsRender {
 	
 	public Collection<Entry> entries = new TreeSet();
 	public final boolean isCategory;
+	final String displayName;
 	Object data;
 	
 	public static class Entry implements Comparable<Entry> {
@@ -63,7 +69,7 @@ public final class StatBarsRender {
 	}
 			
 	public static StatBarsRender fromCategory(Category category) {
-		StatBarsRender render = new StatBarsRender(true);
+		StatBarsRender render = new StatBarsRender(true, StatCollector.translateToLocal(category.name));
 		for(String s : category.playerData.keySet())
 			render.entries.add(new Entry(category.getTotalValueFromPlayerData(s), s));
 		
@@ -75,8 +81,8 @@ public final class StatBarsRender {
 		return render;
 	}
 	
-	public static StatBarsRender fromPlayerData(PlayerCategoryData data) {
-		StatBarsRender render = new StatBarsRender(false);
+	public static StatBarsRender fromPlayerData(PlayerCategoryData data, Category category) {
+		StatBarsRender render = new StatBarsRender(false, StatCollector.translateToLocal(category.name) + " - " + data.name);
 		if(data != null) {
 			for(String s : data.stats.keySet())
 				render.entries.add(new Entry(data.stats.get(s), s));
@@ -114,7 +120,7 @@ public final class StatBarsRender {
 		List<Entry> newEntries = new ArrayList();
 		
 		int totalVal = 0;
-		int size = 9;
+		int size = 14;
 		int i = 0;
 		boolean addedClientPlayer = false;
 		
@@ -147,7 +153,7 @@ public final class StatBarsRender {
 			}
 			
 			totalVal += entry.val;
-			entry.pos = i;
+			entry.pos = i + 1;
 			newEntries.add(entry);
 			
 			if(i >= size)
@@ -159,33 +165,35 @@ public final class StatBarsRender {
 		this.entries = newEntries;
 	}
 	
-	private StatBarsRender(boolean isCategory) {
+	private StatBarsRender(boolean isCategory, String displayName) {
 		this.isCategory = isCategory;
+		this.displayName = displayName;
 	}
 	
 	public void renderStatBars(int x, int y) {
+		final int width = 100;
+		final int height = 98; 
+		
 		Tessellator tess = Tessellator.instance;
 		Minecraft mc = Minecraft.getMinecraft();
 		
 		GL11.glEnable(GL11.GL_BLEND);
-		mc.renderEngine.bindTexture(hudBar);
-		tess.startDrawingQuads();
-		tess.addVertexWithUV(x, y + 8, 0, 0, 1);
-		tess.addVertexWithUV(x + 50, y + 8, 0, 1, 1);
-		tess.addVertexWithUV(x + 50, y, 0, 1, 0);
-		tess.addVertexWithUV(x, y, 0, 0, 0);
-		tess.draw();
 		
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		Gui.drawRect(x, y + 8, x + 50, y + 78, 0x77000000);
+		Gui.drawRect(x, y + 8, x + width, y + height, 0x77000000);
 		
 		int yp = 8;
 		for(Entry entry : entries) {
-			Gui.drawRect(x, y + yp, x + 50, y + 7 + yp, entry.color);
-
+			if(!ConfigHandler.useGradients)
+				Gui.drawRect(x, y + yp, x + width, y + 6 + yp, entry.color);
+			else {
+				Color color = new Color(entry.color).brighter();
+				Color color1 = ConfigHandler.useGradients ? new Color(entry.color).darker().darker() : color;
+				RenderHelper.drawGradientRect(x, y + yp, 0, x + width, y + 6 + yp, color.getRGB(), color1.getRGB());
+			}
 			
-			yp += 7;
+			yp += 6;
 		}
 		
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -194,8 +202,24 @@ public final class StatBarsRender {
 		x *= 2;
 		y *= 2;
 		
-		mc.fontRenderer.drawStringWithShadow(LibMisc.MOD_NAME, x + 5, y + 4, 0xFFFFFF);
+		mc.renderEngine.bindTexture(hudBar);
+		GL11.glColor4f(1F, 1F, 1F, 1F);
+		tess.startDrawingQuads();
+		tess.addVertexWithUV(x * 2, (y + 8) * 2, 0, 0, 1);
+		tess.addVertexWithUV((x + width) * 2, (y + 8) * 2, 0, 1, 1);
+		tess.addVertexWithUV((x + width) * 2, y * 2, 0, 1, 0);
+		tess.addVertexWithUV(x * 2, y * 2, 0, 0, 0);
+		tess.draw();
 		
+		mc.fontRenderer.drawStringWithShadow(displayName, x + 8, y + 4, 0xFFFFFF);		
+		yp = 9;
+		for(Entry entry : entries) {
+			String s1 = "#" + entry.pos + " - " + StatCollector.translateToLocal(entry.name) + ": " + entry.val;
+			mc.fontRenderer.drawStringWithShadow(s1, (x + 4) * 2, (y + yp) * 2, 0xFFFFFF);
+			
+			yp += 6;
+		}
+
 		GL11.glScalef(2F, 2F, 2F);
 		x /= 2;
 		y /= 2;

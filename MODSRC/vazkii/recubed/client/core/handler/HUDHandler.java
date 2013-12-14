@@ -37,7 +37,7 @@ public final class HUDHandler {
 					StatBarsRender.fromCategory(category).renderStatBars(coords.x, coords.y);
 				else {
 					PlayerCategoryData data = category.playerData.get(playerName);
-					StatBarsRender.fromPlayerData(data).renderStatBars(coords.x, coords.y);
+					StatBarsRender.fromPlayerData(data, category).renderStatBars(coords.x, coords.y);
 				}
 			}
 		}
