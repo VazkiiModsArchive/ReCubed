@@ -29,6 +29,7 @@ public final class ClientCacheHandler {
 
 	public static boolean drawHud = true;
 	public static boolean useGradients = true;
+	public static boolean contrastHudText = false;
 	
 	public static int hudRelativeTo = 0;
 	public static int hudPosX = 0;
@@ -96,6 +97,7 @@ public final class ClientCacheHandler {
 		} else {
 			drawHud = cmp.getBoolean("drawHud");
 			useGradients = cmp.getBoolean("useGradients");
+			contrastHudText = cmp.getBoolean("contrastHudText");
 			hudRelativeTo = cmp.getInteger("hudRelativeTo");
 			hudPosX = cmp.getInteger("hudPosX");
 			hudPosY = cmp.getInteger("hudPosY");
@@ -108,6 +110,7 @@ public final class ClientCacheHandler {
 		NBTTagCompound cmp = new NBTTagCompound();
 		
 		cmp.setBoolean("useGradients", useGradients);
+		cmp.setBoolean("contrastHudText", contrastHudText);
 		cmp.setBoolean("drawHud", drawHud);
 		cmp.setInteger("hudRelativeTo", hudRelativeTo);
 		cmp.setInteger("hudPosX", hudPosX);

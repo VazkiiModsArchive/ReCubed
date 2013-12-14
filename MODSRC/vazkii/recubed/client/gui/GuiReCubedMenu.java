@@ -46,11 +46,20 @@ public class GuiReCubedMenu extends GuiScreen {
 			
 		}));
 		
-		buttonList.add(new GuiCheckboxButton(4, x + 20, y + 150, "recubed.misc.hud_enabled", new SafeCallable<Boolean>() {
+		buttonList.add(new GuiCheckboxButton(4, x + 20, y + 145, "recubed.misc.hud_enabled", new SafeCallable<Boolean>() {
 
 			@Override
 			public Boolean call() {
 				return ClientCacheHandler.drawHud;
+			}
+			
+		}));
+		
+		buttonList.add(new GuiCheckboxButton(5, x + 20, y + 170, "recubed.misc.contrast_text", new SafeCallable<Boolean>() {
+
+			@Override
+			public Boolean call() {
+				return ClientCacheHandler.contrastHudText;
 			}
 			
 		}));
@@ -78,6 +87,11 @@ public class GuiReCubedMenu extends GuiScreen {
 			}
 			case 4 : {
 				ClientCacheHandler.drawHud = !ClientCacheHandler.drawHud;
+				ClientCacheHandler.findCompoundAndWrite();
+				return;
+			}
+			case 5 : {
+				ClientCacheHandler.contrastHudText = !ClientCacheHandler.contrastHudText;
 				ClientCacheHandler.findCompoundAndWrite();
 			}
 		}

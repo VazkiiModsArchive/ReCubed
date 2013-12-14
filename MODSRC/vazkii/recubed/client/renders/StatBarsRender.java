@@ -142,6 +142,7 @@ public final class StatBarsRender {
 			if(i >= size) {
 				if(!isCategory) {
 					Entry othersEntry = new Entry(totalValue - totalVal, "recubed.misc.others");
+					othersEntry.pos = 15;
 					newEntries.add(othersEntry);
 					
 					break;
@@ -216,7 +217,15 @@ public final class StatBarsRender {
 		yp = 9;
 		for(Entry entry : entries) {
 			String s1 = "#" + entry.pos + " - " + StatCollector.translateToLocal(entry.name) + ": " + entry.val + " (" + entry.percentage + "%)";
-			mc.fontRenderer.drawStringWithShadow(s1, (x + 2) * 2, (y + yp) * 2, 0xFFFFFF);
+			
+			int colorRGB = 0xFFFFFF;
+			if(ClientCacheHandler.contrastHudText) {
+				Color color = new Color(entry.color);
+				Color color1 = new Color(255 - color.getRed(), 255 - color.getGreen(), 255 - color.getBlue());
+				colorRGB = color1.getRGB();
+			}
+
+			mc.fontRenderer.drawStringWithShadow(s1, (x + 2) * 2, (y + yp) * 2, colorRGB);
 			
 			yp += 6;
 		}
