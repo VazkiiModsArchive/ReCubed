@@ -17,7 +17,7 @@ recubed.category.times_slept=Times Slept
 
 # DAMAGE
 recubed.damage.inFire=Standing on Fire
-recubed.damage.onFire=Fire
+recubed.damage.onFire=Burning
 recubed.damage.lava=Lava
 recubed.damage.inWall=Suffocation
 recubed.damage.drown=Drowning
