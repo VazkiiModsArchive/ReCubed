@@ -40,7 +40,7 @@ public strictfp class PieChartRender {
 	
 	public static class Entry implements Comparable<Entry> {
 		int val;
-		int angle;
+		float angle;
 		int color;
 		public String name;
 
@@ -171,7 +171,7 @@ public strictfp class PieChartRender {
 			GL11.glVertex2i(x, y);			
 			
 			GL11.glColor4ub((byte) color1.getRed(), (byte) color1.getGreen(), (byte) color1.getBlue(), (byte) 255);
-			for(int i = entry.angle; i >= 0; i--) {
+			for(int i = (int) entry.angle; i >= 0; i--) {
 				float rad = (float) ((i + totalDeg) / 180F * Math.PI);
 				GL11.glVertex2d(x + Math.cos(rad) * radius, y + Math.sin(rad) * radius);
 			}
@@ -238,7 +238,7 @@ public strictfp class PieChartRender {
 		GL11.glEnd();
 		
 		if(tooltip != null)
-			RenderHelper.renderTooltip(mx, my, Arrays.asList(StatCollector.translateToLocal(tooltip.name), EnumChatFormatting.GRAY + "" + (int) tooltip.val + " (" + (int) Math.round(tooltip.angle / 3.6F) + "%)"));
+			RenderHelper.renderTooltip(mx, my, Arrays.asList(StatCollector.translateToLocal(tooltip.name), EnumChatFormatting.GRAY + "" + (int) tooltip.val + " (" + (Math.round(tooltip.angle / 3.6F * 100D) / 100D) + "%)"));
 		
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glPopMatrix();
