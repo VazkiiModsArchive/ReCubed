@@ -50,7 +50,8 @@ public class GuiReCubedMenu extends GuiScreen {
 				return;
 			}
 			case 2 : {
-				
+				mc.displayGuiScreen(new GuiMoveHUD());
+				return;
 			}
 			case 3 : {
 				ClientCacheHandler.drawHud = !ClientCacheHandler.drawHud;

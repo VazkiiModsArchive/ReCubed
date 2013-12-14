@@ -32,7 +32,6 @@ recubed.damage.anvil=Anvil
 recubed.damage.fallingBlock=Falling Blocks
 
 # MISC
-recubed.misc.envDamage=Environmental Damage
 recubed.misc.openMenu=Open ReCubed Menu
 recubed.misc.credits=By Vazkii, for #ModJam 3
 recubed.misc.enter=Press ENTER to track this stat.
@@ -42,8 +41,9 @@ recubed.misc.back=Back
 recubed.misc.your_stats=Your Stats
 recubed.no_data=There's no data for this.
 recubed.misc.view_stats=View Stats
-recubed.misc.set_tracked=Set HUD Tracked Stat
 recubed.misc.move_hud=Move HUD
+recubed.misc.click_to_set=Left Click to set position
+recubed.misc.escape_to_reset=Press ESCAPE to reset position
 recubed.misc.hud_enabled=HUD Enabled
 recubed.misc.login=Login
 recubed.misc.command=Command

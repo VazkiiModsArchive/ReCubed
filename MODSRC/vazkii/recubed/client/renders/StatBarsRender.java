@@ -205,8 +205,6 @@ public final class StatBarsRender {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		
 		GL11.glScalef(0.5F, 0.5F, 0.5F);
-		x *= 2;
-		y *= 2;
 		
 		mc.renderEngine.bindTexture(hudBar);
 		GL11.glColor4f(1F, 1F, 1F, 1F);
@@ -217,7 +215,7 @@ public final class StatBarsRender {
 		tess.addVertexWithUV(x * 2, y * 2, 0, 0, 0);
 		tess.draw();
 		
-		mc.fontRenderer.drawStringWithShadow(displayName, x + 8, y + 4, 0xFFFFFF);		
+		mc.fontRenderer.drawStringWithShadow(displayName, (x + 4) * 2, (y + 2) * 2, 0xFFFFFF);		
 		yp = 9;
 		for(Entry entry : entries) {
 			String s1 = "#" + entry.pos + " - " + StatCollector.translateToLocal(entry.name) + ": " + entry.val + " (" + entry.percentage + "%)";
@@ -227,8 +225,6 @@ public final class StatBarsRender {
 		}
 
 		GL11.glScalef(2F, 2F, 2F);
-		x /= 2;
-		y /= 2;
 		GL11.glPopMatrix();
 	}
 	

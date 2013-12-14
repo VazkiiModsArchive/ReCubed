@@ -12,21 +12,22 @@ package vazkii.recubed.client.core.handler;
 
 import java.awt.Point;
 
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.event.ForgeSubscribe;
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.ClientData;
 import vazkii.recubed.api.internal.PlayerCategoryData;
+import vazkii.recubed.client.gui.GuiMoveHUD;
 import vazkii.recubed.client.renders.StatBarsRender;
 
 public final class HUDHandler {
 
 	@ForgeSubscribe
 	public void onDrawScreen(RenderGameOverlayEvent.Post event) {		
-		if(event.type == ElementType.ALL && ClientCacheHandler.drawHud) {
-			Point coords = new Point(0, 0);//getCoords(event.resolution.getScaledWidth(), event.resolution.getScaledHeight(), ClientCacheHandler.hudRelativeTo, ClientCacheHandler.hudPosX, ClientCacheHandler.hudPosY);
-			// TODO Remove constant position!
+		if(event.type == ElementType.ALL && shouldRenderHUD()) {
+			Point coords = getCoords(event.resolution.getScaledWidth(), event.resolution.getScaledHeight(), ClientCacheHandler.hudRelativeTo, ClientCacheHandler.hudPosX, ClientCacheHandler.hudPosY);
 			
 			String categoryName = ClientCacheHandler.hudCategory;
 
@@ -41,6 +42,13 @@ public final class HUDHandler {
 				}
 			}
 		}
+	}
+	
+	private static boolean shouldRenderHUD() {
+		Minecraft mc = Minecraft.getMinecraft();
+		if(mc.currentScreen != null && mc.currentScreen instanceof GuiMoveHUD) 
+			return true;
+		return ClientCacheHandler.drawHud;
 	}
 	
 	public static Point getCoords(int screenX, int screenY, int relativePos, int posX, int posY) {

@@ -88,8 +88,8 @@ public final class ClientCacheHandler {
 		if(cmp.hasNoTags()) {
 			Minecraft mc = Minecraft.getMinecraft();
 			hudPosX = 100;
-			hudPosY = 68;
-			hudRelativeTo = 4;
+			hudPosY = 98;
+			hudRelativeTo = 3;
 			findCompoundAndWrite();
 		} else {
 			drawHud = cmp.getBoolean("drawHud");
