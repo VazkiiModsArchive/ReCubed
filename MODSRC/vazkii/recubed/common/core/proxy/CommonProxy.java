@@ -14,7 +14,9 @@ import net.minecraft.network.INetworkManager;
 import net.minecraftforge.common.MinecraftForge;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.api.internal.ServerData;
+import vazkii.recubed.common.core.handler.ConfigHandler;
 import vazkii.recubed.common.core.handler.GeneralEventHandler;
+import vazkii.recubed.common.core.handler.ServerTickHandler;
 import vazkii.recubed.common.core.handler.WorldSaveHandler;
 import vazkii.recubed.common.core.helper.CacheHelper;
 import vazkii.recubed.common.lib.LibCategories;
@@ -24,10 +26,14 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
+		ConfigHandler.load(event.getSuggestedConfigurationFile());
+		
 		ReCubedAPI.registerCategory(LibCategories.ARROWS_SHOT);
 		ReCubedAPI.registerCategory(LibCategories.DAMAGE_DEALT);
 		ReCubedAPI.registerCategory(LibCategories.DAMAGE_TAKEN);	
@@ -46,7 +52,10 @@ public class CommonProxy {
 	}
 	
 	public void init(FMLInitializationEvent event) {
+		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
+		
 		GameRegistry.registerPlayerTracker(new PlayerTracker());
+		
 		MinecraftForge.EVENT_BUS.register(new WorldSaveHandler());
 		MinecraftForge.EVENT_BUS.register(new GeneralEventHandler());
 	}
