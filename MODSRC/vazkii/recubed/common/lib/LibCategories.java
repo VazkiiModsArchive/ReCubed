@@ -24,6 +24,7 @@ public final class LibCategories {
 	public static final String ENDER_PEARLS_THROWN = CATEGORY + "ender_pearls_thrown";
 	public static final String ENTITIES_RIDDEN = CATEGORY + "entities_ridden";
 	public static final String EXPERIENCE_GATHERED = CATEGORY + "experience_gathered";
+	public static final String FOOD_EATEN = CATEGORY + "food_eaten";
 	public static final String ITEMS_BROKEN = CATEGORY + "items_broken";
 	public static final String ITEMS_DROPPED = CATEGORY + "items_dropped";
 	public static final String ITEMS_PICKED_UP = CATEGORY + "items_picked_up";

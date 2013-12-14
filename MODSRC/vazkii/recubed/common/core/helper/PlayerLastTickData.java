@@ -10,10 +10,13 @@
  */
 package vazkii.recubed.common.core.helper;
 
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.common.lib.LibCategories;
+import vazkii.recubed.common.lib.LibObfuscation;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public final class PlayerLastTickData {
@@ -39,6 +42,15 @@ public final class PlayerLastTickData {
 		if(!riding && player.ridingEntity != null) 
 			ReCubedAPI.addValueToCategory(LibCategories.ENTITIES_RIDDEN, player.username, MiscHelper.getEntityString(player.ridingEntity), 1);
 
+		ItemStack itemInUse = ReflectionHelper.getPrivateValue(EntityPlayer.class, player, LibObfuscation.ITEM_IN_USE);
+		int itemInUseCount = ReflectionHelper.getPrivateValue(EntityPlayer.class, player, LibObfuscation.ITEM_IN_USE_COUNT);
+		if(itemInUse != null && itemInUseCount == 1) {
+			Item item = itemInUse.getItem();
+			
+			if(item instanceof ItemFood)
+				ReCubedAPI.addValueToCategory(LibCategories.FOOD_EATEN, player.username, itemInUse.getUnlocalizedName() + ".name", 1);
+		}
+		
 		setData(player);
 	}
 	
