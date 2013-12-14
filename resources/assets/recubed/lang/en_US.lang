@@ -7,6 +7,7 @@ recubed.category.damage_taken=Damage Taken
 recubed.category.dimensions_changed=Dimensions Travelled
 recubed.category.discs_played=Discs Played
 recubed.category.ender_pearls_thrown=Ender Pearls Thrown
+recubed.category.entities_ridden=Entities Ridden
 recubed.category.experience_gathered=Experience Collected
 recubed.category.items_broken=Items Broken
 recubed.category.items_dropped=Items Dropped
@@ -65,3 +66,6 @@ recubed.misc.shot=Shot
 recubed.misc.critical_shot=Critical Shot
 recubed.misc.experience=Experience
 recubed.misc.level=Level
+
+# VANILLA LOCALIZATIONS
+entity.MinecartRideable.name=Minecart

@@ -18,6 +18,7 @@ public final class PlayerLastTickData {
 
 	int xp;
 	int level;
+	boolean riding;
 	
 	public void tickPlayer(EntityPlayer player) {
 		if(player.experienceTotal > xp) {
@@ -30,12 +31,16 @@ public final class PlayerLastTickData {
 			ReCubedAPI.addValueToCategory(LibCategories.LEVELS_GAINED, player.username, "recubed.misc.level", extra);
 		}
 		
+		if(!riding && player.ridingEntity != null) 
+			ReCubedAPI.addValueToCategory(LibCategories.ENTITIES_RIDDEN, player.username, MiscHelper.getEntityString(player.ridingEntity), 1);
+
 		setData(player);
 	}
 	
 	public void setData(EntityPlayer player) {
 		xp = player.experienceTotal;
 		level = player.experienceLevel;
+		riding = player.ridingEntity != null;
 	}
 	
 }
