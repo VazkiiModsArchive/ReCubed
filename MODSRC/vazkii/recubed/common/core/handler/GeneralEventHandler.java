@@ -71,7 +71,7 @@ public final class GeneralEventHandler {
 			String name = MiscHelper.getEntityString(event.entity);
 
 			if(ReCubedAPI.validatePlayer(player))
-				ReCubedAPI.addValueToCategory(LibCategories.DAMAGE_DEALT, player.username, name, (int) event.ammount);
+				ReCubedAPI.addValueToCategory(LibCategories.DAMAGE_DEALT, player.username, name, (int) Math.min(event.entityLiving.getHealth(), event.ammount));
 		}
 	}
 
@@ -87,7 +87,7 @@ public final class GeneralEventHandler {
 				name = ((EntityPlayer) event.entity).username;
 
 			if(ReCubedAPI.validatePlayer(player))
-				ReCubedAPI.addValueToCategory(LibCategories.DAMAGE_TAKEN, player.username, name, (int) event.ammount);
+				ReCubedAPI.addValueToCategory(LibCategories.DAMAGE_TAKEN, player.username, name, (int) Math.min(player.getHealth(), event.ammount));
 		}
 	}
 
