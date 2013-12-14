@@ -10,20 +10,27 @@
  */
 package vazkii.recubed.client.gui;
 
+import java.util.Map;
+
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
-import vazkii.recubed.api.ReCubedAPI;
+
+import org.lwjgl.opengl.GL11;
+
 import vazkii.recubed.api.internal.Category;
-import vazkii.recubed.api.internal.ClientData;
 import vazkii.recubed.api.internal.PlayerCategoryData;
 import vazkii.recubed.client.renders.PieChartRender;
 import vazkii.recubed.client.renders.PieChartRender.Entry;
+import vazkii.recubed.common.core.helper.MiscHelper;
 
 public class GuiStatViewer extends GuiCategoryList {
 
 	Object category;
 	Entry hoveredEntry;
+	
+	GuiTextField searchBar;
 
 	@Override
 	public void initGui() {
@@ -32,6 +39,13 @@ public class GuiStatViewer extends GuiCategoryList {
 		buttonList.clear();
 		buttonList.add(new GuiButton(0, x + 340, y + 145, 50, 20, StatCollector.translateToLocal("recubed.misc.back")));
 		buttonList.add(new GuiButton(1, x + 310, y + 170, 80, 20, StatCollector.translateToLocal("recubed.misc.your_stats")));
+		
+		String search = StatCollector.translateToLocal("recubed.misc.search");
+		searchBar = new GuiTextField(fontRenderer, x + fontRenderer.getStringWidth(search) + 5, y - 20, 200, 18);
+		searchBar.setFocused(true);
+		searchBar.setCanLoseFocus(false);
+		searchBar.setMaxStringLength(32);
+		searchBar.setVisible(false);
 	}
 
 	@Override
@@ -51,6 +65,78 @@ public class GuiStatViewer extends GuiCategoryList {
 		if(category instanceof PlayerCategoryData)
 			displayString = displayString + " - " + EnumChatFormatting.AQUA + ((PlayerCategoryData) category).name;
 		drawCenteredString(fontRenderer, displayString, x + 250, y + 5, 0xFFFFFF);
+		
+		searchBar.drawTextBox();
+		
+		String search = StatCollector.translateToLocal("recubed.misc.search");
+		int length = fontRenderer.getStringWidth(search);
+		String text = searchBar.getText(); 
+		
+		if(text.isEmpty()) {
+			GL11.glEnable(GL11.GL_BLEND);
+			fontRenderer.drawStringWithShadow(StatCollector.translateToLocal("recubed.misc.type_to_search"), x + length + 10, y- 15, 0x66FFFFFF);
+			GL11.glDisable(GL11.GL_BLEND);
+		} else {
+			fontRenderer.drawStringWithShadow(search, x, y - 15, 0xFFFFFF);
+			Category currentCategory = fromCurrentCategoryInt();
+			
+			boolean found = false;
+			int color = 0;
+			int value = 0;
+			int total = 0;
+			
+			if(category instanceof Category) {
+				PlayerCategoryData data = getValueFromCaseInsensitveString(currentCategory.playerData, text);
+				if(data != null) {
+					color = MiscHelper.generateColorFromString(data.name);
+					value = data.getTotalValue();
+					found = true;
+					total = currentCategory.getTotalValue();
+				}
+			} else {
+				PlayerCategoryData data = (PlayerCategoryData) category;
+				Integer value_ = getValueFromCaseInsensitveString(data.stats, text);
+				if(value_ != null) {
+					color = MiscHelper.generateColorFromString(unlocalized);
+					value = value_;
+					found = true;
+					total = data.getTotalValue();
+				}
+			}
+			
+			if(found) {
+				drawRect(x + length + 187, y - 20, x + length + 205, y - 2, color);
+				float percentage = Math.round((float) value / (float) total * 100F * 100F) / 100F;
+				
+				fontRenderer.drawStringWithShadow(value + " (" + percentage + "%)", x + length + 210, y - 15, 0xFFFFFF);
+			} else fontRenderer.drawStringWithShadow("0 (0%)", x + length + 210, y - 15, 0xFFFFFF);
+		}
+	}
+	
+	String unlocalized;
+	public <T> T getValueFromCaseInsensitveString(Map<String, T> map, String key) {
+		for(String k : map.keySet())
+			if(StatCollector.translateToLocal(k).compareToIgnoreCase(key) == 0) {
+				unlocalized = k;
+				return map.get(k);
+			}
+		
+		return null;
+	}
+	
+	@Override
+	protected void keyTyped(char par1, int par2) {
+		super.keyTyped(par1, par2);
+		
+		searchBar.textboxKeyTyped(par1, par2);
+		searchBar.setVisible(!searchBar.getText().isEmpty());
+	}
+	
+	public void clearSearchBar() {
+		if(searchBar != null) {
+			searchBar.setText("");
+			searchBar.setVisible(false);
+		}
 	}
 
 	@Override
@@ -58,10 +144,14 @@ public class GuiStatViewer extends GuiCategoryList {
 		Category category = fromCurrentCategoryInt();
 
 		if(par1GuiButton.id == 0) {
-			if(this.category instanceof PlayerCategoryData)
+			if(this.category instanceof PlayerCategoryData) {
 				this.category = category;
-			else mc.displayGuiScreen(new GuiReCubedMenu());
-		} else this.category = category.playerData.get(mc.thePlayer.username);
+				clearSearchBar();
+			} else mc.displayGuiScreen(new GuiReCubedMenu());
+		} else {
+			this.category = category.playerData.get(mc.thePlayer.username);
+			clearSearchBar();
+		}
 	}
 
 	@Override
@@ -69,8 +159,11 @@ public class GuiStatViewer extends GuiCategoryList {
 		if(category instanceof Category && par3 == 0 && hoveredEntry != null && shouldVisitStats() && !hoveredEntry.name.equals("recubed.misc.others")) {
 			Category category = (Category) this.category;
 			this.category = category.playerData.get(hoveredEntry.name);
+			clearSearchBar();
 		}
 
+		searchBar.mouseClicked(par1, par2, par3);
+		
 		super.mouseClicked(par1, par2, par3);
 	}
 
@@ -80,11 +173,12 @@ public class GuiStatViewer extends GuiCategoryList {
 
 	@Override
 	public void selectCategory(int category) {
+		boolean isCurrentCategory = this.category instanceof Category;
+		
 		super.selectCategory(category);
 		this.category = fromCurrentCategoryInt();
-	}
-
-	Category fromCurrentCategoryInt() {
-		return ClientData.categories.get(ReCubedAPI.categories.get(indexes.get(selectedCategory)));
+		
+		if(!isCurrentCategory)
+			clearSearchBar();
 	}
 }
