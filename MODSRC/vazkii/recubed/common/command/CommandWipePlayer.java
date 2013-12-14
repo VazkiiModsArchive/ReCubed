@@ -12,6 +12,7 @@ package vazkii.recubed.common.command;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.command.WrongUsageException;
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.PlayerCategoryData;
 import vazkii.recubed.api.internal.ServerData;
@@ -30,6 +31,9 @@ public class CommandWipePlayer extends CommandBase {
 
 	@Override
 	public void processCommand(ICommandSender icommandsender, String[] astring) {
+		if(astring.length != 1)
+			throw new WrongUsageException(getCommandUsage(icommandsender), (Object[]) astring);
+		
 		for(String s : ServerData.categories.keySet()) {
 			Category category = ServerData.categories.get(s);
 			category.playerData.put(astring[0], new PlayerCategoryData(astring[0]));

@@ -13,6 +13,7 @@ package vazkii.recubed.common.command;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.command.WrongUsageException;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.PlayerCategoryData;
@@ -32,6 +33,9 @@ public class CommandClearCategory extends CommandBase {
 
 	@Override
 	public void processCommand(ICommandSender icommandsender, String[] astring) {
+		if(astring.length != 1)
+			throw new WrongUsageException(getCommandUsage(icommandsender), (Object[]) astring);
+		
 		Category category = ServerData.categories.get(ReCubedAPI.shortTerms.get(astring[0]));
 		if(category == null)
 			throw new CommandException("That category doesn't exist!");
