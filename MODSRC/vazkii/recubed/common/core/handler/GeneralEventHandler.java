@@ -94,7 +94,7 @@ public final class GeneralEventHandler {
 	// ITEMS BROKEN
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onItemBroken(PlayerDestroyItemEvent event) {
-		if(ReCubedAPI.validatePlayer(event.entityPlayer) && event.original.isItemStackDamageable())
+		if(ReCubedAPI.validatePlayer(event.entityPlayer) && event.original.isItemStackDamageable() && event.original.getItemDamage() == event.original.getMaxDamage())
 			ReCubedAPI.addValueToCategory(LibCategories.ITEMS_BROKEN, event.entityPlayer.username, event.original.getUnlocalizedName() + ".name", 1);
 	}
 
