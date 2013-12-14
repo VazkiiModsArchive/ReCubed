@@ -21,6 +21,7 @@ public final class LibCategories {
 	public static final String DAMAGE_TAKEN = CATEGORY + "damage_taken";
 	public static final String DIMENSIONS_CHANGED = CATEGORY + "dimensions_changed";
 	public static final String DISCS_PLAYED = CATEGORY + "discs_played";
+	public static final String ENDER_EYES_USED = CATEGORY + "ender_eyes_used";
 	public static final String ENDER_PEARLS_THROWN = CATEGORY + "ender_pearls_thrown";
 	public static final String ENTITIES_RIDDEN = CATEGORY + "entities_ridden";
 	public static final String EXPERIENCE_GATHERED = CATEGORY + "experience_gathered";

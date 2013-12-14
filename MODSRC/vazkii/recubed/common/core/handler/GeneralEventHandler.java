@@ -190,7 +190,7 @@ public final class GeneralEventHandler {
 		}
 	}
 
-	// SNOWBALLS THROWN + ENDER PEARLS THROWN
+	// SNOWBALLS THROWN + ENDER PEARLS THROWN + ENDER EYES USED
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		if(ReCubedAPI.validatePlayer(event.entityPlayer)) {
@@ -205,6 +205,9 @@ public final class GeneralEventHandler {
 
 				if(stack.getItem() instanceof ItemRecord && event.action == Action.RIGHT_CLICK_BLOCK && event.entityPlayer.worldObj.getBlockId(event.x, event.y, event.z) == Block.jukebox.blockID)
 					ReCubedAPI.addValueToCategory(LibCategories.DISCS_PLAYED, event.entityPlayer.username, ((ItemRecord) stack.getItem()).recordName, 1);
+			
+				if(event.entityPlayer.dimension == 0 && stack.itemID == Item.eyeOfEnder.itemID)
+					ReCubedAPI.addValueToCategory(LibCategories.ENDER_EYES_USED, event.entityPlayer.username, "item.eyeOfEnder.name", 1);
 			}
 		}
 	}
