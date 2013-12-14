@@ -125,7 +125,7 @@ public final class GeneralEventHandler {
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onMessageReceived(CommandEvent event) {
 		if(event.sender instanceof EntityPlayer && ReCubedAPI.validatePlayer((EntityPlayer) event.sender)) {
-			ReCubedAPI.addValueToCategory(LibCategories.MESSAGES_SENT, event.sender.getCommandSenderName(), "recubed.misc.command", 1);
+			ReCubedAPI.addValueToCategory(LibCategories.MESSAGES_SENT, event.sender.getCommandSenderName(), "/" + event.command.getCommandName(), 1);
 
 			if(event.command instanceof CommandGive) {
 				int i = CommandBase.parseIntWithMin(event.sender, event.parameters[1], 1);
