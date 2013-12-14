@@ -34,6 +34,7 @@ import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import vazkii.recubed.api.ReCubedAPI;
@@ -163,7 +164,7 @@ public final class GeneralEventHandler {
 	public void onMobGetTarget(LivingSetAttackTargetEvent event) {
 		if(event.target instanceof EntityPlayer && EntityList.getEntityString(event.entity) != null) {
 			EntityPlayer player = (EntityPlayer) event.target;
-			if(ReCubedAPI.validatePlayer(player));
+			if(ReCubedAPI.validatePlayer(player))
 				ReCubedAPI.addValueToCategory(LibCategories.MOBS_AGGROED, player.username, MiscHelper.getEntityString(event.entity), 1);
 		}
 	}
@@ -175,10 +176,11 @@ public final class GeneralEventHandler {
 			EntityPlayer player = (EntityPlayer) event.source.getEntity();
 			String name = MiscHelper.getEntityString(event.entity);
 
-			if(ReCubedAPI.validatePlayer(player));
+			if(ReCubedAPI.validatePlayer(player))
 				ReCubedAPI.addValueToCategory(event.entity instanceof IBossDisplayData ? LibCategories.BOSS_KILLS : LibCategories.MOBS_KILLED, player.username, name, 1);
 		}
 	}
+	
 
 	// TIMES DIED + PLAYER KILLS
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
@@ -194,7 +196,7 @@ public final class GeneralEventHandler {
 					ReCubedAPI.addValueToCategory(LibCategories.PLAYER_KILLS, name, player.username, 1);
 			}
 
-			if(ReCubedAPI.validatePlayer(player));
+			if(ReCubedAPI.validatePlayer(player))
 				ReCubedAPI.addValueToCategory(LibCategories.TIMES_DIED, player.username, name, 1);
 		}
 	}
