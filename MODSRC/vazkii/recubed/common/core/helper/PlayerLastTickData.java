@@ -10,9 +10,11 @@
  */
 package vazkii.recubed.common.core.helper;
 
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.common.lib.LibCategories;
-import net.minecraft.entity.player.EntityPlayer;
+import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public final class PlayerLastTickData {
 
@@ -21,6 +23,9 @@ public final class PlayerLastTickData {
 	boolean riding;
 	
 	public void tickPlayer(EntityPlayer player) {
+		if(!ReCubedAPI.validatePlayer(player))
+			return;
+		
 		if(player.experienceTotal > xp) {
 			int extra = player.experienceTotal - xp;
 			ReCubedAPI.addValueToCategory(LibCategories.EXPERIENCE_GATHERED, player.username, "recubed.misc.experience", extra);

@@ -28,7 +28,6 @@ public final class LibCategories {
 	public static final String ITEMS_DROPPED = CATEGORY + "items_dropped";
 	public static final String ITEMS_PICKED_UP = CATEGORY + "items_picked_up";
 	public static final String ITEMS_SPAWNED = CATEGORY + "items_spawned";
-	public static final String JUMPS_DONE = CATEGORY + "jumps_done";
 	public static final String LEVELS_GAINED = CATEGORY + "levels_gained";
 	public static final String MESSAGES_SENT = CATEGORY + "messages_sent";
 	public static final String MOBS_AGGROED = CATEGORY + "mobs_aggroed";

@@ -116,19 +116,6 @@ public final class GeneralEventHandler {
 			ReCubedAPI.addValueToCategory(LibCategories.ITEMS_PICKED_UP, event.entityPlayer.username, stack.getUnlocalizedName() + ".name", stack.stackSize);
 	}
 
-	// JUMPS DONE
-	@ForgeSubscribe(priority = EventPriority.LOWEST)
-	public void onPlayerJump(LivingJumpEvent event) {
-		if(event.entity instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer) event.entity;
-			System.out.println("jump");
-
-			if(ReCubedAPI.validatePlayer(player)) {
-				ReCubedAPI.addValueToCategory(LibCategories.JUMPS_DONE, player.username, player.isSprinting() ? "recubed.misc.sprint_jump" : "recubed.misc.jump", 1);
-			}
-		}
-	}
-
 	// MESSAGES SENT + ITEMS SPAWNED
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onMessageReceived(ServerChatEvent event) {

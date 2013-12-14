@@ -21,7 +21,8 @@ public final class PlayerTickHandler {
 	public static Map<String, PlayerLastTickData> playerData = new HashMap();
 	
 	public static void playerTicked(EntityPlayer player) {
-		playerData.get(player.username).tickPlayer(player);
+		if(playerData.containsKey(player.username))
+			playerData.get(player.username).tickPlayer(player);
 	}
 	
 }
