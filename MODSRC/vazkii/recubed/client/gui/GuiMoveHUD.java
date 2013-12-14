@@ -51,6 +51,12 @@ public class GuiMoveHUD extends GuiScreen {
 			}
 		}
 		
+		fontRenderer.drawStringWithShadow("W", 0, 0, 0xFFFFFF);
+		fontRenderer.drawStringWithShadow("A", 0, height - 9, 0xFFFFFF);
+		fontRenderer.drawStringWithShadow("S", width - 6, height - 9, 0xFFFFFF);
+		fontRenderer.drawStringWithShadow("D", width - 6, 0, 0xFFFFFF);
+
+		
 		ClientCacheHandler.hudPosX = mx;
 		ClientCacheHandler.hudPosY = my;
 		ClientCacheHandler.hudRelativeTo = quadrant;
@@ -73,6 +79,45 @@ public class GuiMoveHUD extends GuiScreen {
 			ClientCacheHandler.hudRelativeTo = originalRelativePos;
 			ClientCacheHandler.findCompoundAndWrite();
 			mc.displayGuiScreen(new GuiReCubedMenu());
+		}
+		
+		switch(par1) {
+			case 'w' : {
+				ClientCacheHandler.hudPosX = 0;
+				ClientCacheHandler.hudPosY = 0;
+				ClientCacheHandler.hudRelativeTo = 1;
+				
+				ClientCacheHandler.findCompoundAndWrite();
+				mc.displayGuiScreen(new GuiReCubedMenu());
+				return;
+			}
+			case 'a' : {
+				ClientCacheHandler.hudPosX = 0;
+				ClientCacheHandler.hudPosY = 98;
+				ClientCacheHandler.hudRelativeTo = 2;
+				
+				ClientCacheHandler.findCompoundAndWrite();
+				mc.displayGuiScreen(new GuiReCubedMenu());
+				return;
+			}
+			case 's' : {
+				ClientCacheHandler.hudPosX = 100;
+				ClientCacheHandler.hudPosY = 98;
+				ClientCacheHandler.hudRelativeTo = 3;
+				
+				ClientCacheHandler.findCompoundAndWrite();
+				mc.displayGuiScreen(new GuiReCubedMenu());
+				return;
+			}
+			case 'd' : {
+				ClientCacheHandler.hudPosX = 100;
+				ClientCacheHandler.hudPosY = 0;
+				ClientCacheHandler.hudRelativeTo = 0;
+				
+				ClientCacheHandler.findCompoundAndWrite();
+				mc.displayGuiScreen(new GuiReCubedMenu());
+				return;
+			}
 		}
 	}
 	
