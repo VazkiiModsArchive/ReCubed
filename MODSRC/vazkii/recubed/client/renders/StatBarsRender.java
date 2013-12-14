@@ -18,23 +18,20 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-import scala.collection.parallel.ParIterableLike.Min;
+
+import org.lwjgl.opengl.GL11;
+
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.PlayerCategoryData;
+import vazkii.recubed.client.core.handler.ClientCacheHandler;
 import vazkii.recubed.client.core.helper.RenderHelper;
 import vazkii.recubed.client.lib.LibResources;
-import vazkii.recubed.client.renders.PieChartRender.Entry;
-import vazkii.recubed.common.core.handler.ConfigHandler;
 import vazkii.recubed.common.core.helper.MiscHelper;
-import vazkii.recubed.common.lib.LibMisc;
 
 public final class StatBarsRender {
 
@@ -191,11 +188,11 @@ public final class StatBarsRender {
 		
 		int yp = 8;
 		for(Entry entry : entries) {
-			if(!ConfigHandler.useGradients)
+			if(!ClientCacheHandler.useGradients)
 				Gui.drawRect(x, y + yp, x + width, y + 6 + yp, entry.color);
 			else {
 				Color color = new Color(entry.color).brighter();
-				Color color1 = ConfigHandler.useGradients ? new Color(entry.color).darker().darker() : color;
+				Color color1 = ClientCacheHandler.useGradients ? new Color(entry.color).darker().darker() : color;
 				RenderHelper.drawGradientRect(x, y + yp, 0, x + width, y + 6 + yp, color.getRGB(), color1.getRGB());
 			}
 			

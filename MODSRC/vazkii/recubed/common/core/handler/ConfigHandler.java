@@ -17,14 +17,11 @@ import net.minecraftforge.common.Property;
 
 public final class ConfigHandler {
 
-	private static final String CATEGORY_CLIENT = "client";
 	private static final String CATEGORY_SERVER = "server";
 	
 	public static Configuration config;
 	
 	public static int packetInterval = 40;
-	
-	public static boolean useGradients = true;
 	
 	public static void load(File file) {
 		config = new Configuration(file);
@@ -34,10 +31,6 @@ public final class ConfigHandler {
 		Property propPacketInterval = config.get(CATEGORY_SERVER, "packet_interval", packetInterval);
 		propPacketInterval.comment = "The interval in which packets are sent to client, default is 40 ticks (2 secs)";
 		packetInterval = propPacketInterval.getInt(packetInterval);
-		
-		Property propUseGradients = config.get(CATEGORY_CLIENT, "use_gradients", useGradients);
-		propUseGradients.comment = "Set to true to render pie charts and stat bars with gradients. False to render them in flat color.";
-		useGradients = propUseGradients.getBoolean(useGradients);
 		
 		config.save();
 	}

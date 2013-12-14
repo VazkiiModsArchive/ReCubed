@@ -28,6 +28,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.PlayerCategoryData;
+import vazkii.recubed.client.core.handler.ClientCacheHandler;
 import vazkii.recubed.client.core.helper.RenderHelper;
 import vazkii.recubed.common.core.handler.ConfigHandler;
 import vazkii.recubed.common.core.helper.MiscHelper;
@@ -157,7 +158,7 @@ public strictfp final class PieChartRender {
 		for(Entry entry : entries) {
 			boolean mouseInSector = mouseIn && angle > totalDeg && angle < totalDeg + entry.angle;
 			Color color = new Color(entry.color).brighter();
-			Color color1 = ConfigHandler.useGradients ? new Color(entry.color).darker().darker() : color;
+			Color color1 = ClientCacheHandler.useGradients ? new Color(entry.color).darker().darker() : color;
 			
 			if(mouseInSector) {
 				tooltip = entry;

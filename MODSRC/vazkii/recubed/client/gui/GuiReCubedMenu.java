@@ -17,6 +17,7 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 import vazkii.recubed.client.core.handler.ClientCacheHandler;
+import vazkii.recubed.client.core.helper.SafeCallable;
 import vazkii.recubed.common.lib.LibMisc;
 
 public class GuiReCubedMenu extends GuiScreen {
@@ -35,7 +36,24 @@ public class GuiReCubedMenu extends GuiScreen {
 		buttonList.clear();
 		buttonList.add(new GuiButton(1, x + 20, y + 60, 160, 20, StatCollector.translateToLocal("recubed.misc.view_stats")));
 		buttonList.add(new GuiButton(2, x + 20, y + 90, 160, 20, StatCollector.translateToLocal("recubed.misc.move_hud")));
-		buttonList.add(new GuiShowHUDCheckboxButton(3, x + 20, y + 150));
+		
+		buttonList.add(new GuiCheckboxButton(3, x + 20, y + 120, "recubed.misc.use_gradients", new SafeCallable<Boolean>() {
+
+			@Override
+			public Boolean call() {
+				return ClientCacheHandler.useGradients;
+			}
+			
+		}));
+		
+		buttonList.add(new GuiCheckboxButton(4, x + 20, y + 150, "recubed.misc.hud_enabled", new SafeCallable<Boolean>() {
+
+			@Override
+			public Boolean call() {
+				return ClientCacheHandler.drawHud;
+			}
+			
+		}));
 	}
 	
 	@Override
@@ -54,6 +72,11 @@ public class GuiReCubedMenu extends GuiScreen {
 				return;
 			}
 			case 3 : {
+				ClientCacheHandler.useGradients = !ClientCacheHandler.useGradients;
+				ClientCacheHandler.findCompoundAndWrite();
+				return;
+			}
+			case 4 : {
 				ClientCacheHandler.drawHud = !ClientCacheHandler.drawHud;
 				ClientCacheHandler.findCompoundAndWrite();
 			}

@@ -28,6 +28,8 @@ import vazkii.recubed.common.lib.LibMisc;
 public final class ClientCacheHandler {
 
 	public static boolean drawHud = true;
+	public static boolean useGradients = true;
+	
 	public static int hudRelativeTo = 0;
 	public static int hudPosX = 0;
 	public static int hudPosY = 0;
@@ -93,6 +95,7 @@ public final class ClientCacheHandler {
 			findCompoundAndWrite();
 		} else {
 			drawHud = cmp.getBoolean("drawHud");
+			useGradients = cmp.getBoolean("useGradients");
 			hudRelativeTo = cmp.getInteger("hudRelativeTo");
 			hudPosX = cmp.getInteger("hudPosX");
 			hudPosY = cmp.getInteger("hudPosY");
@@ -104,6 +107,7 @@ public final class ClientCacheHandler {
 	public static void findCompoundAndWrite() {
 		NBTTagCompound cmp = new NBTTagCompound();
 		
+		cmp.setBoolean("useGradients", useGradients);
 		cmp.setBoolean("drawHud", drawHud);
 		cmp.setInteger("hudRelativeTo", hudRelativeTo);
 		cmp.setInteger("hudPosX", hudPosX);
