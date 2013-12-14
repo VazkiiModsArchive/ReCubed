@@ -19,6 +19,7 @@ recubed.category.messages_sent=Messages Sent
 recubed.category.mobs_aggroed=Mobs Aggroed
 recubed.category.mobs_killed=Entities Killed
 recubed.category.player_kills=Player Kills
+recubed.category.potions_gotten=Potions Affected By
 recubed.category.snowballs_thrown=Snowballs Thrown
 recubed.category.times_died=Deaths
 recubed.category.times_played=Times Logged In

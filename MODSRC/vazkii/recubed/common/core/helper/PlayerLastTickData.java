@@ -10,10 +10,16 @@
  */
 package vazkii.recubed.common.core.helper;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.common.lib.LibCategories;
 import vazkii.recubed.common.lib.LibObfuscation;
@@ -24,24 +30,23 @@ public final class PlayerLastTickData {
 	int xp;
 	int level;
 	boolean riding;
+	List<Integer> potionEffects = new ArrayList();
 	
 	public void tickPlayer(EntityPlayer player) {
 		if(!ReCubedAPI.validatePlayer(player))
 			return;
 		
+		// ENTITIES RIDDEN
+				if(!riding && player.ridingEntity != null) 
+					ReCubedAPI.addValueToCategory(LibCategories.ENTITIES_RIDDEN, player.username, MiscHelper.getEntityString(player.ridingEntity), 1);
+		
+		// EXPERIENCE GATHERED
 		if(player.experienceTotal > xp) {
 			int extra = player.experienceTotal - xp;
 			ReCubedAPI.addValueToCategory(LibCategories.EXPERIENCE_GATHERED, player.username, "recubed.misc.experience", extra);
 		}
-		
-		if(player.experienceLevel > level) {
-			int extra = player.experienceLevel - level;
-			ReCubedAPI.addValueToCategory(LibCategories.LEVELS_GAINED, player.username, "recubed.misc.level", extra);
-		}
-		
-		if(!riding && player.ridingEntity != null) 
-			ReCubedAPI.addValueToCategory(LibCategories.ENTITIES_RIDDEN, player.username, MiscHelper.getEntityString(player.ridingEntity), 1);
 
+		// FOOD EATEN
 		ItemStack itemInUse = ReflectionHelper.getPrivateValue(EntityPlayer.class, player, LibObfuscation.ITEM_IN_USE);
 		int itemInUseCount = ReflectionHelper.getPrivateValue(EntityPlayer.class, player, LibObfuscation.ITEM_IN_USE_COUNT);
 		if(itemInUse != null && itemInUseCount == 1) {
@@ -51,6 +56,20 @@ public final class PlayerLastTickData {
 				ReCubedAPI.addValueToCategory(LibCategories.FOOD_EATEN, player.username, itemInUse.getUnlocalizedName() + ".name", 1);
 		}
 		
+		// LEVELS GAINED
+		if(player.experienceLevel > level) {
+			int extra = player.experienceLevel - level;
+			ReCubedAPI.addValueToCategory(LibCategories.LEVELS_GAINED, player.username, "recubed.misc.level", extra);
+		}
+		
+		// POTIONS AFFECTED BY
+		Collection<PotionEffect> effects = player.getActivePotionEffects();
+		for(PotionEffect effect : effects) {
+			System.out.println(effect);
+			if(!potionEffects.contains(effect.getPotionID()))
+				ReCubedAPI.addValueToCategory(LibCategories.POTIONS_GOTTEN, player.username, Potion.potionTypes[effect.getPotionID()].getName(), 1);
+		}
+
 		setData(player);
 	}
 	
@@ -58,6 +77,12 @@ public final class PlayerLastTickData {
 		xp = player.experienceTotal;
 		level = player.experienceLevel;
 		riding = player.ridingEntity != null;
+		
+		potionEffects.clear();
+		Collection<PotionEffect> effects = player.getActivePotionEffects();
+		if(effects != null)
+			for(PotionEffect effect : effects)
+				potionEffects.add(effect.getPotionID());
 	}
 	
 }
