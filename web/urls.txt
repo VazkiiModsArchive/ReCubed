@@ -1,0 +1,3 @@
+1.0-1=https://www.sugarsync.com/pf/D9740002_82596175_682052
+1.0-2=https://www.sugarsync.com/pf/D9740002_82596175_682054
+1.0-3=https://www.sugarsync.com/pf/D9740002_82596175_682050
