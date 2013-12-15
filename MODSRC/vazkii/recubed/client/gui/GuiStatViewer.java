@@ -62,12 +62,16 @@ public class GuiStatViewer extends GuiCategoryList {
 			drawCenteredString(fontRenderer, StatCollector.translateToLocal("recubed.no_data"), x + 250, y + 95, 0xFF7777);
 		else{
 			hoveredEntry = pie.renderChart(80, x + 250, y + 100, par1, par2);
-			fontRenderer.drawStringWithShadow(String.format(StatCollector.translateToLocal("recubed.misc.total"), pie.totalVal), x + 134, y + 185, 0xFFFFFF);
+			String text = String.format(StatCollector.translateToLocal("recubed.misc.total"), pie.totalVal);
+			if(fromCurrentCategoryInt().isFrozen)
+				text = text + EnumChatFormatting.AQUA + StatCollector.translateToLocal("recubed.misc.frozen_suffix");
+			
+			fontRenderer.drawStringWithShadow(text, x + 134, y + 185, 0xFFFFFF);
 		}
 
 		String displayString = StatCollector.translateToLocal(fromCurrentCategoryInt().name);
 		if(category instanceof PlayerCategoryData)
-			displayString = displayString + " - " + EnumChatFormatting.AQUA + ((PlayerCategoryData) category).name;
+			displayString = displayString + " - " + EnumChatFormatting.GREEN + ((PlayerCategoryData) category).name;
 		drawCenteredString(fontRenderer, displayString, x + 250, y + 5, 0xFFFFFF);
 
 		searchBar.drawTextBox();

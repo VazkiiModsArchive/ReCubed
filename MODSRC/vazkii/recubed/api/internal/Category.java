@@ -48,6 +48,9 @@ public final class Category implements Serializable {
 		Collection<NBTBase> tags = cmp.getTags();
 		for(NBTBase nbt : tags) {
 			String name = nbt.getName();
+			if(name.equals("isFrozen"))
+				continue;
+			
 			if(cmp.hasKey(name)) {
 				NBTTagCompound cmp1 = cmp.getCompoundTag(name);
 				if(!playerData.containsKey(name))

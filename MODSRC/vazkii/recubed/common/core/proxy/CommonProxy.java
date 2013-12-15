@@ -14,8 +14,10 @@ import net.minecraft.network.INetworkManager;
 import net.minecraftforge.common.MinecraftForge;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.api.internal.ServerData;
+import vazkii.recubed.common.command.CommandCategoryFreeze;
 import vazkii.recubed.common.command.CommandClearCategory;
 import vazkii.recubed.common.command.CommandClearPlayer;
+import vazkii.recubed.common.command.CommandFreeze;
 import vazkii.recubed.common.command.CommandWipeData;
 import vazkii.recubed.common.command.CommandWipePlayer;
 import vazkii.recubed.common.core.handler.ConfigHandler;
@@ -87,8 +89,10 @@ public class CommonProxy {
 	public void serverStarting(FMLServerStartingEvent event) {
 		ServerData.init();
 		
+		event.registerServerCommand(new CommandCategoryFreeze());
 		event.registerServerCommand(new CommandClearCategory());
 		event.registerServerCommand(new CommandClearPlayer());
+		event.registerServerCommand(new CommandFreeze());
 		event.registerServerCommand(new CommandWipeData());
 		event.registerServerCommand(new CommandWipePlayer());
 	}
