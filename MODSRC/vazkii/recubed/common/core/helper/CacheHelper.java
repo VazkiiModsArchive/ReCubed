@@ -25,11 +25,19 @@ import vazkii.recubed.common.lib.LibMisc;
 public class CacheHelper {
 
 	public static File getCacheFile() throws IOException {
+		return getCacheFile("", LibMisc.MOD_ID + ".dat");
+	}
+	
+	public static File getCacheFile(String loc_, String name) throws IOException{
 		MinecraftServer server = MinecraftServer.getServer();
 
 		WorldServer world = server.worldServers[0];
 		File loc = world.getChunkSaveLocation();
-		File cacheFile = new File(loc, LibMisc.MOD_ID + ".dat");
+		File cacheFile = new File(loc, loc_.isEmpty() ? name : loc_);
+		if(!loc_.isEmpty()) {
+			cacheFile.mkdirs();
+			cacheFile = new File(cacheFile, name);
+		}
 
 		if(!cacheFile.exists())
 			cacheFile.createNewFile();
@@ -37,15 +45,7 @@ public class CacheHelper {
 		return cacheFile;
 	}
 
-	public static NBTTagCompound getCacheCompound() {
-		File cache = null;
-
-		try {
-			cache = getCacheFile();
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
-
+	public static NBTTagCompound getCacheCompound(File cache) {
 		if(cache == null)
 			throw new RuntimeException("No cache file!");
 
@@ -57,19 +57,16 @@ public class CacheHelper {
 
 			try {
 				CompressedStreamTools.writeCompressed(cmp, new FileOutputStream(cache));
-				return getCacheCompound();
+				return getCacheCompound(cache);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 				return null;
 			}
 		}
-
-
 	}
 
-	public static void injectNBTToFile(NBTTagCompound cmp) {
+	public static void injectNBTToFile(NBTTagCompound cmp, File f) {
 		try {
-			File f = getCacheFile();
 			CompressedStreamTools.writeCompressed(cmp, new FileOutputStream(f));
 		} catch(IOException e) {
 			e.printStackTrace();
@@ -77,14 +74,23 @@ public class CacheHelper {
 	}
 
 	public static void findCompoundAndLoad() {
-		NBTTagCompound cmp = getCacheCompound();
-		ServerData.loadFromNBT(cmp);
+		NBTTagCompound cmp;
+		try {
+			cmp = getCacheCompound(getCacheFile());
+			ServerData.loadFromNBT(cmp);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void findCompoundAndWrite() {
 		NBTTagCompound cmp = new NBTTagCompound();
 		ServerData.writeToNBT(cmp);
-		injectNBTToFile(cmp);
+		try {
+			injectNBTToFile(cmp, getCacheFile());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

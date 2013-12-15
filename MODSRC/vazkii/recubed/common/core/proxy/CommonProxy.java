@@ -18,6 +18,7 @@ import vazkii.recubed.common.command.CommandCategoryFreeze;
 import vazkii.recubed.common.command.CommandClearCategory;
 import vazkii.recubed.common.command.CommandClearPlayer;
 import vazkii.recubed.common.command.CommandFreeze;
+import vazkii.recubed.common.command.CommandSaveBackup;
 import vazkii.recubed.common.command.CommandWipeData;
 import vazkii.recubed.common.command.CommandWipePlayer;
 import vazkii.recubed.common.core.handler.ConfigHandler;
@@ -95,6 +96,7 @@ public class CommonProxy {
 		event.registerServerCommand(new CommandClearCategory());
 		event.registerServerCommand(new CommandClearPlayer());
 		event.registerServerCommand(new CommandFreeze());
+		event.registerServerCommand(new CommandSaveBackup());
 		event.registerServerCommand(new CommandWipeData());
 		event.registerServerCommand(new CommandWipePlayer());
 	}
