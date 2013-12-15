@@ -64,6 +64,7 @@ public class CommonProxy {
 		registerCategory(LibCategories.MOBS_KILLED);
 		registerCategory(LibCategories.MESSAGES_SENT);
 		registerCategory(LibCategories.PLAYER_KILLS);
+		registerCategory(LibCategories.POTIONS_DRANK);
 		registerCategory(LibCategories.POTIONS_GOTTEN);
 		registerCategory(LibCategories.SHEEP_DYED);
 		registerCategory(LibCategories.SNOWBALLS_THROWN);

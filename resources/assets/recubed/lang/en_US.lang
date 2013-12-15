@@ -22,6 +22,7 @@ recubed.category.messages_sent=Messages Sent
 recubed.category.mobs_aggroed=Mobs Aggroed
 recubed.category.mobs_killed=Entities Killed
 recubed.category.player_kills=Player Kills
+recubed.category.potions_drank=Potions Drank
 recubed.category.potions_gotten=Potions Affected By
 recubed.category.sheep_dyed=Sheep Dyed
 recubed.category.snowballs_thrown=Snowballs Thrown
