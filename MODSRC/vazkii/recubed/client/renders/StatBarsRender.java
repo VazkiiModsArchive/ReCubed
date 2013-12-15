@@ -216,6 +216,9 @@ public final class StatBarsRender {
 		tess.addVertexWithUV(x * 2, y * 2, 0, 0, 0);
 		tess.draw();
 
+		boolean unicode = mc.fontRenderer.getUnicodeFlag();
+		mc.fontRenderer.setUnicodeFlag(!ClientCacheHandler.useVanillaFont);
+		
 		mc.fontRenderer.drawStringWithShadow(displayName, (x + 4) * 2, (y + 2) * 2, 0xFFFFFF);
 		yp = 9;
 		for(Entry entry : entries) {
@@ -232,6 +235,8 @@ public final class StatBarsRender {
 
 			yp += 6;
 		}
+		
+		mc.fontRenderer.setUnicodeFlag(unicode);
 
 		GL11.glScalef(2F, 2F, 2F);
 		GL11.glPopMatrix();

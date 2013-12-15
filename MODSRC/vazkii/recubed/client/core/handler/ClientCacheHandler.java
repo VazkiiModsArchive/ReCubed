@@ -25,6 +25,7 @@ public final class ClientCacheHandler {
 
 	public static boolean drawHud = true;
 	public static boolean useGradients = true;
+	public static boolean useVanillaFont = true;
 	public static boolean contrastHudText = false;
 
 	public static int hudRelativeTo = 0;
@@ -93,6 +94,7 @@ public final class ClientCacheHandler {
 		} else {
 			drawHud = cmp.getBoolean("drawHud");
 			useGradients = cmp.getBoolean("useGradients");
+			useVanillaFont = cmp.getBoolean("useVanillaFont");
 			contrastHudText = cmp.getBoolean("contrastHudText");
 			hudRelativeTo = cmp.getInteger("hudRelativeTo");
 			hudPosX = cmp.getInteger("hudPosX");
@@ -107,6 +109,7 @@ public final class ClientCacheHandler {
 
 		cmp.setBoolean("useGradients", useGradients);
 		cmp.setBoolean("contrastHudText", contrastHudText);
+		cmp.setBoolean("useVanillaFont", useVanillaFont);
 		cmp.setBoolean("drawHud", drawHud);
 		cmp.setInteger("hudRelativeTo", hudRelativeTo);
 		cmp.setInteger("hudPosX", hudPosX);

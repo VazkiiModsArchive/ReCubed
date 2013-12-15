@@ -23,7 +23,7 @@ import vazkii.recubed.common.lib.LibMisc;
 public class GuiReCubedMenu extends GuiScreen {
 
 	int guiWidth = 200;
-	int guiHeight = 200;
+	int guiHeight = 230;
 	int x, y;
 
 	@Override
@@ -55,7 +55,16 @@ public class GuiReCubedMenu extends GuiScreen {
 
 		}));
 
-		buttonList.add(new GuiCheckboxButton(5, x + 20, y + 170, "recubed.misc.contrast_text", new SafeCallable<Boolean>() {
+		buttonList.add(new GuiCheckboxButton(5, x + 20, y + 170, "recubed.misc.use_vanilla_font", new SafeCallable<Boolean>() {
+
+			@Override
+			public Boolean call() {
+				return ClientCacheHandler.useVanillaFont;
+			}
+
+		}));
+		
+		buttonList.add(new GuiCheckboxButton(6, x + 20, y + 195, "recubed.misc.contrast_text", new SafeCallable<Boolean>() {
 
 			@Override
 			public Boolean call() {
@@ -91,6 +100,11 @@ public class GuiReCubedMenu extends GuiScreen {
 				return;
 			}
 			case 5 : {
+				ClientCacheHandler.useVanillaFont = !ClientCacheHandler.useVanillaFont;
+				ClientCacheHandler.findCompoundAndWrite();
+				return;
+			}
+			case 6 : {
 				ClientCacheHandler.contrastHudText = !ClientCacheHandler.contrastHudText;
 				ClientCacheHandler.findCompoundAndWrite();
 			}

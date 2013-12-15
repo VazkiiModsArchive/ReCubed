@@ -64,6 +64,7 @@ recubed.misc.click_to_set=Left Click to set position
 recubed.misc.escape_to_reset=Press ESCAPE to reset position
 recubed.misc.hud_enabled=HUD Enabled
 recubed.misc.use_gradients=Use Gradients
+recubed.misc.use_vanilla_font=Use Minecraft Font
 recubed.misc.contrast_text=Contrast HUD Text
 recubed.misc.login=Login
 recubed.misc.command=Command
