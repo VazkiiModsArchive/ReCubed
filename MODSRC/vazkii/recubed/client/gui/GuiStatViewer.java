@@ -42,13 +42,13 @@ public class GuiStatViewer extends GuiCategoryList {
 		buttonList.add(new GuiButton(1, x + 310, y + 170, 80, 20, StatCollector.translateToLocal("recubed.misc.your_stats")));
 
 		String search = StatCollector.translateToLocal("recubed.misc.search");
-		searchBar = new GuiTextField(fontRenderer, x + fontRenderer.getStringWidth(search) + 5, y - 20, 200, 18);
+		searchBar = new GuiTextField(fontRenderer, x + fontRenderer.getStringWidth(search) + 5, y - 20, 150, 18);
 		searchBar.setFocused(true);
 		searchBar.setCanLoseFocus(false);
 		searchBar.setMaxStringLength(32);
 		searchBar.setVisible(false);
 
-		buttonList.add(visit = new GuiButton(2, x + fontRenderer.getStringWidth(search) + 205, y - 45, 70, 20, StatCollector.translateToLocal("recubed.misc.see_stats")));
+		buttonList.add(visit = new GuiButton(2, x + guiWidth - 70, y - 20, 70, 20, StatCollector.translateToLocal("recubed.misc.see_stats")));
 		visit.drawButton = false;
 	}
 
@@ -110,13 +110,13 @@ public class GuiStatViewer extends GuiCategoryList {
 			}
 
 			if(found) {
-				drawRect(x + length + 187, y - 20, x + length + 205, y - 2, color);
+				drawRect(x + length + 137, y - 20, x + length + 155, y - 2, color);
 				float percentage = Math.round((float) value / (float) total * 100F * 100F) / 100F;
 
-				fontRenderer.drawStringWithShadow(value + " (" + percentage + "%)", x + length + 210, y - 15, 0xFFFFFF);
+				fontRenderer.drawStringWithShadow(value + " (" + percentage + "%)", x + length + 160, y - 15, 0xFFFFFF);
 				visit.drawButton = category instanceof Category;
 			} else {
-				fontRenderer.drawStringWithShadow("0 (0%)", x + length + 210, y - 15, 0xFFFFFF);
+				fontRenderer.drawStringWithShadow("0 (0%)", x + length + 160, y - 15, 0xFFFFFF);
 				visit.drawButton = false;
 			}
 		}
