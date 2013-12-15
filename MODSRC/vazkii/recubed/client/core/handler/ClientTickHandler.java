@@ -16,6 +16,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import vazkii.recubed.api.internal.ClientData;
 import vazkii.recubed.client.renders.InventoryCogwheelRender;
+import vazkii.recubed.common.core.handler.ConfigHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
@@ -32,7 +33,8 @@ public class ClientTickHandler implements ITickHandler {
 			World world = Minecraft.getMinecraft().theWorld;
 			if(world == null)
 				ClientData.categories.clear();
-		} else InventoryCogwheelRender.renderCogwheel();
+		} else if(ConfigHandler.useCogwheel)
+			InventoryCogwheelRender.renderCogwheel();
 
 	}
 

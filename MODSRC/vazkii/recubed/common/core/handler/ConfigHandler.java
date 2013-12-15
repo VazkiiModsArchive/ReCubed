@@ -18,10 +18,12 @@ import net.minecraftforge.common.Property;
 public final class ConfigHandler {
 
 	private static final String CATEGORY_SERVER = "server";
-
+	private static final String CATEGORY_CLIENT = "client";
+	
 	public static Configuration config;
 
 	public static int packetInterval = 40;
+	public static boolean useCogwheel = true;
 
 	public static void load(File file) {
 		config = new Configuration(file);
@@ -32,6 +34,10 @@ public final class ConfigHandler {
 		propPacketInterval.comment = "The interval in which packets are sent to client, default is 40 ticks (2 secs)";
 		packetInterval = propPacketInterval.getInt(packetInterval);
 
+		Property propUseCogwheel = config.get(CATEGORY_CLIENT, "use_cogwheel", useCogwheel);
+		propUseCogwheel.comment = "Set to true to use the cogwheel button in the inventory, false to register a keybind";
+		useCogwheel = propUseCogwheel.getBoolean(useCogwheel);
+		
 		config.save();
 	}
 
