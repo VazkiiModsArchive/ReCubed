@@ -73,7 +73,7 @@ public final class GeneralEventHandler {
 			ReCubedAPI.addValueToCategory(LibCategories.BLOCKS_BROKEN, event.getPlayer().username, Item.itemsList[event.block.blockID].getUnlocalizedName(new ItemStack(event.block.blockID, 1, event.blockMetadata)) + ".name", 1);
 	}
 
-	
+
 	// COWS MILKED + ANIMALS SHEARED + SHEEP DYED
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onEntityInteracted(EntityInteractEvent event) {
@@ -230,10 +230,10 @@ public final class GeneralEventHandler {
 
 				if(stack.getItem() instanceof ItemRecord && event.action == Action.RIGHT_CLICK_BLOCK && event.entityPlayer.worldObj.getBlockId(event.x, event.y, event.z) == Block.jukebox.blockID)
 					ReCubedAPI.addValueToCategory(LibCategories.DISCS_PLAYED, event.entityPlayer.username, ((ItemRecord) stack.getItem()).recordName, 1);
-			
+
 				if(event.entityPlayer.dimension == 0 && stack.itemID == Item.eyeOfEnder.itemID)
 					ReCubedAPI.addValueToCategory(LibCategories.ENDER_EYES_USED, event.entityPlayer.username, "item.eyeOfEnder.name", 1);
-			
+
 				if(stack.itemID == Item.fishingRod.itemID)
 					if(event.entityPlayer.fishEntity == null)
 						ReCubedAPI.addValueToCategory(LibCategories.TIMES_FISHED, event.entityPlayer.username, "recubed.misc.hook_casted", 1);
@@ -242,8 +242,8 @@ public final class GeneralEventHandler {
 
 				if(stack.itemID == Item.potion.itemID) {
 					ItemPotion potion = (ItemPotion) stack.getItem();
-					if(potion.isSplash(stack.getItemDamage())) {
-						List<PotionEffect> effects = potion.getEffects(stack); 
+					if(ItemPotion.isSplash(stack.getItemDamage())) {
+						List<PotionEffect> effects = potion.getEffects(stack);
 						for(PotionEffect effect : effects)
 							ReCubedAPI.addValueToCategory(LibCategories.POTIONS_THROWN, event.entityPlayer.username, Potion.potionTypes[effect.getPotionID()].getName(), 1);
 					}

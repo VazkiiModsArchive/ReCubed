@@ -26,7 +26,7 @@ public final class ServerData implements Serializable {
 	public static void reset() {
 		categories.clear();
 	}
-	
+
 	public static void wipe() {
 		Category category = categories.values().iterator().next();
 		List<String> playerData = new ArrayList();

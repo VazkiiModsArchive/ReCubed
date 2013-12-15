@@ -25,7 +25,7 @@ public final class ReCubedAPI {
 
 	public static final List<String> categories = new ArrayList();
 	public static final Map<String, String> shortTerms = new HashMap();
-		
+
 	public static void registerCategory(String category, String shortTerm) {
 		if(!categories.contains(category)) {
 			categories.add(category);

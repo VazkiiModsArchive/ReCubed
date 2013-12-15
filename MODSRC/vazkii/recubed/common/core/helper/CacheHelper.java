@@ -27,7 +27,7 @@ public class CacheHelper {
 	public static File getCacheFile() throws IOException {
 		return getCacheFile("", LibMisc.MOD_ID + ".dat", true);
 	}
-	
+
 	public static File getCacheFile(String loc_, String name, boolean create) throws IOException{
 		MinecraftServer server = MinecraftServer.getServer();
 

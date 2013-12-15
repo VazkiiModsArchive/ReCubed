@@ -81,7 +81,7 @@ public class CommonProxy {
 	private static void registerCategory(String category) {
 		ReCubedAPI.registerCategory(category, category.substring(LibCategories.CATEGORY.length()));
 	}
-	
+
 	public void init(FMLInitializationEvent event) {
 		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
 
@@ -93,7 +93,7 @@ public class CommonProxy {
 
 	public void serverStarting(FMLServerStartingEvent event) {
 		ServerData.init();
-		
+
 		event.registerServerCommand(new CommandCategoryFreeze());
 		event.registerServerCommand(new CommandClearCategory());
 		event.registerServerCommand(new CommandClearPlayer());

@@ -70,7 +70,7 @@ public final class StatBarsRender {
 	public static StatBarsRender fromCategory(Category category) {
 		if(category == null)
 			return null;
-		
+
 		StatBarsRender render = new StatBarsRender(true, StatCollector.translateToLocal(category.name));
 		for(String s : category.playerData.keySet())
 			render.entries.add(new Entry(category.getTotalValueFromPlayerData(s), s));
@@ -86,7 +86,7 @@ public final class StatBarsRender {
 	public static StatBarsRender fromPlayerData(PlayerCategoryData data, Category category) {
 		if(data == null || category == null)
 			return null;
-		
+
 		StatBarsRender render = new StatBarsRender(false, StatCollector.translateToLocal(category.name) + " - " + data.name);
 		if(data != null) {
 			for(String s : data.stats.keySet())
@@ -224,14 +224,14 @@ public final class StatBarsRender {
 
 		boolean unicode = mc.fontRenderer.getUnicodeFlag();
 		mc.fontRenderer.setUnicodeFlag(!ClientCacheHandler.useVanillaFont);
-		
+
 		mc.fontRenderer.drawStringWithShadow(displayName, (x + 4) * 2, (y + 2) * 2, 0xFFFFFF);
 		yp = 9;
 		for(Entry entry : entries) {
 			String posStr = "#" + entry.pos + " - ";
 			String valAndPercentageStr = ": " + entry.val + " (" + entry.percentage + "%)";
-			int remainingLenght = width * 2 - 4 - (mc.fontRenderer.getStringWidth(posStr) + (mc.fontRenderer.getStringWidth(valAndPercentageStr)));
-			
+			int remainingLenght = width * 2 - 4 - (mc.fontRenderer.getStringWidth(posStr) + mc.fontRenderer.getStringWidth(valAndPercentageStr));
+
 			String name = StatCollector.translateToLocal(entry.name);
 			String nameStr = mc.fontRenderer.trimStringToWidth(StatCollector.translateToLocal(entry.name), remainingLenght);
 			if(!name.equals(nameStr)) {
@@ -240,7 +240,7 @@ public final class StatBarsRender {
 				nameStr = mc.fontRenderer.trimStringToWidth(nameStr, remainingLenght);
 				nameStr = nameStr + elipsis;
 			}
-			
+
 			String s1 = posStr + nameStr + valAndPercentageStr;
 
 			int colorRGB = 0xFFFFFF;
@@ -254,7 +254,7 @@ public final class StatBarsRender {
 
 			yp += 6;
 		}
-		
+
 		mc.fontRenderer.setUnicodeFlag(unicode);
 
 		GL11.glScalef(2F, 2F, 2F);

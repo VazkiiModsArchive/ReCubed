@@ -63,7 +63,7 @@ public class GuiReCubedMenu extends GuiScreen {
 			}
 
 		}));
-		
+
 		buttonList.add(new GuiCheckboxButton(6, x + 20, y + 195, "recubed.misc.contrast_text", new SafeCallable<Boolean>() {
 
 			@Override

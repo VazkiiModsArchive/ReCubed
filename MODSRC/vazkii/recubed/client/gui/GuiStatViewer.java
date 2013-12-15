@@ -65,19 +65,19 @@ public class GuiStatViewer extends GuiCategoryList {
 			String text = String.format(StatCollector.translateToLocal("recubed.misc.total"), pie.totalVal);
 			if(fromCurrentCategoryInt().isFrozen)
 				text = text + EnumChatFormatting.AQUA + StatCollector.translateToLocal("recubed.misc.frozen_suffix");
-			
+
 			fontRenderer.drawStringWithShadow(text, x + 134, y + 188, 0xFFFFFF);
 		}
 
 		String displayString = StatCollector.translateToLocal(fromCurrentCategoryInt().name);
 		int width = fontRenderer.getStringWidth(displayString);
 		int xPos = x + 250 - width / 2;
-		
+
 		if(category instanceof PlayerCategoryData) {
 			displayString = displayString + " - ";
 			width = fontRenderer.getStringWidth(displayString);
 			xPos = x + 250 - width / 2;
-			
+
 			String name = ((PlayerCategoryData) category).name;
 			xPos -= fontRenderer.getStringWidth(name) / 2;
 			int color = MiscHelper.generateColorFromString(name);

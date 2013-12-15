@@ -26,7 +26,7 @@ public final class MiscHelper {
 	public static String getEntityString(Entity entity) {
 		if(entity instanceof EntityPlayer)
 			return ((EntityPlayer) entity).username;
-		
+
 		return "entity." + EntityList.getEntityString(entity) + ".name";
 	}
 
@@ -46,7 +46,7 @@ public final class MiscHelper {
 
 		return treemap;
 	}
-	
+
 	public static boolean isPlayerAllowedToUseCommands(String player) {
 		return ConfigHandler.commandPlayers.isEmpty() || ConfigHandler.commandPlayers.contains(player.toLowerCase());
 	}

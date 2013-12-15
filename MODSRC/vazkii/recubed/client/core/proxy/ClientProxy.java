@@ -32,11 +32,11 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 		super.preInit(event);
-		
+
 		if(!ConfigHandler.useCogwheel)
 			KeyBindingRegistry.registerKeyBinding(new KeybindHandler());
 	}
-	
+
 	@Override
 	public void init(FMLInitializationEvent event) {
 		super.init(event);
@@ -44,7 +44,7 @@ public class ClientProxy extends CommonProxy {
 		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
 
 		MinecraftForge.EVENT_BUS.register(new HUDHandler());
-		
+
 		ClientCacheHandler.findCompoundAndLoad();
 	}
 

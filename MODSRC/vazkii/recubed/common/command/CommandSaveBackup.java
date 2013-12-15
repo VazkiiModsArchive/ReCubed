@@ -1,11 +1,11 @@
 /**
  * This class was created by <Vazkii>. It's distributed as
  * part of the ReCubed Mod.
- * 
+ *
  * ReCubed is Open Source and distributed under a
  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- * 
+ *
  * File Created @ [Dec 15, 2013, 2:50:43 PM (GMT)]
  */
 package vazkii.recubed.common.command;
@@ -41,12 +41,12 @@ public class CommandSaveBackup extends CommandBase {
 	public void processCommand(ICommandSender icommandsender, String[] astring) {
 		if(astring.length != 1)
 			throw new WrongUsageException(getCommandUsage(icommandsender), (Object[]) astring);
-		
+
 		if(icommandsender instanceof EntityPlayer && !MiscHelper.isPlayerAllowedToUseCommands(icommandsender.getCommandSenderName()))
 			throw new CommandException("recubed.commands.no_perms");
-		
+
 		String backupName = astring[0];
-		
+
 		try {
 			File file = CacheHelper.getCacheFile(LibMisc.MOD_ID + "Backups/", backupName + ".dat", true);
 			NBTTagCompound cmp = CacheHelper.getCacheCompound(file);
@@ -57,7 +57,7 @@ public class CommandSaveBackup extends CommandBase {
 			throw new CommandException(e.getMessage(), (Object[]) e.getStackTrace());
 		}
 	}
-	
+
 	@Override
     public int getRequiredPermissionLevel() {
         return 3;

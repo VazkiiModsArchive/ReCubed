@@ -22,7 +22,7 @@ public final class Category implements Serializable {
 	private static final long serialVersionUID = -5946983565592790696L;
 	public final HashMap<String, PlayerCategoryData> playerData = new HashMap();
 	public final String name;
-	
+
 	public boolean isFrozen = false;
 
 	public Category(String name) {
@@ -50,7 +50,7 @@ public final class Category implements Serializable {
 			String name = nbt.getName();
 			if(name.equals("isFrozen"))
 				continue;
-			
+
 			if(cmp.hasKey(name)) {
 				NBTTagCompound cmp1 = cmp.getCompoundTag(name);
 				if(!playerData.containsKey(name))

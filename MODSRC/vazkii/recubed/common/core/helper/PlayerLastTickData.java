@@ -55,9 +55,9 @@ public final class PlayerLastTickData {
 
 			if(item instanceof ItemFood)
 				ReCubedAPI.addValueToCategory(LibCategories.FOOD_EATEN, player.username, itemInUse.getUnlocalizedName() + ".name", 1);
-		
+
 			if(item instanceof ItemPotion) {
-				List<PotionEffect> effects = ((ItemPotion) item).getEffects(itemInUse); 
+				List<PotionEffect> effects = ((ItemPotion) item).getEffects(itemInUse);
 				for(PotionEffect effect : effects)
 					ReCubedAPI.addValueToCategory(LibCategories.POTIONS_DRANK, player.username, Potion.potionTypes[effect.getPotionID()].getName(), 1);
 			}
