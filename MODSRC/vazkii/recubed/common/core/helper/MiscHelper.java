@@ -16,13 +16,17 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
-import vazkii.recubed.common.core.handler.ConfigHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.player.EntityPlayer;
+import vazkii.recubed.common.core.handler.ConfigHandler;
 
 public final class MiscHelper {
 
 	public static String getEntityString(Entity entity) {
+		if(entity instanceof EntityPlayer)
+			return ((EntityPlayer) entity).username;
+		
 		return "entity." + EntityList.getEntityString(entity) + ".name";
 	}
 
