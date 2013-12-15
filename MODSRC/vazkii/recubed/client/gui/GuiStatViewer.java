@@ -70,9 +70,20 @@ public class GuiStatViewer extends GuiCategoryList {
 		}
 
 		String displayString = StatCollector.translateToLocal(fromCurrentCategoryInt().name);
-		if(category instanceof PlayerCategoryData)
-			displayString = displayString + " - " + EnumChatFormatting.GREEN + ((PlayerCategoryData) category).name;
-		drawCenteredString(fontRenderer, displayString, x + 250, y + 5, 0xFFFFFF);
+		int width = fontRenderer.getStringWidth(displayString);
+		int xPos = x + 250 - width / 2;
+		
+		if(category instanceof PlayerCategoryData) {
+			displayString = displayString + " - ";
+			width = fontRenderer.getStringWidth(displayString);
+			xPos = x + 250 - width / 2;
+			
+			String name = ((PlayerCategoryData) category).name;
+			xPos -= fontRenderer.getStringWidth(name) / 2;
+			int color = MiscHelper.generateColorFromString(name);
+			fontRenderer.drawStringWithShadow(name, xPos + width, y + 5, color);
+		}
+		fontRenderer.drawStringWithShadow(displayString, xPos, y + 5, 0xFFFFFF);
 
 		searchBar.drawTextBox();
 
