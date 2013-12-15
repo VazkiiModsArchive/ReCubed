@@ -25,10 +25,10 @@ import vazkii.recubed.common.lib.LibMisc;
 public class CacheHelper {
 
 	public static File getCacheFile() throws IOException {
-		return getCacheFile("", LibMisc.MOD_ID + ".dat");
+		return getCacheFile("", LibMisc.MOD_ID + ".dat", true);
 	}
 	
-	public static File getCacheFile(String loc_, String name) throws IOException{
+	public static File getCacheFile(String loc_, String name, boolean create) throws IOException{
 		MinecraftServer server = MinecraftServer.getServer();
 
 		WorldServer world = server.worldServers[0];
@@ -40,7 +40,9 @@ public class CacheHelper {
 		}
 
 		if(!cacheFile.exists())
-			cacheFile.createNewFile();
+			if(create)
+				cacheFile.createNewFile();
+			else return null;
 
 		return cacheFile;
 	}

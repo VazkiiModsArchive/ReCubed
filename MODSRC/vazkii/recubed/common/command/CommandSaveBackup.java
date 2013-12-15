@@ -48,7 +48,7 @@ public class CommandSaveBackup extends CommandBase {
 		String backupName = astring[0];
 		
 		try {
-			File file = CacheHelper.getCacheFile(LibMisc.MOD_ID + "Backups/", backupName + ".dat");
+			File file = CacheHelper.getCacheFile(LibMisc.MOD_ID + "Backups/", backupName + ".dat", true);
 			NBTTagCompound cmp = CacheHelper.getCacheCompound(file);
 			ServerData.writeToNBT(cmp);
 			CacheHelper.injectNBTToFile(cmp, file);
