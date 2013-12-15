@@ -52,7 +52,7 @@ public final class ReCubedAPI {
 	public static void setValueToCategory(String category, String player, String tag, int value) {
 		Category category_ = ServerData.categories.get(category);
 
-		if(category != null) {
+		if(category != null && !category_.isFrozen) {
 			PlayerCategoryData data = category_.playerData.get(player);
 			data.stats.put(tag, value);
 		}

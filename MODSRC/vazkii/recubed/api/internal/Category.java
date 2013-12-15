@@ -22,6 +22,8 @@ public final class Category implements Serializable {
 	private static final long serialVersionUID = -5946983565592790696L;
 	public final HashMap<String, PlayerCategoryData> playerData = new HashMap();
 	public final String name;
+	
+	public boolean isFrozen = false;
 
 	public Category(String name) {
 		this.name = name;
@@ -54,6 +56,7 @@ public final class Category implements Serializable {
 				playerData.get(name).loadFromNBT(cmp1);
 			}
 		}
+		isFrozen = cmp.getBoolean("isFrozen");
 	}
 
 	public void writeToNBT(NBTTagCompound cmp) {
@@ -62,6 +65,7 @@ public final class Category implements Serializable {
 			playerData.get(s).writeToNBT(cmp1);
 			cmp.setCompoundTag(s, cmp1);
 		}
+		cmp.setBoolean("isFrozen", isFrozen);
 	}
 
 }
