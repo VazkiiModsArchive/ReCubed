@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
+import vazkii.recubed.common.core.handler.ConfigHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 
@@ -40,5 +41,9 @@ public final class MiscHelper {
 			treemap.put(key, map.get(key));
 
 		return treemap;
+	}
+	
+	public static boolean isPlayerAllowedToUseCommands(String player) {
+		return ConfigHandler.commandPlayers.isEmpty() || ConfigHandler.commandPlayers.contains(player.toLowerCase());
 	}
 }

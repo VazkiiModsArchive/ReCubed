@@ -11,6 +11,9 @@
 package vazkii.recubed.common.core.handler;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
@@ -24,7 +27,8 @@ public final class ConfigHandler {
 
 	public static int packetInterval = 40;
 	public static boolean useCogwheel = true;
-
+	public static List<String> commandPlayers = new ArrayList();
+	
 	public static void load(File file) {
 		config = new Configuration(file);
 
@@ -34,9 +38,19 @@ public final class ConfigHandler {
 		propPacketInterval.comment = "The interval in which packets are sent to client, default is 40 ticks (2 secs)";
 		packetInterval = propPacketInterval.getInt(packetInterval);
 
+		Property propCommandPlayers = config.get(CATEGORY_SERVER, "command_players", "");
+		propCommandPlayers.comment = "A comma separated list of players allowed to use comamnds. Leave empty for all OPs";
+		String commandPlayersStr = propCommandPlayers.getString().trim();
+		if(!commandPlayersStr.isEmpty()) {
+			List<String> commandPlayers = Arrays.asList(commandPlayersStr.split(","));
+			for(String s : commandPlayers)
+				ConfigHandler.commandPlayers.add(s.toLowerCase());
+		}
+		
 		Property propUseCogwheel = config.get(CATEGORY_CLIENT, "use_cogwheel", useCogwheel);
 		propUseCogwheel.comment = "Set to true to use the cogwheel button in the inventory, false to register a keybind";
 		useCogwheel = propUseCogwheel.getBoolean(useCogwheel);
+		
 		
 		config.save();
 	}
