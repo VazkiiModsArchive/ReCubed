@@ -222,7 +222,20 @@ public final class StatBarsRender {
 		mc.fontRenderer.drawStringWithShadow(displayName, (x + 4) * 2, (y + 2) * 2, 0xFFFFFF);
 		yp = 9;
 		for(Entry entry : entries) {
-			String s1 = "#" + entry.pos + " - " + StatCollector.translateToLocal(entry.name) + ": " + entry.val + " (" + entry.percentage + "%)";
+			String posStr = "#" + entry.pos + " - ";
+			String valAndPercentageStr = ": " + entry.val + " (" + entry.percentage + "%)";
+			int remainingLenght = width * 2 - 4 - (mc.fontRenderer.getStringWidth(posStr) + (mc.fontRenderer.getStringWidth(valAndPercentageStr)));
+			
+			String name = StatCollector.translateToLocal(entry.name);
+			String nameStr = mc.fontRenderer.trimStringToWidth(StatCollector.translateToLocal(entry.name), remainingLenght);
+			if(!name.equals(nameStr)) {
+				String elipsis = "(...)";
+				remainingLenght -= mc.fontRenderer.getStringWidth(elipsis);
+				nameStr = mc.fontRenderer.trimStringToWidth(nameStr, remainingLenght);
+				nameStr = nameStr + elipsis;
+			}
+			
+			String s1 = posStr + nameStr + valAndPercentageStr;
 
 			int colorRGB = 0xFFFFFF;
 			if(ClientCacheHandler.contrastHudText) {
