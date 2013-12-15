@@ -68,6 +68,9 @@ public final class StatBarsRender {
 	}
 
 	public static StatBarsRender fromCategory(Category category) {
+		if(category == null)
+			return null;
+		
 		StatBarsRender render = new StatBarsRender(true, StatCollector.translateToLocal(category.name));
 		for(String s : category.playerData.keySet())
 			render.entries.add(new Entry(category.getTotalValueFromPlayerData(s), s));
@@ -81,6 +84,9 @@ public final class StatBarsRender {
 	}
 
 	public static StatBarsRender fromPlayerData(PlayerCategoryData data, Category category) {
+		if(data == null || category == null)
+			return null;
+		
 		StatBarsRender render = new StatBarsRender(false, StatCollector.translateToLocal(category.name) + " - " + data.name);
 		if(data != null) {
 			for(String s : data.stats.keySet())

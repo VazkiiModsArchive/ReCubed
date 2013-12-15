@@ -35,8 +35,7 @@ public class CommandWipeData extends CommandBase {
 		if(icommandsender instanceof EntityPlayer && !MiscHelper.isPlayerAllowedToUseCommands(icommandsender.getCommandSenderName()))
 			throw new CommandException("recubed.commands.no_perms");
 		
-		ServerData.reset();
-		ServerData.init();
+		ServerData.wipe();
 		icommandsender.sendChatToPlayer(new ChatMessageComponent().addKey("recubed.commands.command_sucessful"));
 	}
 	

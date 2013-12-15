@@ -11,7 +11,9 @@
 package vazkii.recubed.api.internal;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import net.minecraft.nbt.NBTTagCompound;
 import vazkii.recubed.api.ReCubedAPI;
@@ -23,6 +25,17 @@ public final class ServerData implements Serializable {
 
 	public static void reset() {
 		categories.clear();
+	}
+	
+	public static void wipe() {
+		Category category = categories.values().iterator().next();
+		List<String> playerData = new ArrayList();
+		playerData = new ArrayList(category.playerData.keySet());
+		reset();
+		init();
+		for(Category category_ : categories.values())
+			for(String s : playerData)
+				category_.playerData.put(s, new PlayerCategoryData(s));
 	}
 
 	public static void init() {

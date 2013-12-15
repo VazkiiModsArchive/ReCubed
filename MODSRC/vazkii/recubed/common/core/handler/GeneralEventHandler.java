@@ -110,8 +110,6 @@ public final class GeneralEventHandler {
 			String name = "recubed.damage." + event.source.getDamageType();
 			if(event.source.getEntity() != null)
 				name = MiscHelper.getEntityString(event.source.getEntity());
-			if(event.source.getEntity() instanceof EntityPlayer)
-				name = ((EntityPlayer) event.entity).username;
 
 			if(ReCubedAPI.validatePlayer(player))
 				ReCubedAPI.addValueToCategory(LibCategories.DAMAGE_TAKEN, player.username, name, (int) Math.min(player.getHealth(), event.ammount));
