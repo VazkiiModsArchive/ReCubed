@@ -2,7 +2,7 @@
 	<title>ReCubed Files</title>
 
 	<font size="6">ReCubed Files</font><br>
-	<a href="http://www.minecraftforum.net/topic/1813058-">ReCubed Thread</a><br>
+	<a href="http://www.minecraftforum.net/topic/2205628-">ReCubed Thread</a><br>
 	<a href="http://vazkii.us">Back to vazkii.us</a>
 	<br><hr><br>
 	
