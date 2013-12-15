@@ -12,7 +12,6 @@ package vazkii.recubed.common.core.handler;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandGive;
@@ -26,8 +25,11 @@ import net.minecraft.entity.player.EnumStatus;
 import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
+import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.event.CommandEvent;
@@ -50,6 +52,7 @@ import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.common.core.helper.MiscHelper;
 import vazkii.recubed.common.lib.LibCategories;
 import vazkii.recubed.common.lib.LibObfuscation;
+import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public final class GeneralEventHandler {
 
@@ -214,7 +217,7 @@ public final class GeneralEventHandler {
 		}
 	}
 
-	// SNOWBALLS THROWN + ENDER PEARLS THROWN + ENDER EYES USED + TIMES FISHED
+	// SNOWBALLS THROWN + ENDER PEARLS THROWN + ENDER EYES USED + TIMES FISHED + POTIONS THROWN
 	@ForgeSubscribe(priority = EventPriority.LOWEST)
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		if(ReCubedAPI.validatePlayer(event.entityPlayer)) {
@@ -239,6 +242,14 @@ public final class GeneralEventHandler {
 					else if((Integer) ReflectionHelper.getPrivateValue(EntityFishHook.class, event.entityPlayer.fishEntity, LibObfuscation.TICKS_CATCHABLE) > 0)
 						ReCubedAPI.addValueToCategory(LibCategories.TIMES_FISHED, event.entityPlayer.username, "recubed.misc.fish_caught", 1);
 
+				if(stack.itemID == Item.potion.itemID) {
+					ItemPotion potion = (ItemPotion) stack.getItem();
+					if(potion.isSplash(stack.getItemDamage())) {
+						List<PotionEffect> effects = potion.getEffects(stack); 
+						for(PotionEffect effect : effects)
+							ReCubedAPI.addValueToCategory(LibCategories.POTIONS_THROWN, event.entityPlayer.username, Potion.potionTypes[effect.getPotionID()].getName(), 1);
+					}
+				}
 			}
 		}
 	}
