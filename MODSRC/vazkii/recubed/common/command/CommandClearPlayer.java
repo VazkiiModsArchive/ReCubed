@@ -42,5 +42,10 @@ public class CommandClearPlayer extends CommandBase {
 		
 		category.playerData.put(astring[1], new PlayerCategoryData(astring[1]));
 	}
+	
+	@Override
+    public int getRequiredPermissionLevel() {
+        return 3;
+    }
 
 }

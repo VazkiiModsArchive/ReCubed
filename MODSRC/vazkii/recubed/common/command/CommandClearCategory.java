@@ -43,5 +43,10 @@ public class CommandClearCategory extends CommandBase {
 		for(String s : category.playerData.keySet())
 			category.playerData.put(s, new PlayerCategoryData(s));
 	}
+	
+	@Override
+    public int getRequiredPermissionLevel() {
+        return 3;
+    }
 
 }

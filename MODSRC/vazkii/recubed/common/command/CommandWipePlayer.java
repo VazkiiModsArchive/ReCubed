@@ -39,5 +39,10 @@ public class CommandWipePlayer extends CommandBase {
 			category.playerData.put(astring[0], new PlayerCategoryData(astring[0]));
 		}
 	}
+	
+	@Override
+    public int getRequiredPermissionLevel() {
+        return 3;
+    }
 
 }

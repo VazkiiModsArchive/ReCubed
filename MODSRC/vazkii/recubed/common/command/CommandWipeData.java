@@ -31,5 +31,10 @@ public class CommandWipeData extends CommandBase {
 		ServerData.reset();
 		ServerData.init();
 	}
+	
+	@Override
+    public int getRequiredPermissionLevel() {
+        return 3;
+    }
 
 }
