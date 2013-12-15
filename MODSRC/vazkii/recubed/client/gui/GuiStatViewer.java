@@ -66,7 +66,7 @@ public class GuiStatViewer extends GuiCategoryList {
 			if(fromCurrentCategoryInt().isFrozen)
 				text = text + EnumChatFormatting.AQUA + StatCollector.translateToLocal("recubed.misc.frozen_suffix");
 			
-			fontRenderer.drawStringWithShadow(text, x + 134, y + 185, 0xFFFFFF);
+			fontRenderer.drawStringWithShadow(text, x + 134, y + 188, 0xFFFFFF);
 		}
 
 		String displayString = StatCollector.translateToLocal(fromCurrentCategoryInt().name);
