@@ -19,6 +19,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
@@ -237,8 +238,12 @@ public strictfp final class PieChartRender {
 		}
 		GL11.glEnd();
 
-		if(tooltip != null)
-			RenderHelper.renderTooltip(mx, my, Arrays.asList(StatCollector.translateToLocal(tooltip.name), EnumChatFormatting.GRAY + "" + tooltip.val + " (" + Math.round(tooltip.angle / 3.6F * 100D) / 100D + "%)"));
+		if(tooltip != null) {
+			List<String> tooltipList = new ArrayList(Arrays.asList(StatCollector.translateToLocal(tooltip.name), EnumChatFormatting.GRAY + "" + tooltip.val + " (" + Math.round(tooltip.angle / 3.6F * 100D) / 100D + "%)"));
+			if(Minecraft.getMinecraft().gameSettings.advancedItemTooltips)
+				tooltipList.add(EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + tooltip.name);
+			RenderHelper.renderTooltip(mx, my, tooltipList);
+		}
 
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glPopMatrix();

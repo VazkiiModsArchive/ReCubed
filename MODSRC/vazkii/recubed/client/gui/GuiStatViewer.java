@@ -104,7 +104,7 @@ public class GuiStatViewer extends GuiCategoryList {
 			int color = 0;
 			int value = 0;
 			int total = 0;
-
+			
 			if(category instanceof Category) {
 				PlayerCategoryData data = getValueFromCaseInsensitveString(currentCategory.playerData, text);
 				if(data != null) {
@@ -130,6 +130,10 @@ public class GuiStatViewer extends GuiCategoryList {
 
 				fontRenderer.drawStringWithShadow(value + " (" + percentage + "%)", x + length + 160, y - 15, 0xFFFFFF);
 				visit.drawButton = category instanceof Category;
+				
+				if(mc.gameSettings.advancedItemTooltips)
+					fontRenderer.drawStringWithShadow(EnumChatFormatting.ITALIC + unlocalized, x + length + 10, y - 32, 0xFFFFFF);
+
 			} else {
 				fontRenderer.drawStringWithShadow("0 (0%)", x + length + 160, y - 15, 0xFFFFFF);
 				visit.drawButton = false;
