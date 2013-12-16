@@ -206,7 +206,7 @@ public final class GeneralEventHandler {
 				name = MiscHelper.getEntityString(event.source.getEntity());
 			if(event.source.getEntity() instanceof EntityPlayer) {
 				name = ((EntityPlayer) event.source.getEntity()).username;
-				if(ReCubedAPI.validatePlayer((EntityPlayer) event.entity));
+				if(ReCubedAPI.validatePlayer((EntityPlayer) event.source.getEntity()))
 					ReCubedAPI.addValueToCategory(LibCategories.PLAYER_KILLS, name, player.username, 1);
 			}
 
