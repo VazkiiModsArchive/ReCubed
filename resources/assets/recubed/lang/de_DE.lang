@@ -1,0 +1,92 @@
+# CATEGORIES
+recubed.category.animals_sheared=Tiere Geschoren
+recubed.category.arrows_shot=Pfeile verschossen
+recubed.category.boss_kills=Bosse Getötet
+recubed.category.blocks_broken=Abgebaute Blöcke
+recubed.category.cows_milked=Gemolkene Kühe
+recubed.category.damage_dealt=Verursachter Schaden
+recubed.category.damage_taken=Erhaltener Schaden
+recubed.category.dimensions_changed=Bereiste Dimensionen
+recubed.category.discs_played=Gespielte Schallplatten
+recubed.category.ender_eyes_used=Benutzte Enderaugen
+recubed.category.ender_pearls_thrown=Geworfene Enderperlen
+recubed.category.entities_ridden=Gerittene Lebewesen
+recubed.category.experience_gathered=Gesammelte Erfahrung
+recubed.category.food_eaten=Gegessene Nahrung
+recubed.category.items_broken=Zerbrochene Items
+recubed.category.items_dropped=Fallen Gelassene Items
+recubed.category.items_spawned=Erschaffene Items
+recubed.category.items_picked_up=Gesammelte Items
+recubed.category.levels_gained=Erhaltene Level
+recubed.category.messages_sent=Versendete Nachrichten
+recubed.category.mobs_aggroed=Monster wütend gemacht
+recubed.category.mobs_killed=Lebewesen getötet
+recubed.category.player_kills=Spieler getötet
+recubed.category.potions_drank=Tränke getrunken
+recubed.category.potions_gotten=Von Tränken Beeinflusst
+recubed.category.potions_thrown=Tränke Geworfen
+recubed.category.sheep_dyed=Schafe Gefärbt
+recubed.category.snowballs_thrown=Geworfene Schneebälle
+recubed.category.times_died=Tode
+recubed.category.times_fished=Male Geangelt
+recubed.category.times_played=Logins
+recubed.category.times_slept=Male Geschlafen
+
+# DAMAGE
+recubed.damage.inFire=Im Feuer stehend
+recubed.damage.onFire=Brennend
+recubed.damage.lava=Lava
+recubed.damage.inWall=Ersticken
+recubed.damage.drown=Ertrinken
+recubed.damage.starve=Hunger
+recubed.damage.cactus=Stechen
+recubed.damage.fall=Fallen
+recubed.damage.outOfWorld=Aus der Welt heraus
+recubed.damage.generic=Unspezifischer Schaden
+recubed.damage.magic=Magie
+recubed.damage.wither=Zerfall
+recubed.damage.anvil=Amboss
+recubed.damage.fallingBlock=Fallende Blöcke
+
+# MISC
+recubed.misc.openMenu=Öffne ReCubed-Menü
+recubed.misc.credits=Von Vazkii, für #ModJam 3
+recubed.misc.enter=Drücke ENTER, um diese Statistik zu verfolgen.
+recubed.misc.type_to_search=(Tippe zum Suchen)
+recubed.misc.see_stats=Statistiken Ansehen
+recubed.misc.total=Total: %s
+recubed.misc.frozen_suffix= (Gefroren)
+recubed.misc.others=Anderes
+recubed.misc.back=Zurück
+recubed.misc.search=Suche: 
+recubed.misc.your_stats=Deine Statistiken
+recubed.no_data=Es gibt keine Daten hierfür.
+recubed.misc.view_stats=Zeige Statistiken
+recubed.misc.move_hud=Bewege HUD
+recubed.misc.click_to_set=Linksklicke, um Position zu setzen
+recubed.misc.escape_to_reset=Drücke ESCAPE, um Position wiederherzustellen
+recubed.misc.hud_enabled=HUD Aktiviert
+recubed.misc.use_gradients=Nutze Gradienten
+recubed.misc.use_vanilla_font=Nutze Minecraft-Schriftart
+recubed.misc.contrast_text=HUD-Text-Kontrast
+recubed.misc.login=Login
+recubed.misc.command=Befehl
+recubed.misc.chat=Chat-Nachricht
+recubed.misc.jump=Sprung
+recubed.misc.sprint_jump=Sprintsprung
+recubed.misc.sleep=Schlaf
+recubed.misc.shot=Schuss
+recubed.misc.critical_shot=Volltreffer
+recubed.misc.experience=Erfahrung
+recubed.misc.level=Level
+recubed.misc.hook_casted=Hook Casted
+recubed.misc.fish_caught=Fisch Gefangen
+
+# COMMANDS
+recubed.commands.no_perms=Du hast keine Berechtigung, diesen Befehl zu nutzen!
+recubed.commands.no_category=Diese Kategorie existiert nicht.
+recubed.commands.no_backup=Dieses Backup existiert nicht.
+recubed.commands.command_sucessful=Befehl erfolgreich.
+
+# VANILLA LOCALIZATIONS
+entity.MinecartRideable.name=Lore
