@@ -19,7 +19,7 @@ public class PacketCategory implements IMessage, IMessageHandler<PacketCategory,
 
 	public Category category;
 	public String name;
-	
+
 	public PacketCategory() { }
 
 	public PacketCategory(Category category) {
@@ -40,7 +40,7 @@ public class PacketCategory implements IMessage, IMessageHandler<PacketCategory,
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static Collection<PacketCategory> allCategoryPackets() {
 		Collection<PacketCategory> packets = new ArrayList();
 		for(String s : ServerData.categories.keySet())

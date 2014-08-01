@@ -10,16 +10,13 @@
  */
 package vazkii.recubed.common.core.handler;
 
-import java.util.EnumSet;
-
+import vazkii.recubed.common.core.helper.CacheHelper;
+import vazkii.recubed.common.network.PacketCategory;
+import vazkii.recubed.common.network.PacketHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
-import net.minecraft.entity.player.EntityPlayer;
-import vazkii.recubed.common.core.helper.CacheHelper;
-import vazkii.recubed.common.network.PacketCategory;
-import vazkii.recubed.common.network.PacketHandler;
 
 public final class ServerTickHandler  {
 

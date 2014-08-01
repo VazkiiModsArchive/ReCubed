@@ -77,13 +77,13 @@ public strictfp final class PieChartRender {
 
 	public static PieChartRender fromPlayerData(PlayerCategoryData data) {
 		PieChartRender render = new PieChartRender(false);
-			for(String s : data.stats.keySet())
-				render.entries.add(new Entry(data.stats.get(s), s));
+		for(String s : data.stats.keySet())
+			render.entries.add(new Entry(data.stats.get(s), s));
 
-			int totalVal = render.buildAngles();
-			if(totalVal == 0)
-				return null;
-			render.truncateSmallValues(totalVal);
+		int totalVal = render.buildAngles();
+		if(totalVal == 0)
+			return null;
+		render.truncateSmallValues(totalVal);
 
 		return render;
 	}

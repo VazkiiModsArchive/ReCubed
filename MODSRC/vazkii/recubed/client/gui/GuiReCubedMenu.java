@@ -77,37 +77,37 @@ public class GuiReCubedMenu extends GuiScreen {
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {
 		switch(par1GuiButton.id) {
-			case 0 : {
-				mc.displayGuiScreen(new GuiStatViewer());
-				return;
-			}
-			case 1 : {
-				mc.displayGuiScreen(new GuiStatSelector());
-				return;
-			}
-			case 2 : {
-				mc.displayGuiScreen(new GuiMoveHUD());
-				return;
-			}
-			case 3 : {
-				ClientCacheHandler.useGradients = !ClientCacheHandler.useGradients;
-				ClientCacheHandler.findCompoundAndWrite();
-				return;
-			}
-			case 4 : {
-				ClientCacheHandler.drawHud = !ClientCacheHandler.drawHud;
-				ClientCacheHandler.findCompoundAndWrite();
-				return;
-			}
-			case 5 : {
-				ClientCacheHandler.useVanillaFont = !ClientCacheHandler.useVanillaFont;
-				ClientCacheHandler.findCompoundAndWrite();
-				return;
-			}
-			case 6 : {
-				ClientCacheHandler.contrastHudText = !ClientCacheHandler.contrastHudText;
-				ClientCacheHandler.findCompoundAndWrite();
-			}
+		case 0 : {
+			mc.displayGuiScreen(new GuiStatViewer());
+			return;
+		}
+		case 1 : {
+			mc.displayGuiScreen(new GuiStatSelector());
+			return;
+		}
+		case 2 : {
+			mc.displayGuiScreen(new GuiMoveHUD());
+			return;
+		}
+		case 3 : {
+			ClientCacheHandler.useGradients = !ClientCacheHandler.useGradients;
+			ClientCacheHandler.findCompoundAndWrite();
+			return;
+		}
+		case 4 : {
+			ClientCacheHandler.drawHud = !ClientCacheHandler.drawHud;
+			ClientCacheHandler.findCompoundAndWrite();
+			return;
+		}
+		case 5 : {
+			ClientCacheHandler.useVanillaFont = !ClientCacheHandler.useVanillaFont;
+			ClientCacheHandler.findCompoundAndWrite();
+			return;
+		}
+		case 6 : {
+			ClientCacheHandler.contrastHudText = !ClientCacheHandler.contrastHudText;
+			ClientCacheHandler.findCompoundAndWrite();
+		}
 		}
 	}
 

@@ -78,7 +78,7 @@ public class CommonProxy {
 	private static void registerCategory(String category) {
 		ReCubedAPI.registerCategory(category, category.substring(LibCategories.CATEGORY.length()));
 	}
-	
+
 	public void receivePacket(PacketCategory packet) {
 		// NO-OP
 	}
@@ -89,7 +89,7 @@ public class CommonProxy {
 
 		MinecraftForge.EVENT_BUS.register(new WorldSaveHandler());
 		MinecraftForge.EVENT_BUS.register(new GeneralEventHandler());
-		
+
 		PacketHandler.init();
 	}
 

@@ -10,11 +10,9 @@
  */
 package vazkii.recubed.api.internal;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Set;
 
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 
 public final class Category {
@@ -46,7 +44,7 @@ public final class Category {
 	public void loadFromNBT(NBTTagCompound cmp) {
 		Set<String> names = cmp.func_150296_c();
 		for(String name : names) {
-			NBTBase nbt = cmp.getTag(name);
+			cmp.getTag(name);
 			if(name.equals("isFrozen"))
 				continue;
 

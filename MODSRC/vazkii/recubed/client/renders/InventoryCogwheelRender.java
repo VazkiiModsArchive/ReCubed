@@ -78,7 +78,7 @@ public final class InventoryCogwheelRender {
 				if(Mouse.isButtonDown(0))
 					mc.displayGuiScreen(new GuiReCubedMenu());
 			}
- 		}
+		}
 	}
 
 }

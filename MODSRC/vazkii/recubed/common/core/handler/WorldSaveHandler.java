@@ -10,12 +10,12 @@
  */
 package vazkii.recubed.common.core.handler;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.event.world.WorldEvent;
 import vazkii.recubed.common.core.helper.CacheHelper;
 import vazkii.recubed.common.network.PacketCategory;
 import vazkii.recubed.common.network.PacketHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public final class WorldSaveHandler {
 

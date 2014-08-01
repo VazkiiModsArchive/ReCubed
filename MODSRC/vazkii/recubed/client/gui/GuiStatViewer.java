@@ -104,7 +104,7 @@ public class GuiStatViewer extends GuiCategoryList {
 			int color = 0;
 			int value = 0;
 			int total = 0;
-			
+
 			if(category instanceof Category) {
 				PlayerCategoryData data = getValueFromCaseInsensitveString(currentCategory.playerData, text);
 				if(data != null) {
@@ -130,7 +130,7 @@ public class GuiStatViewer extends GuiCategoryList {
 
 				fontRendererObj.drawStringWithShadow(value + " (" + percentage + "%)", x + length + 160, y - 15, 0xFFFFFF);
 				visit.visible = category instanceof Category;
-				
+
 				if(mc.gameSettings.advancedItemTooltips)
 					fontRendererObj.drawStringWithShadow(EnumChatFormatting.ITALIC + unlocalized, x + length + 10, y - 32, 0xFFFFFF);
 
@@ -172,24 +172,24 @@ public class GuiStatViewer extends GuiCategoryList {
 		Category category = fromCurrentCategoryInt();
 
 		switch(par1GuiButton.id) {
-			case 0 : {
-				if(this.category instanceof PlayerCategoryData) {
-					this.category = category;
-					clearSearchBar();
-				} else mc.displayGuiScreen(new GuiReCubedMenu());
-				return;
-			}
-			case 1 : {
-				this.category = category.playerData.get(mc.thePlayer.getGameProfile().getName());
+		case 0 : {
+			if(this.category instanceof PlayerCategoryData) {
+				this.category = category;
 				clearSearchBar();
-				return;
-			}
-			case 2 : {
-				String text = unlocalized;
-				this.category = fromCurrentCategoryInt().playerData.get(text);
-				clearSearchBar();
-				return;
-			}
+			} else mc.displayGuiScreen(new GuiReCubedMenu());
+			return;
+		}
+		case 1 : {
+			this.category = category.playerData.get(mc.thePlayer.getGameProfile().getName());
+			clearSearchBar();
+			return;
+		}
+		case 2 : {
+			String text = unlocalized;
+			this.category = fromCurrentCategoryInt().playerData.get(text);
+			clearSearchBar();
+			return;
+		}
 		}
 	}
 

@@ -60,17 +60,17 @@ public final class GeneralEventHandler {
 	// ARROWS SHOT
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onEntityTakeDamage(ArrowLooseEvent event) {
-        float f = event.charge / 20.0F;
-        f = (f * f + f * 2.0F) / 3.0F;
+		float f = event.charge / 20.0F;
+		f = (f * f + f * 2.0F) / 3.0F;
 
-        if(ReCubedAPI.validatePlayer(event.entityPlayer))
+		if(ReCubedAPI.validatePlayer(event.entityPlayer))
 			ReCubedAPI.addValueToCategory(LibCategories.ARROWS_SHOT, event.entityPlayer.getGameProfile().getName(), f >= 1F ? "recubed.misc.critical_shot" : "recubed.misc.shot", 1);
 	}
 
 	// BLOCKS BROKEN
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onBlockBroken(BlockEvent.BreakEvent event) {
-        if(ReCubedAPI.validatePlayer(event.getPlayer()) && event.block != null && Item.getItemFromBlock(event.block) != null)
+		if(ReCubedAPI.validatePlayer(event.getPlayer()) && event.block != null && Item.getItemFromBlock(event.block) != null)
 			ReCubedAPI.addValueToCategory(LibCategories.BLOCKS_BROKEN, event.getPlayer().getGameProfile().getName(), Item.getItemFromBlock(event.block).getUnlocalizedName(new ItemStack(event.block, 1, event.blockMetadata)) + ".name", 1);
 	}
 
@@ -78,17 +78,17 @@ public final class GeneralEventHandler {
 	// COWS MILKED + ANIMALS SHEARED + SHEEP DYED
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onEntityInteracted(EntityInteractEvent event) {
-        if(ReCubedAPI.validatePlayer(event.entityPlayer)) {
-        	ItemStack currentItem = event.entityPlayer.getCurrentEquippedItem();
-        	if(currentItem != null && currentItem.getItem() == Items.bucket && event.target instanceof EntityCow)
-        		ReCubedAPI.addValueToCategory(LibCategories.COWS_MILKED, event.entityPlayer.getGameProfile().getName(), "item.milk.name", 1);
+		if(ReCubedAPI.validatePlayer(event.entityPlayer)) {
+			ItemStack currentItem = event.entityPlayer.getCurrentEquippedItem();
+			if(currentItem != null && currentItem.getItem() == Items.bucket && event.target instanceof EntityCow)
+				ReCubedAPI.addValueToCategory(LibCategories.COWS_MILKED, event.entityPlayer.getGameProfile().getName(), "item.milk.name", 1);
 
-        	if(currentItem != null && currentItem.getItem() == Items.shears && event.target instanceof IShearable && ((IShearable) event.target).isShearable(currentItem, event.target.worldObj, (int) event.target.posX, (int) event.target.posY, (int) event.target.posZ))
-        		ReCubedAPI.addValueToCategory(LibCategories.ANIMALS_SHEARED, event.entityPlayer.getGameProfile().getName(), MiscHelper.getEntityString(event.target), 1);
+			if(currentItem != null && currentItem.getItem() == Items.shears && event.target instanceof IShearable && ((IShearable) event.target).isShearable(currentItem, event.target.worldObj, (int) event.target.posX, (int) event.target.posY, (int) event.target.posZ))
+				ReCubedAPI.addValueToCategory(LibCategories.ANIMALS_SHEARED, event.entityPlayer.getGameProfile().getName(), MiscHelper.getEntityString(event.target), 1);
 
-        	if(currentItem != null && currentItem.getItem() instanceof ItemDye && event.target instanceof EntitySheep && !((EntitySheep) event.target).getSheared() && 15 - ((EntitySheep) event.target).getFleeceColor() != currentItem.getItemDamage())
-        		ReCubedAPI.addValueToCategory(LibCategories.SHEEP_DYED, event.entityPlayer.getGameProfile().getName(), currentItem.getUnlocalizedName() + ".name", 1);
-        }
+			if(currentItem != null && currentItem.getItem() instanceof ItemDye && event.target instanceof EntitySheep && !((EntitySheep) event.target).getSheared() && 15 - ((EntitySheep) event.target).getFleeceColor() != currentItem.getItemDamage())
+				ReCubedAPI.addValueToCategory(LibCategories.SHEEP_DYED, event.entityPlayer.getGameProfile().getName(), currentItem.getUnlocalizedName() + ".name", 1);
+		}
 	}
 
 	// DAMAGE DEALT
@@ -156,21 +156,21 @@ public final class GeneralEventHandler {
 			if(event.command instanceof CommandGive) {
 				String name = event.parameters[1];
 				Item item = CommandBase.getItemByText(event.sender, name);
-	            int j = 1;
-	            int k = 0;
+				int j = 1;
+				int k = 0;
 
-	            if(item == null)
-	                return;
+				if(item == null)
+					return;
 
-                if(event.parameters.length >= 3)
-                    j = CommandBase.parseIntBounded(event.sender, event.parameters[2], 1, 64);
+				if(event.parameters.length >= 3)
+					j = CommandBase.parseIntBounded(event.sender, event.parameters[2], 1, 64);
 
-                if(event.parameters.length >= 4)
-                    k = CommandBase.parseInt(event.sender, event.parameters[3]);
+				if(event.parameters.length >= 4)
+					k = CommandBase.parseInt(event.sender, event.parameters[3]);
 
-                ItemStack stack = new ItemStack(item, j, k);
+				ItemStack stack = new ItemStack(item, j, k);
 
-    			ReCubedAPI.addValueToCategory(LibCategories.ITEMS_SPAWNED, event.sender.getCommandSenderName(), stack.getUnlocalizedName() + ".name", 1);
+				ReCubedAPI.addValueToCategory(LibCategories.ITEMS_SPAWNED, event.sender.getCommandSenderName(), stack.getUnlocalizedName() + ".name", 1);
 			}
 		}
 	}
@@ -263,38 +263,38 @@ public final class GeneralEventHandler {
 		EnumStatus status = event.result;
 		if(status == null) {
 			findStatus : {
-				if(!event.entityPlayer.worldObj.isRemote) {
-					if (event.entityPlayer.isPlayerSleeping() || !event.entityPlayer.isEntityAlive()) {
-						status = EnumStatus.OTHER_PROBLEM;
-						break findStatus;
-					}
-
-					if (!event.entityPlayer.worldObj.provider.isSurfaceWorld()) {
-						status = EnumStatus.NOT_POSSIBLE_HERE;
-						break findStatus;
-					}
-
-					if (event.entityPlayer.worldObj.isDaytime()) {
-						status = EnumStatus.NOT_POSSIBLE_NOW;
-						break findStatus;
-					}
-
-					if (Math.abs(event.entityPlayer.posX - event.x) > 3D || Math.abs(event.entityPlayer.posY - event.y) > 3D || Math.abs(event.entityPlayer.posZ - event.z) > 3D) {
-						status = EnumStatus.TOO_FAR_AWAY;
-						break findStatus;
-					}
-
-					double d0 = 8.0D;
-					double d1 = 5.0D;
-					List list = event.entityPlayer.worldObj.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox(event.x - d0, event.y - d1, event.z - d0, event.x + d0, event.y + d1, event.z + d0));
-
-					if (!list.isEmpty()) {
-						status = EnumStatus.NOT_SAFE;
-						break findStatus;
-					}
-					status = EnumStatus.OK;
+			if(!event.entityPlayer.worldObj.isRemote) {
+				if (event.entityPlayer.isPlayerSleeping() || !event.entityPlayer.isEntityAlive()) {
+					status = EnumStatus.OTHER_PROBLEM;
+					break findStatus;
 				}
+
+				if (!event.entityPlayer.worldObj.provider.isSurfaceWorld()) {
+					status = EnumStatus.NOT_POSSIBLE_HERE;
+					break findStatus;
+				}
+
+				if (event.entityPlayer.worldObj.isDaytime()) {
+					status = EnumStatus.NOT_POSSIBLE_NOW;
+					break findStatus;
+				}
+
+				if (Math.abs(event.entityPlayer.posX - event.x) > 3D || Math.abs(event.entityPlayer.posY - event.y) > 3D || Math.abs(event.entityPlayer.posZ - event.z) > 3D) {
+					status = EnumStatus.TOO_FAR_AWAY;
+					break findStatus;
+				}
+
+				double d0 = 8.0D;
+				double d1 = 5.0D;
+				List list = event.entityPlayer.worldObj.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox(event.x - d0, event.y - d1, event.z - d0, event.x + d0, event.y + d1, event.z + d0));
+
+				if (!list.isEmpty()) {
+					status = EnumStatus.NOT_SAFE;
+					break findStatus;
+				}
+				status = EnumStatus.OK;
 			}
+		}
 		}
 
 		if(status == EnumStatus.OK)

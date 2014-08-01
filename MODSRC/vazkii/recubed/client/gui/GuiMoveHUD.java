@@ -10,7 +10,6 @@
  */
 package vazkii.recubed.client.gui;
 
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.StatCollector;
 import vazkii.recubed.client.core.handler.ClientCacheHandler;
@@ -36,20 +35,20 @@ public class GuiMoveHUD extends GuiScreen {
 		drawCenteredString(fontRendererObj, StatCollector.translateToLocal("recubed.misc.escape_to_reset"), width / 2, 21, 0xFFFFFF);
 
 		switch(quadrant) {
-			case 0 : {
-				mx = width - mx;
-				break;
-			}
-			case 1 : break;
-			case 2 : {
-				my = height - my;
-				break;
-			}
-			case 3 : {
-				mx = width - mx;
-				my = height - my;
-				break;
-			}
+		case 0 : {
+			mx = width - mx;
+			break;
+		}
+		case 1 : break;
+		case 2 : {
+			my = height - my;
+			break;
+		}
+		case 3 : {
+			mx = width - mx;
+			my = height - my;
+			break;
+		}
 		}
 
 		fontRendererObj.drawStringWithShadow("W", 0, 0, 0xFFFFFF);
@@ -82,42 +81,42 @@ public class GuiMoveHUD extends GuiScreen {
 		}
 
 		switch(par1) {
-			case 'w' : {
-				ClientCacheHandler.hudPosX = 0;
-				ClientCacheHandler.hudPosY = 0;
-				ClientCacheHandler.hudRelativeTo = 1;
+		case 'w' : {
+			ClientCacheHandler.hudPosX = 0;
+			ClientCacheHandler.hudPosY = 0;
+			ClientCacheHandler.hudRelativeTo = 1;
 
-				ClientCacheHandler.findCompoundAndWrite();
-				mc.displayGuiScreen(new GuiReCubedMenu());
-				return;
-			}
-			case 'a' : {
-				ClientCacheHandler.hudPosX = 0;
-				ClientCacheHandler.hudPosY = 98;
-				ClientCacheHandler.hudRelativeTo = 2;
+			ClientCacheHandler.findCompoundAndWrite();
+			mc.displayGuiScreen(new GuiReCubedMenu());
+			return;
+		}
+		case 'a' : {
+			ClientCacheHandler.hudPosX = 0;
+			ClientCacheHandler.hudPosY = 98;
+			ClientCacheHandler.hudRelativeTo = 2;
 
-				ClientCacheHandler.findCompoundAndWrite();
-				mc.displayGuiScreen(new GuiReCubedMenu());
-				return;
-			}
-			case 's' : {
-				ClientCacheHandler.hudPosX = 100;
-				ClientCacheHandler.hudPosY = 98;
-				ClientCacheHandler.hudRelativeTo = 3;
+			ClientCacheHandler.findCompoundAndWrite();
+			mc.displayGuiScreen(new GuiReCubedMenu());
+			return;
+		}
+		case 's' : {
+			ClientCacheHandler.hudPosX = 100;
+			ClientCacheHandler.hudPosY = 98;
+			ClientCacheHandler.hudRelativeTo = 3;
 
-				ClientCacheHandler.findCompoundAndWrite();
-				mc.displayGuiScreen(new GuiReCubedMenu());
-				return;
-			}
-			case 'd' : {
-				ClientCacheHandler.hudPosX = 100;
-				ClientCacheHandler.hudPosY = 0;
-				ClientCacheHandler.hudRelativeTo = 0;
+			ClientCacheHandler.findCompoundAndWrite();
+			mc.displayGuiScreen(new GuiReCubedMenu());
+			return;
+		}
+		case 'd' : {
+			ClientCacheHandler.hudPosX = 100;
+			ClientCacheHandler.hudPosY = 0;
+			ClientCacheHandler.hudRelativeTo = 0;
 
-				ClientCacheHandler.findCompoundAndWrite();
-				mc.displayGuiScreen(new GuiReCubedMenu());
-				return;
-			}
+			ClientCacheHandler.findCompoundAndWrite();
+			mc.displayGuiScreen(new GuiReCubedMenu());
+			return;
+		}
 		}
 	}
 

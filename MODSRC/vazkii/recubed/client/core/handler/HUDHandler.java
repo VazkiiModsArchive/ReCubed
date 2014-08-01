@@ -57,10 +57,10 @@ public final class HUDHandler {
 
 	public static Point getCoords(int screenX, int screenY, int relativePos, int posX, int posY) {
 		switch(relativePos) {
-			case 0 : return new Point(screenX - posX, posY);
-			case 1 : return new Point(posX, posY);
-			case 2 : return new Point(posX, screenY - posY);
-			default : return new Point(screenX - posX, screenY - posY);
+		case 0 : return new Point(screenX - posX, posY);
+		case 1 : return new Point(posX, posY);
+		case 2 : return new Point(posX, screenY - posY);
+		default : return new Point(screenX - posX, screenY - posY);
 		}
 	}
 

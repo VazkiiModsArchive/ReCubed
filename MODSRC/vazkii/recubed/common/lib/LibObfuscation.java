@@ -13,9 +13,9 @@ package vazkii.recubed.common.lib;
 public final class LibObfuscation {
 
 	/** EntityPlayer **/
-    public static final String[] ITEM_IN_USE = new String[] { "itemInUse", "field_71074_e", "f" };
-    public static final String[] ITEM_IN_USE_COUNT = new String[] { "itemInUseCount", "field_71072_f", "g" };
+	public static final String[] ITEM_IN_USE = new String[] { "itemInUse", "field_71074_e", "f" };
+	public static final String[] ITEM_IN_USE_COUNT = new String[] { "itemInUseCount", "field_71072_f", "g" };
 
-    /** EntityFishingHook **/
-    public static final String[] TICKS_CATCHABLE = new String[] { "ticksCatchable", "field_70219_an", "au" };
+	/** EntityFishingHook **/
+	public static final String[] TICKS_CATCHABLE = new String[] { "ticksCatchable", "field_70219_an", "au" };
 }

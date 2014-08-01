@@ -50,8 +50,8 @@ public class CommandCategoryFreeze extends CommandBase {
 	}
 
 	@Override
-    public int getRequiredPermissionLevel() {
-        return 3;
-    }
+	public int getRequiredPermissionLevel() {
+		return 3;
+	}
 
 }

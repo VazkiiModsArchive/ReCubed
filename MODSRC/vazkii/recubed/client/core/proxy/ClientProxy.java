@@ -48,5 +48,5 @@ public class ClientProxy extends CommonProxy {
 	public void receivePacket(PacketCategory packet) {
 		ClientData.categories.put(packet.category.name, packet.category);
 	}
-	
+
 }

@@ -37,7 +37,7 @@ public final class PlayerLastTickData {
 		if(!ReCubedAPI.validatePlayer(player))
 			return;
 		String name = player.getGameProfile().getName();
-		
+
 		// ENTITIES RIDDEN
 		if(!riding && player.ridingEntity != null)
 			ReCubedAPI.addValueToCategory(LibCategories.ENTITIES_RIDDEN, name, MiscHelper.getEntityString(player.ridingEntity), 1);
