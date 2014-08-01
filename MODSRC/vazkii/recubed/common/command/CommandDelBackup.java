@@ -18,7 +18,7 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatMessageComponent;
+import net.minecraft.util.ChatComponentTranslation;
 import vazkii.recubed.common.core.helper.CacheHelper;
 import vazkii.recubed.common.core.helper.MiscHelper;
 import vazkii.recubed.common.lib.LibMisc;
@@ -51,7 +51,7 @@ public class CommandDelBackup extends CommandBase {
 				throw new CommandException("recubed.commands.no_backup");
 
 			file.delete();
-			icommandsender.sendChatToPlayer(new ChatMessageComponent().addKey("recubed.commands.command_sucessful"));
+			icommandsender.addChatMessage(new ChatComponentTranslation("recubed.commands.command_sucessful"));
 		} catch (IOException e) {
 			throw new CommandException(e.getMessage(), (Object[]) e.getStackTrace());
 		}

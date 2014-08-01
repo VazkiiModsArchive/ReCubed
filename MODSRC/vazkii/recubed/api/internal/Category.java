@@ -11,8 +11,8 @@
 package vazkii.recubed.api.internal;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.Set;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -45,9 +45,9 @@ public final class Category implements Serializable {
 	}
 
 	public void loadFromNBT(NBTTagCompound cmp) {
-		Collection<NBTBase> tags = cmp.getTags();
-		for(NBTBase nbt : tags) {
-			String name = nbt.getName();
+		Set<String> names = cmp.func_150296_c();
+		for(String name : names) {
+			NBTBase nbt = cmp.getTag(name);
 			if(name.equals("isFrozen"))
 				continue;
 
@@ -66,7 +66,7 @@ public final class Category implements Serializable {
 		for(String s : playerData.keySet()) {
 			NBTTagCompound cmp1 = new NBTTagCompound();
 			playerData.get(s).writeToNBT(cmp1);
-			cmp.setCompoundTag(s, cmp1);
+			cmp.setTag(s, cmp1);
 		}
 		cmp.setBoolean("isFrozen", isFrozen);
 	}

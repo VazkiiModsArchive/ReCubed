@@ -15,7 +15,7 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatMessageComponent;
+import net.minecraft.util.ChatComponentTranslation;
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.ServerData;
 import vazkii.recubed.common.core.helper.MiscHelper;
@@ -43,7 +43,7 @@ public class CommandFreeze extends CommandBase {
 		boolean frozen = Boolean.parseBoolean(astring[0]);
 		for(Category category : ServerData.categories.values())
 			category.isFrozen = frozen;
-		icommandsender.sendChatToPlayer(new ChatMessageComponent().addKey("recubed.commands.command_sucessful"));
+		icommandsender.addChatMessage(new ChatComponentTranslation("recubed.commands.command_sucessful"));
 	}
 
 	@Override

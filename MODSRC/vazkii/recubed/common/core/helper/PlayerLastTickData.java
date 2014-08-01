@@ -36,15 +36,16 @@ public final class PlayerLastTickData {
 	public void tickPlayer(EntityPlayer player) {
 		if(!ReCubedAPI.validatePlayer(player))
 			return;
-
+		String name = player.getGameProfile().getName();
+		
 		// ENTITIES RIDDEN
-				if(!riding && player.ridingEntity != null)
-					ReCubedAPI.addValueToCategory(LibCategories.ENTITIES_RIDDEN, player.username, MiscHelper.getEntityString(player.ridingEntity), 1);
+		if(!riding && player.ridingEntity != null)
+			ReCubedAPI.addValueToCategory(LibCategories.ENTITIES_RIDDEN, name, MiscHelper.getEntityString(player.ridingEntity), 1);
 
 		// EXPERIENCE GATHERED
 		if(player.experienceTotal > xp) {
 			int extra = player.experienceTotal - xp;
-			ReCubedAPI.addValueToCategory(LibCategories.EXPERIENCE_GATHERED, player.username, "recubed.misc.experience", extra);
+			ReCubedAPI.addValueToCategory(LibCategories.EXPERIENCE_GATHERED, name, "recubed.misc.experience", extra);
 		}
 
 		// FOOD EATEN + POTIONS DRANK
@@ -54,26 +55,26 @@ public final class PlayerLastTickData {
 			Item item = itemInUse.getItem();
 
 			if(item instanceof ItemFood)
-				ReCubedAPI.addValueToCategory(LibCategories.FOOD_EATEN, player.username, itemInUse.getUnlocalizedName() + ".name", 1);
+				ReCubedAPI.addValueToCategory(LibCategories.FOOD_EATEN, name, itemInUse.getUnlocalizedName() + ".name", 1);
 
 			if(item instanceof ItemPotion) {
 				List<PotionEffect> effects = ((ItemPotion) item).getEffects(itemInUse);
 				for(PotionEffect effect : effects)
-					ReCubedAPI.addValueToCategory(LibCategories.POTIONS_DRANK, player.username, Potion.potionTypes[effect.getPotionID()].getName(), 1);
+					ReCubedAPI.addValueToCategory(LibCategories.POTIONS_DRANK, name, Potion.potionTypes[effect.getPotionID()].getName(), 1);
 			}
 		}
 
 		// LEVELS GAINED
 		if(player.experienceLevel > level) {
 			int extra = player.experienceLevel - level;
-			ReCubedAPI.addValueToCategory(LibCategories.LEVELS_GAINED, player.username, "recubed.misc.level", extra);
+			ReCubedAPI.addValueToCategory(LibCategories.LEVELS_GAINED, name, "recubed.misc.level", extra);
 		}
 
 		// POTIONS AFFECTED BY
 		Collection<PotionEffect> effects = player.getActivePotionEffects();
 		for(PotionEffect effect : effects) {
 			if(!potionEffects.contains(effect.getPotionID()))
-				ReCubedAPI.addValueToCategory(LibCategories.POTIONS_GOTTEN, player.username, Potion.potionTypes[effect.getPotionID()].getName(), 1);
+				ReCubedAPI.addValueToCategory(LibCategories.POTIONS_GOTTEN, name, Potion.potionTypes[effect.getPotionID()].getName(), 1);
 		}
 
 		setData(player);

@@ -12,47 +12,37 @@ package vazkii.recubed.common.core.handler;
 
 import java.util.EnumSet;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import vazkii.recubed.common.core.helper.CacheHelper;
-import vazkii.recubed.common.network.PacketManager;
-import vazkii.recubed.common.network.packet.IPacket;
-import vazkii.recubed.common.network.packet.PacketCategory;
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
+import vazkii.recubed.common.network.PacketCategory;
+import vazkii.recubed.common.network.PacketHandler;
 
-public final class ServerTickHandler implements ITickHandler {
+public final class ServerTickHandler  {
 
 	long ticksElapsed = 0;
 
-	@Override
-	public void tickStart(EnumSet<TickType> type, Object... tickData) {
-		// NO-OP
+	@SubscribeEvent
+	public void playerTickEnd(PlayerTickEvent event) {
+		if(event.phase == Phase.END)
+			PlayerTickHandler.playerTicked(event.player);
 	}
 
-	@Override
-	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-		if(type.equals(EnumSet.of(TickType.PLAYER)))
-			PlayerTickHandler.playerTicked((EntityPlayer) tickData[0]);
-		else {
+	@SubscribeEvent
+	public void serverTickEnd(ServerTickEvent event) {
+		if(event.phase == Phase.END) {
 			if(ticksElapsed % ConfigHandler.packetInterval == 0) {
 				CacheHelper.findCompoundAndWrite();
 
-				for(IPacket packet : PacketCategory.allCategoryPackets())
-					PacketManager.dispatchToAllClients(packet);
+				for(PacketCategory packet : PacketCategory.allCategoryPackets())
+					PacketHandler.INSTANCE.sendToAll(packet);
 			}
 
 			++ticksElapsed;
 		}
-	}
-
-	@Override
-	public EnumSet<TickType> ticks() {
-		return EnumSet.of(TickType.SERVER, TickType.PLAYER);
-	}
-
-	@Override
-	public String getLabel() {
-		return "ReCubed_server";
 	}
 
 }

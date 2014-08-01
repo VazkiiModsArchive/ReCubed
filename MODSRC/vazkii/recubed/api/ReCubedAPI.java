@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.common.FakePlayer;
+import net.minecraftforge.common.util.FakePlayer;
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.PlayerCategoryData;
 import vazkii.recubed.api.internal.ServerData;

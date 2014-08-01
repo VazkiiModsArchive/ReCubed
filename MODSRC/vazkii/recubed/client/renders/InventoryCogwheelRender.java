@@ -13,7 +13,6 @@ package vazkii.recubed.client.renders;
 import java.util.Arrays;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.RenderHelper;
@@ -26,6 +25,7 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
+import vazkii.recubed.client.core.helper.TransientScaledResolution;
 import vazkii.recubed.client.gui.GuiReCubedMenu;
 import vazkii.recubed.client.lib.LibResources;
 
@@ -38,13 +38,13 @@ public final class InventoryCogwheelRender {
 		if(mc.currentScreen != null && (mc.currentScreen instanceof GuiInventory || mc.currentScreen instanceof GuiContainerCreative)) {
 			boolean creative = mc.currentScreen instanceof GuiContainerCreative;
 
-			ScaledResolution res = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
-			int x = res.getScaledWidth() / 2 - 19;
+			TransientScaledResolution res = new TransientScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
+			int x = res.getScaledWidth() / 2 - 62;
 			int y = res.getScaledHeight() / 2 - 75;
 
 			if(creative) {
 				GuiContainerCreative container = (GuiContainerCreative) mc.currentScreen;
-				if(container.getCurrentTabIndex() == CreativeTabs.tabInventory.getTabIndex()) {
+				if(container.func_147056_g() == CreativeTabs.tabInventory.getTabIndex()) {
 					x -= 26;
 					y += 13;
 				} else return;

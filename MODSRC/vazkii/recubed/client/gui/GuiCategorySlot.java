@@ -58,7 +58,7 @@ public class GuiCategorySlot extends GuiScrollingList {
 		Category category = ClientData.categories.get(categoryName);
 
 		int color = 0xFFFFFF;
-		if(category.playerData.get(mc.thePlayer.username).getTotalValue() == 0)
+		if(category.playerData.get(mc.thePlayer.getGameProfile().getName()).getTotalValue() == 0)
 			color = 0x777777;
 
 		mc.fontRenderer.drawStringWithShadow(StatCollector.translateToLocal(categoryName), j - 110, k + 2, color);

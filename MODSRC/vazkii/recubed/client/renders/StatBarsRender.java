@@ -134,7 +134,7 @@ public final class StatBarsRender {
 		int i = 0;
 		boolean addedClientPlayer = false;
 
-		String name = Minecraft.getMinecraft().thePlayer.username;
+		String name = Minecraft.getMinecraft().thePlayer.getGameProfile().getName();
 		int clientPos = 0;
 		for(Entry entry : sortedEntries) {
 			if(entry.name.equals(name)) {

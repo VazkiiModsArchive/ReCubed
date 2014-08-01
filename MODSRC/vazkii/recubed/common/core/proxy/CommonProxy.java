@@ -10,7 +10,6 @@
  */
 package vazkii.recubed.common.core.proxy;
 
-import net.minecraft.network.INetworkManager;
 import net.minecraftforge.common.MinecraftForge;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.api.internal.ServerData;
@@ -25,19 +24,17 @@ import vazkii.recubed.common.command.CommandWipeData;
 import vazkii.recubed.common.command.CommandWipePlayer;
 import vazkii.recubed.common.core.handler.ConfigHandler;
 import vazkii.recubed.common.core.handler.GeneralEventHandler;
+import vazkii.recubed.common.core.handler.PlayerTracker;
 import vazkii.recubed.common.core.handler.ServerTickHandler;
 import vazkii.recubed.common.core.handler.WorldSaveHandler;
 import vazkii.recubed.common.core.helper.CacheHelper;
 import vazkii.recubed.common.lib.LibCategories;
-import vazkii.recubed.common.network.PlayerTracker;
-import vazkii.recubed.common.network.packet.IPacket;
+import vazkii.recubed.common.network.PacketCategory;
+import vazkii.recubed.common.network.PacketHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.Player;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.Side;
 
 public class CommonProxy {
 
@@ -81,14 +78,19 @@ public class CommonProxy {
 	private static void registerCategory(String category) {
 		ReCubedAPI.registerCategory(category, category.substring(LibCategories.CATEGORY.length()));
 	}
+	
+	public void receivePacket(PacketCategory packet) {
+		// NO-OP
+	}
 
 	public void init(FMLInitializationEvent event) {
-		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
-
-		GameRegistry.registerPlayerTracker(new PlayerTracker());
+		FMLCommonHandler.instance().bus().register(new ServerTickHandler());
+		FMLCommonHandler.instance().bus().register(new PlayerTracker());
 
 		MinecraftForge.EVENT_BUS.register(new WorldSaveHandler());
 		MinecraftForge.EVENT_BUS.register(new GeneralEventHandler());
+		
+		PacketHandler.init();
 	}
 
 	public void serverStarting(FMLServerStartingEvent event) {
@@ -115,9 +117,5 @@ public class CommonProxy {
 
 	public void serverStopped() {
 		ServerData.reset();
-	}
-
-	public void handlePacket(INetworkManager manager, Player player, IPacket packet) {
-		// NO-OP
 	}
 }

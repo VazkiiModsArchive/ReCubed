@@ -10,8 +10,8 @@
  */
 package vazkii.recubed.client.core.proxy;
 
-import net.minecraft.network.INetworkManager;
 import net.minecraftforge.common.MinecraftForge;
+import vazkii.recubed.api.internal.ClientData;
 import vazkii.recubed.client.core.handler.ClientCacheHandler;
 import vazkii.recubed.client.core.handler.ClientTickHandler;
 import vazkii.recubed.client.core.handler.HUDHandler;
@@ -19,13 +19,10 @@ import vazkii.recubed.client.core.handler.KeybindHandler;
 import vazkii.recubed.client.core.handler.LocalizationHandler;
 import vazkii.recubed.common.core.handler.ConfigHandler;
 import vazkii.recubed.common.core.proxy.CommonProxy;
-import vazkii.recubed.common.network.packet.IPacket;
-import cpw.mods.fml.client.registry.KeyBindingRegistry;
+import vazkii.recubed.common.network.PacketCategory;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.Player;
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.Side;
 
 public class ClientProxy extends CommonProxy {
 
@@ -34,23 +31,22 @@ public class ClientProxy extends CommonProxy {
 		super.preInit(event);
 
 		if(!ConfigHandler.useCogwheel)
-			KeyBindingRegistry.registerKeyBinding(new KeybindHandler());
+			FMLCommonHandler.instance().bus().register(new KeybindHandler());
 	}
 
 	@Override
 	public void init(FMLInitializationEvent event) {
 		super.init(event);
 		LocalizationHandler.loadLangs();
-		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
-
+		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
 		MinecraftForge.EVENT_BUS.register(new HUDHandler());
 
 		ClientCacheHandler.findCompoundAndLoad();
 	}
 
 	@Override
-	public void handlePacket(INetworkManager manager, Player player, IPacket packet) {
-		packet.handle(manager, player);
+	public void receivePacket(PacketCategory packet) {
+		ClientData.categories.put(packet.category.name, packet.category);
 	}
-
+	
 }

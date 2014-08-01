@@ -19,7 +19,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatMessageComponent;
+import net.minecraft.util.ChatComponentTranslation;
 import vazkii.recubed.api.internal.ServerData;
 import vazkii.recubed.common.core.helper.CacheHelper;
 import vazkii.recubed.common.core.helper.MiscHelper;
@@ -52,7 +52,7 @@ public class CommandSaveBackup extends CommandBase {
 			NBTTagCompound cmp = CacheHelper.getCacheCompound(file);
 			ServerData.writeToNBT(cmp);
 			CacheHelper.injectNBTToFile(cmp, file);
-			icommandsender.sendChatToPlayer(new ChatMessageComponent().addKey("recubed.commands.command_sucessful"));
+			icommandsender.addChatMessage(new ChatComponentTranslation("recubed.commands.command_sucessful"));
 		} catch (IOException e) {
 			throw new CommandException(e.getMessage(), (Object[]) e.getStackTrace());
 		}

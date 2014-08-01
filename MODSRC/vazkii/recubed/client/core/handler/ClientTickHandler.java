@@ -10,42 +10,31 @@
  */
 package vazkii.recubed.client.core.handler;
 
-import java.util.EnumSet;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import vazkii.recubed.api.internal.ClientData;
 import vazkii.recubed.client.renders.InventoryCogwheelRender;
 import vazkii.recubed.common.core.handler.ConfigHandler;
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
 
-public class ClientTickHandler implements ITickHandler {
+public class ClientTickHandler {
 
-	@Override
-	public void tickStart(EnumSet<TickType> type, Object... tickData) {
-		// NO-OP
-	}
-
-	@Override
-	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-		if(type.equals(EnumSet.of(TickType.CLIENT))) {
+	@SubscribeEvent
+	public void clientTickEnd(ClientTickEvent event) {
+		if(event.phase == Phase.END) {
 			World world = Minecraft.getMinecraft().theWorld;
 			if(world == null)
 				ClientData.categories.clear();
-		} else if(ConfigHandler.useCogwheel)
+		}
+	}
+
+	@SubscribeEvent
+	public void renderTickEnd(RenderTickEvent event) {
+		if(ConfigHandler.useCogwheel)
 			InventoryCogwheelRender.renderCogwheel();
-
-	}
-
-	@Override
-	public EnumSet<TickType> ticks() {
-		return EnumSet.of(TickType.CLIENT, TickType.RENDER);
-	}
-
-	@Override
-	public String getLabel() {
-		return "ReCubed";
 	}
 
 }

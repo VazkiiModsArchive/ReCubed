@@ -25,7 +25,7 @@ public final class MiscHelper {
 
 	public static String getEntityString(Entity entity) {
 		if(entity instanceof EntityPlayer)
-			return ((EntityPlayer) entity).username;
+			return ((EntityPlayer) entity).getGameProfile().getName();
 
 		return "entity." + EntityList.getEntityString(entity) + ".name";
 	}

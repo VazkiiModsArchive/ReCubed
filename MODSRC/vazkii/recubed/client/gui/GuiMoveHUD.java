@@ -10,6 +10,7 @@
  */
 package vazkii.recubed.client.gui;
 
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.StatCollector;
 import vazkii.recubed.client.core.handler.ClientCacheHandler;
@@ -31,8 +32,8 @@ public class GuiMoveHUD extends GuiScreen {
 		int my = par2;
 		int quadrant = getQuadrant(width, height, mx, my);
 
-		drawCenteredString(fontRenderer, StatCollector.translateToLocal("recubed.misc.click_to_set"), width / 2, 10, 0xFFFFFF);
-		drawCenteredString(fontRenderer, StatCollector.translateToLocal("recubed.misc.escape_to_reset"), width / 2, 21, 0xFFFFFF);
+		drawCenteredString(fontRendererObj, StatCollector.translateToLocal("recubed.misc.click_to_set"), width / 2, 10, 0xFFFFFF);
+		drawCenteredString(fontRendererObj, StatCollector.translateToLocal("recubed.misc.escape_to_reset"), width / 2, 21, 0xFFFFFF);
 
 		switch(quadrant) {
 			case 0 : {
@@ -51,11 +52,10 @@ public class GuiMoveHUD extends GuiScreen {
 			}
 		}
 
-		fontRenderer.drawStringWithShadow("W", 0, 0, 0xFFFFFF);
-		fontRenderer.drawStringWithShadow("A", 0, height - 9, 0xFFFFFF);
-		fontRenderer.drawStringWithShadow("S", width - 6, height - 9, 0xFFFFFF);
-		fontRenderer.drawStringWithShadow("D", width - 6, 0, 0xFFFFFF);
-
+		fontRendererObj.drawStringWithShadow("W", 0, 0, 0xFFFFFF);
+		fontRendererObj.drawStringWithShadow("A", 0, height - 9, 0xFFFFFF);
+		fontRendererObj.drawStringWithShadow("S", width - 6, height - 9, 0xFFFFFF);
+		fontRendererObj.drawStringWithShadow("D", width - 6, 0, 0xFFFFFF);
 
 		ClientCacheHandler.hudPosX = mx;
 		ClientCacheHandler.hudPosY = my;
