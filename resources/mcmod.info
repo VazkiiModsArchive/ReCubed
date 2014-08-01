@@ -1,0 +1,17 @@
+[
+{
+  "modid": "ReCubed",
+  "name": "ReCubed",
+  "description": "A mod that tracks all sorts of stats.",
+  "version": "ANT:VERSION",
+  "mcversion": "1.7.2",
+  "logoFile": "",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["Vazkii"],
+  "credits": "",
+  "parent": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
