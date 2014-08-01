@@ -45,7 +45,7 @@ public final class InventoryCogwheelRender {
 			if(creative) {
 				GuiContainerCreative container = (GuiContainerCreative) mc.currentScreen;
 				if(container.func_147056_g() == CreativeTabs.tabInventory.getTabIndex()) {
-					x -= 26;
+					x -= 7;
 					y += 13;
 				} else return;
 			}
