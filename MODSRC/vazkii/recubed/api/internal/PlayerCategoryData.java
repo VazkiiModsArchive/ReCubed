@@ -19,9 +19,8 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagInt;
 
-public final class PlayerCategoryData implements Serializable {
+public final class PlayerCategoryData {
 
-	private static final long serialVersionUID = -3439306289069975517L;
 	public final HashMap<String, Integer> stats = new HashMap();
 	public final String name;
 

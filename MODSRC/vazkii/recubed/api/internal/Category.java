@@ -17,9 +17,8 @@ import java.util.Set;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 
-public final class Category implements Serializable {
+public final class Category {
 
-	private static final long serialVersionUID = -5946983565592790696L;
 	public final HashMap<String, PlayerCategoryData> playerData = new HashMap();
 	public final String name;
 

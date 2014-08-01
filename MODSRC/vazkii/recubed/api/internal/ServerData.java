@@ -18,9 +18,8 @@ import java.util.List;
 import net.minecraft.nbt.NBTTagCompound;
 import vazkii.recubed.api.ReCubedAPI;
 
-public final class ServerData implements Serializable {
+public final class ServerData {
 
-	private static final long serialVersionUID = -218488987460917539L;
 	public static final HashMap<String, Category> categories = new HashMap();
 
 	public static void reset() {
