@@ -59,8 +59,9 @@ public final class PlayerLastTickData {
 
 			if(item instanceof ItemPotion) {
 				List<PotionEffect> effects = ((ItemPotion) item).getEffects(itemInUse);
-				for(PotionEffect effect : effects)
-					ReCubedAPI.addValueToCategory(LibCategories.POTIONS_DRANK, name, Potion.potionTypes[effect.getPotionID()].getName(), 1);
+				if(effects != null)
+					for(PotionEffect effect : effects)
+						ReCubedAPI.addValueToCategory(LibCategories.POTIONS_DRANK, name, Potion.potionTypes[effect.getPotionID()].getName(), 1);
 			}
 		}
 
