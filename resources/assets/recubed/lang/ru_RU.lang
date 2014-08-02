@@ -1,0 +1,92 @@
+# CATEGORIES
+recubed.category.animals_sheared=Животных пострижено
+recubed.category.arrows_shot=Стрел выпущено
+recubed.category.boss_kills=Боссов убито
+recubed.category.blocks_broken=Блоков сломано
+recubed.category.cows_milked=Коров подоили
+recubed.category.damage_dealt=Урона нанесено
+recubed.category.damage_taken=Урона получено
+recubed.category.dimensions_changed=Путешествий по измерениям
+recubed.category.discs_played=Пластинок проиграно
+recubed.category.ender_eyes_used=Использовано Оков Края
+recubed.category.ender_pearls_thrown=Жемчуга Края брошено
+recubed.category.entities_ridden=Существ оседлали
+recubed.category.experience_gathered=Опыта собрано
+recubed.category.food_eaten=Еды съедено
+recubed.category.items_broken=Предметов сломано
+recubed.category.items_dropped=Предметов брошено
+recubed.category.items_spawned=Предметов заспаунено
+recubed.category.items_picked_up=Предметов подобрано
+recubed.category.levels_gained=Уровней получано
+recubed.category.messages_sent=Сообщений отправлено
+recubed.category.mobs_aggroed=Мобов привлечено
+recubed.category.mobs_killed=Существ убито
+recubed.category.player_kills=Игроков убито
+recubed.category.potions_drank=Зелий выпито
+recubed.category.potions_gotten=Potions Affected By
+recubed.category.potions_thrown=Зелий брошено
+recubed.category.sheep_dyed=Овец покрашено
+recubed.category.snowballs_thrown=Снежков брошено
+recubed.category.times_died=Смерти
+recubed.category.times_fished=Раз рыбачили
+recubed.category.times_played=Раз зашли в игру
+recubed.category.times_slept=Раз спали
+
+# DAMAGE
+recubed.damage.inFire=Стоя в огне
+recubed.damage.onFire=Горя
+recubed.damage.lava=Лава
+recubed.damage.inWall=Удушье
+recubed.damage.drown=Утопление
+recubed.damage.starve=Голодание
+recubed.damage.cactus=Покалывание
+recubed.damage.fall=Падая
+recubed.damage.outOfWorld=Выпав из мира
+recubed.damage.generic=Общий урон
+recubed.damage.magic=Магия
+recubed.damage.wither=Иссушение
+recubed.damage.anvil=Наковальня
+recubed.damage.fallingBlock=Падающие блоки
+
+# MISC
+recubed.misc.openMenu=Открыть меню ReCubed
+recubed.misc.credits=Автор: Vazkii, для #ModJam 3 (RIP)
+recubed.misc.enter=Нажмите ENTER, чтобы следить за этой статистикой.
+recubed.misc.type_to_search=(Введите для поиска)
+recubed.misc.see_stats=Просмотреть статистику
+recubed.misc.total=Всего: %s
+recubed.misc.frozen_suffix= (Frozen)
+recubed.misc.others=Остальное
+recubed.misc.back=Назад
+recubed.misc.search=Поиск: 
+recubed.misc.your_stats=Ваша статистика
+recubed.no_data=Нет данных для этой статистики.
+recubed.misc.view_stats=Просмотреть статистику
+recubed.misc.move_hud=Двигать HUD
+recubed.misc.click_to_set=ЛКМ, чтобы установить позицию
+recubed.misc.escape_to_reset=Нажмите ESCAPE, чтобы сбросить позицию
+recubed.misc.hud_enabled=HUD включен
+recubed.misc.use_gradients=Использовать градиенты
+recubed.misc.use_vanilla_font=Использовать шрифт Minecraft
+recubed.misc.contrast_text=Контрастный текст HUD Text
+recubed.misc.login=Вхождений
+recubed.misc.command=Команда
+recubed.misc.chat=Сообщение чата
+recubed.misc.jump=Прыжок
+recubed.misc.sprint_jump=Sprint Jump
+recubed.misc.sleep=Сон
+recubed.misc.shot=Выстрел
+recubed.misc.critical_shot=Критический выстрел
+recubed.misc.experience=Опыт
+recubed.misc.level=Уровень
+recubed.misc.hook_casted=Крючков заброшено
+recubed.misc.fish_caught=Рыбы поймано
+
+# COMMANDS
+recubed.commands.no_perms=Вы не имеете право на использование этой команды!
+recubed.commands.no_category=Этой категории не существует.
+recubed.commands.no_backup=Этого резерва не существует.
+recubed.commands.command_sucessful=Команда успешна.
+
+# VANILLA LOCALIZATIONS
+entity.MinecartRideable.name=Вагонетка
