@@ -121,7 +121,6 @@ public class GuiReCubedMenu extends GuiScreen {
 		GL11.glScalef(2F, 2F, 2F);
 		drawCenteredString(fontRendererObj, LibMisc.MOD_NAME, (x + guiWidth / 2) / 2, (y + 10) / 2, 0xFF0000);
 		GL11.glScalef(0.5F, 0.5F, 0.5F);
-		drawCenteredString(fontRendererObj, StatCollector.translateToLocal("recubed.misc.credits"), x + guiWidth / 2, y + 30, 0xFF6666);
 
 		super.drawScreen(par1, par2, par3);
 	}
