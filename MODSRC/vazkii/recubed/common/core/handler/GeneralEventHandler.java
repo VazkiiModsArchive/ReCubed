@@ -236,11 +236,8 @@ public final class GeneralEventHandler {
 				if(event.entityPlayer.dimension == 0 && stack.getItem() == Items.ender_eye)
 					ReCubedAPI.addValueToCategory(LibCategories.ENDER_EYES_USED, event.entityPlayer.getGameProfile().getName(), "item.eyeOfEnder.name", 1);
 
-				if(stack.getItem() == Items.fishing_rod)
-					if(event.entityPlayer.fishEntity == null)
-						ReCubedAPI.addValueToCategory(LibCategories.TIMES_FISHED, event.entityPlayer.getGameProfile().getName(), "recubed.misc.hook_casted", 1);
-					else if((Integer) ReflectionHelper.getPrivateValue(EntityFishHook.class, event.entityPlayer.fishEntity, LibObfuscation.TICKS_CATCHABLE) > 0)
-						ReCubedAPI.addValueToCategory(LibCategories.TIMES_FISHED, event.entityPlayer.getGameProfile().getName(), "recubed.misc.fish_caught", 1);
+				if(stack.getItem() == Items.fishing_rod && event.entityPlayer.fishEntity == null)
+					ReCubedAPI.addValueToCategory(LibCategories.TIMES_FISHED, event.entityPlayer.getGameProfile().getName(), "recubed.misc.hook_casted", 1);
 
 				if(stack.getItem() == Items.potionitem) {
 					ItemPotion potion = (ItemPotion) stack.getItem();

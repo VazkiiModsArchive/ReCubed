@@ -16,6 +16,4 @@ public final class LibObfuscation {
 	public static final String[] ITEM_IN_USE = new String[] { "itemInUse", "field_71074_e", "f" };
 	public static final String[] ITEM_IN_USE_COUNT = new String[] { "itemInUseCount", "field_71072_f", "g" };
 
-	/** EntityFishingHook **/
-	public static final String[] TICKS_CATCHABLE = new String[] { "ticksCatchable", "field_70219_an", "au" };
 }
