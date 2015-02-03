@@ -221,6 +221,14 @@ public final class StatBarsRender {
 		tess.addVertexWithUV((x + width) * 2, y * 2, 0, 1, 0);
 		tess.addVertexWithUV(x * 2, y * 2, 0, 0, 0);
 		tess.draw();
+		
+		GL11.glPushMatrix();
+		for(int i = 0; i < 2; i++) {
+			Gui.drawRect(x * 2, (y + 8) * 2, x * 2 + 1, (y + height) * 2, 0xFF000000);
+			GL11.glTranslatef(width * 2 - 1, 0F, 0F);
+		}
+		GL11.glPopMatrix();
+		Gui.drawRect(x * 2, (y + height) * 2 - 1, (x + width) * 2, (y + height) * 2, 0xFF000000);
 
 		boolean unicode = mc.fontRenderer.getUnicodeFlag();
 		mc.fontRenderer.setUnicodeFlag(!ClientCacheHandler.useVanillaFont);
