@@ -81,6 +81,7 @@ recubed.misc.experience=Experience
 recubed.misc.level=Level
 recubed.misc.hook_casted=Hook Casted
 recubed.misc.fish_caught=Fish Caught
+recubed.misc.null_item=Invalid Item
 
 # COMMANDS
 recubed.commands.no_perms=You don't have permission to use this command!

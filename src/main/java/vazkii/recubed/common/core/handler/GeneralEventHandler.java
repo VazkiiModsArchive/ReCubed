@@ -87,7 +87,7 @@ public final class GeneralEventHandler {
 				ReCubedAPI.addValueToCategory(LibCategories.ANIMALS_SHEARED, event.entityPlayer.getGameProfile().getName(), MiscHelper.getEntityString(event.target), 1);
 
 			if(currentItem != null && currentItem.getItem() instanceof ItemDye && event.target instanceof EntitySheep && !((EntitySheep) event.target).getSheared() && 15 - ((EntitySheep) event.target).getFleeceColor() != currentItem.getItemDamage())
-				ReCubedAPI.addValueToCategory(LibCategories.SHEEP_DYED, event.entityPlayer.getGameProfile().getName(), currentItem.getUnlocalizedName() + ".name", 1);
+				ReCubedAPI.addValueToCategory(LibCategories.SHEEP_DYED, event.entityPlayer.getGameProfile().getName(), MiscHelper.getStackName(currentItem), 1);
 		}
 	}
 
@@ -121,7 +121,7 @@ public final class GeneralEventHandler {
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onItemBroken(PlayerDestroyItemEvent event) {
 		if(ReCubedAPI.validatePlayer(event.entityPlayer) && event.original.isItemStackDamageable() && event.original.getItemDamage() == event.original.getMaxDamage())
-			ReCubedAPI.addValueToCategory(LibCategories.ITEMS_BROKEN, event.entityPlayer.getGameProfile().getName(), event.original.getUnlocalizedName() + ".name", 1);
+			ReCubedAPI.addValueToCategory(LibCategories.ITEMS_BROKEN, event.entityPlayer.getGameProfile().getName(), MiscHelper.getStackName(event.original), 1);
 	}
 
 	// ITEMS DROPPED
@@ -129,7 +129,7 @@ public final class GeneralEventHandler {
 	public void onPlayerTossItem(ItemTossEvent event) {
 		ItemStack stack = event.entityItem.getEntityItem();
 		if(ReCubedAPI.validatePlayer(event.player))
-			ReCubedAPI.addValueToCategory(LibCategories.ITEMS_DROPPED, event.player.getGameProfile().getName(), stack.getUnlocalizedName() + ".name", stack.stackSize);
+			ReCubedAPI.addValueToCategory(LibCategories.ITEMS_DROPPED, event.player.getGameProfile().getName(), MiscHelper.getStackName(stack), stack.stackSize);
 
 	}
 
@@ -138,7 +138,7 @@ public final class GeneralEventHandler {
 	public void onItemPickedUp(EntityItemPickupEvent event) {
 		ItemStack stack = event.item.getEntityItem();
 		if(ReCubedAPI.validatePlayer(event.entityPlayer))
-			ReCubedAPI.addValueToCategory(LibCategories.ITEMS_PICKED_UP, event.entityPlayer.getGameProfile().getName(), stack.getUnlocalizedName() + ".name", stack.stackSize);
+			ReCubedAPI.addValueToCategory(LibCategories.ITEMS_PICKED_UP, event.entityPlayer.getGameProfile().getName(), MiscHelper.getStackName(stack), stack.stackSize);
 	}
 
 	// MESSAGES SENT + ITEMS SPAWNED
@@ -170,7 +170,7 @@ public final class GeneralEventHandler {
 
 				ItemStack stack = new ItemStack(item, j, k);
 
-				ReCubedAPI.addValueToCategory(LibCategories.ITEMS_SPAWNED, event.sender.getCommandSenderName(), stack.getUnlocalizedName() + ".name", 1);
+				ReCubedAPI.addValueToCategory(LibCategories.ITEMS_SPAWNED, event.sender.getCommandSenderName(), MiscHelper.getStackName(stack), 1);
 			}
 		}
 	}

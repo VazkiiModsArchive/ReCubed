@@ -19,6 +19,7 @@ import java.util.TreeMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import vazkii.recubed.common.core.handler.ConfigHandler;
 
 public final class MiscHelper {
@@ -49,5 +50,12 @@ public final class MiscHelper {
 
 	public static boolean isPlayerAllowedToUseCommands(String player) {
 		return ConfigHandler.commandPlayers.isEmpty() || ConfigHandler.commandPlayers.contains(player.toLowerCase());
+	}
+	
+	public static String getStackName(ItemStack stack) {
+		if(stack == null || stack.getItem() == null)
+			return "recubed.misc.null_item";
+			
+		return stack.getItem().getUnlocalizedNameInefficiently(stack) + ".name";
 	}
 }
