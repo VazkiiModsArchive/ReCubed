@@ -1,33 +1,28 @@
-# Eclipse stuff
-.classpath
-.project
-.settings/
- 
-# netbeans
-nbproject
+*.mp3
+Thumbs.db
 
-# maven
-/*/target/
+## gradle
+/.gradle
+/build
 
-# gradle
-.gradle/
+## ForgeGradle
+/run
 
-# vim
-.*.sw[a-p]
+## eclipse
+/.settings
+/.metadata
+/.classpath
+/.project
+/bin
 
-# various other potential build files
-/*/build/
-/buildassets/map_*.txt
-/*/bin/
-/*/dist/
-/*/manifest.mf
-/release
+## intellij
+/out
+/.idea
+/atlassian-ide-plugin.xml
 
-# Mac filesystem dust
-.DS_Store
+## Private Stuffs
+/private.properties
 
-# intellij
-*.iml
-*.ipr
-*.iws
-.idea/
+## Jars
+*.jar
+!/gradle/wrapper/gradle-wrapper.jar
