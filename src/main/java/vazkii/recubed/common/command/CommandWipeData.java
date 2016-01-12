@@ -31,8 +31,8 @@ public class CommandWipeData extends CommandBase {
 	}
 
 	@Override
-	public void processCommand(ICommandSender icommandsender, String[] astring) {
-		if(icommandsender instanceof EntityPlayer && !MiscHelper.isPlayerAllowedToUseCommands(icommandsender.getCommandSenderName()))
+	public void processCommand(ICommandSender icommandsender, String[] astring) throws CommandException {
+		if(icommandsender instanceof EntityPlayer && !MiscHelper.isPlayerAllowedToUseCommands(icommandsender.getName()))
 			throw new CommandException("recubed.commands.no_perms");
 
 		ServerData.wipe();

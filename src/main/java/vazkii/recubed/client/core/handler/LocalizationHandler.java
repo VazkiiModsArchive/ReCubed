@@ -10,8 +10,8 @@
  */
 package vazkii.recubed.client.core.handler;
 
+import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import vazkii.recubed.client.lib.LibResources;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public final class LocalizationHandler {
 

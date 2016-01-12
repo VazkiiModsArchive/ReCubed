@@ -15,11 +15,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.StatCollector;
-
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.util.StatCollector;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.ClientData;

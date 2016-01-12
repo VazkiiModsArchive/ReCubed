@@ -12,19 +12,22 @@ package vazkii.recubed.client.renders;
 
 import java.util.Arrays;
 
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
-
+import net.minecraft.world.World;
 import vazkii.recubed.client.core.helper.TransientScaledResolution;
 import vazkii.recubed.client.gui.GuiReCubedMenu;
 import vazkii.recubed.client.lib.LibResources;
@@ -44,7 +47,7 @@ public final class InventoryCogwheelRender {
 
 			if(creative) {
 				GuiContainerCreative container = (GuiContainerCreative) mc.currentScreen;
-				if(container.func_147056_g() == CreativeTabs.tabInventory.getTabIndex()) {
+				if(container.getSelectedTabIndex() == CreativeTabs.tabInventory.getTabIndex()) {
 					x -= 7;
 					y += 13;
 				} else return;
@@ -57,14 +60,14 @@ public final class InventoryCogwheelRender {
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
 			mc.renderEngine.bindTexture(cogwheel);
-			Tessellator tess = Tessellator.instance;
+			WorldRenderer wr = Tessellator.getInstance().getWorldRenderer();
 
-			tess.startDrawingQuads();
-			tess.addVertexWithUV(x * 2, y * 2 + 16, 0, 0, 1);
-			tess.addVertexWithUV(x * 2 + 16, y * 2 + 16, 0, 1, 1);
-			tess.addVertexWithUV(x * 2 + 16, y * 2, 0, 1, 0);
-			tess.addVertexWithUV(x * 2, y * 2, 0, 0, 0);
-			tess.draw();
+			wr.begin(7, DefaultVertexFormats.POSITION_TEX);
+			wr.pos(x * 2, y * 2 + 16, 0).tex(0, 1).endVertex();
+			wr.pos(x * 2 + 16, y * 2 + 16, 0).tex(1, 1).endVertex();
+			wr.pos(x * 2 + 16, y * 2, 0).tex(1, 0).endVertex();;
+			wr.pos(x * 2, y * 2, 0).tex(0, 0).endVertex();
+			Tessellator.getInstance().draw();
 
 			GL11.glScalef(2F, 2F, 2F);
 			GL11.glDisable(GL11.GL_BLEND);

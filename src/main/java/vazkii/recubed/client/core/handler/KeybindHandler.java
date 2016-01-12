@@ -10,17 +10,16 @@
  */
 package vazkii.recubed.client.core.handler;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.settings.KeyBinding;
-
 import org.lwjgl.input.Keyboard;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import vazkii.recubed.client.gui.GuiReCubedMenu;
 import vazkii.recubed.common.lib.LibMisc;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 
 public class KeybindHandler {
 
@@ -33,7 +32,7 @@ public class KeybindHandler {
 	@SubscribeEvent
 	public void playerTick(ClientTickEvent event) {
 		if(event.phase == Phase.START) {
-			if(key.getIsKeyPressed())
+			if(key.isKeyDown())
 				Minecraft.getMinecraft().displayGuiScreen(new GuiReCubedMenu());
 		}
 	}

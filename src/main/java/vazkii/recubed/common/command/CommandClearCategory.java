@@ -35,11 +35,11 @@ public class CommandClearCategory extends CommandBase {
 	}
 
 	@Override
-	public void processCommand(ICommandSender icommandsender, String[] astring) {
+	public void processCommand(ICommandSender icommandsender, String[] astring)  throws CommandException  {
 		if(astring.length != 1)
 			throw new WrongUsageException(getCommandUsage(icommandsender), (Object[]) astring);
 
-		if(icommandsender instanceof EntityPlayer && !MiscHelper.isPlayerAllowedToUseCommands(icommandsender.getCommandSenderName()))
+		if(icommandsender instanceof EntityPlayer && !MiscHelper.isPlayerAllowedToUseCommands(icommandsender.getName()))
 			throw new CommandException("recubed.commands.no_perms");
 
 		Category category = ServerData.categories.get(ReCubedAPI.shortTerms.get(astring[0]));

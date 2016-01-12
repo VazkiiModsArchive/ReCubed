@@ -10,6 +10,8 @@
  */
 package vazkii.recubed.client.gui;
 
+import java.io.IOException;
+
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import vazkii.recubed.api.internal.Category;
@@ -26,7 +28,7 @@ public class GuiStatSelector extends GuiStatViewer {
 	}
 
 	@Override
-	protected void keyTyped(char par1, int par2) {
+	protected void keyTyped(char par1, int par2) throws IOException {
 		super.keyTyped(par1, par2);
 		if(par2 == 28) {
 			if(category instanceof Category) {

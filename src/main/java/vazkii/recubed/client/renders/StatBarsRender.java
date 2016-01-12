@@ -18,14 +18,15 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-
-import org.lwjgl.opengl.GL11;
-
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.PlayerCategoryData;
 import vazkii.recubed.client.core.handler.ClientCacheHandler;
@@ -187,7 +188,6 @@ public final class StatBarsRender {
 		final int width = 100;
 		final int height = 98;
 
-		Tessellator tess = Tessellator.instance;
 		Minecraft mc = Minecraft.getMinecraft();
 
 		GL11.glEnable(GL11.GL_BLEND);
@@ -215,12 +215,15 @@ public final class StatBarsRender {
 
 		mc.renderEngine.bindTexture(hudBar);
 		GL11.glColor4f(1F, 1F, 1F, 1F);
-		tess.startDrawingQuads();
-		tess.addVertexWithUV(x * 2, (y + 8) * 2, 0, 0, 1);
-		tess.addVertexWithUV((x + width) * 2, (y + 8) * 2, 0, 1, 1);
-		tess.addVertexWithUV((x + width) * 2, y * 2, 0, 1, 0);
-		tess.addVertexWithUV(x * 2, y * 2, 0, 0, 0);
-		tess.draw();
+		
+		float f = 1F;
+		WorldRenderer wr = Tessellator.getInstance().getWorldRenderer();
+		wr.begin(7, DefaultVertexFormats.POSITION_TEX);
+		wr.pos(x * 2, (y + 8) * 2, 0).tex(0, 1).endVertex();
+		wr.pos((x + width) * 2, (y + 8) * 2, 0).tex(1, 1).endVertex();
+		wr.pos((x + width) * 2, y * 2, 0).tex(1, 0).endVertex();
+		wr.pos(x * 2, y * 2, 0).tex(0, 0).endVertex();
+		Tessellator.getInstance().draw();
 		
 		GL11.glPushMatrix();
 		for(int i = 0; i < 2; i++) {
@@ -230,22 +233,22 @@ public final class StatBarsRender {
 		GL11.glPopMatrix();
 		Gui.drawRect(x * 2, (y + height) * 2 - 1, (x + width) * 2, (y + height) * 2, 0xFF000000);
 
-		boolean unicode = mc.fontRenderer.getUnicodeFlag();
-		mc.fontRenderer.setUnicodeFlag(!ClientCacheHandler.useVanillaFont);
+		boolean unicode = mc.fontRendererObj.getUnicodeFlag();
+		mc.fontRendererObj.setUnicodeFlag(!ClientCacheHandler.useVanillaFont);
 
-		mc.fontRenderer.drawStringWithShadow(displayName, (x + 4) * 2, (y + 2) * 2, 0xFFFFFF);
+		mc.fontRendererObj.drawStringWithShadow(displayName, (x + 4) * 2, (y + 2) * 2, 0xFFFFFF);
 		yp = 9;
 		for(Entry entry : entries) {
 			String posStr = "#" + entry.pos + " - ";
 			String valAndPercentageStr = ": " + entry.val + " (" + entry.percentage + "%)";
-			int remainingLenght = width * 2 - 4 - (mc.fontRenderer.getStringWidth(posStr) + mc.fontRenderer.getStringWidth(valAndPercentageStr));
+			int remainingLenght = width * 2 - 4 - (mc.fontRendererObj.getStringWidth(posStr) + mc.fontRendererObj.getStringWidth(valAndPercentageStr));
 
 			String name = StatCollector.translateToLocal(entry.name);
-			String nameStr = mc.fontRenderer.trimStringToWidth(StatCollector.translateToLocal(entry.name), remainingLenght);
+			String nameStr = mc.fontRendererObj.trimStringToWidth(StatCollector.translateToLocal(entry.name), remainingLenght);
 			if(!name.equals(nameStr)) {
 				String elipsis = "(...)";
-				remainingLenght -= mc.fontRenderer.getStringWidth(elipsis);
-				nameStr = mc.fontRenderer.trimStringToWidth(nameStr, remainingLenght);
+				remainingLenght -= mc.fontRendererObj.getStringWidth(elipsis);
+				nameStr = mc.fontRendererObj.trimStringToWidth(nameStr, remainingLenght);
 				nameStr = nameStr + elipsis;
 			}
 
@@ -258,12 +261,12 @@ public final class StatBarsRender {
 				colorRGB = color1.getRGB();
 			}
 
-			mc.fontRenderer.drawStringWithShadow(s1, (x + 2) * 2, (y + yp) * 2, colorRGB);
+			mc.fontRendererObj.drawStringWithShadow(s1, (x + 2) * 2, (y + yp) * 2, colorRGB);
 
 			yp += 6;
 		}
 
-		mc.fontRenderer.setUnicodeFlag(unicode);
+		mc.fontRendererObj.setUnicodeFlag(unicode);
 
 		GL11.glScalef(2F, 2F, 2F);
 		GL11.glPopMatrix();

@@ -12,8 +12,10 @@ package vazkii.recubed.common.core.handler;
 
 import java.util.List;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandGive;
+import net.minecraft.command.NumberInvalidException;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityMob;
@@ -21,7 +23,6 @@ import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayer.EnumStatus;
-import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -32,6 +33,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.event.ServerChatEvent;
@@ -47,16 +49,18 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.common.core.helper.MiscHelper;
 import vazkii.recubed.common.lib.LibCategories;
-import vazkii.recubed.common.lib.LibObfuscation;
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public final class GeneralEventHandler {
 
+	private static ItemStack stackFromState(IBlockState state) {
+		return new ItemStack(state.getBlock(), state.getBlock().getMetaFromState(state));
+	}
+	
 	// ARROWS SHOT
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onEntityTakeDamage(ArrowLooseEvent event) {
@@ -70,8 +74,8 @@ public final class GeneralEventHandler {
 	// BLOCKS BROKEN
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onBlockBroken(BlockEvent.BreakEvent event) {
-		if(ReCubedAPI.validatePlayer(event.getPlayer()) && event.block != null && Item.getItemFromBlock(event.block) != null)
-			ReCubedAPI.addValueToCategory(LibCategories.BLOCKS_BROKEN, event.getPlayer().getGameProfile().getName(), Item.getItemFromBlock(event.block).getUnlocalizedName(new ItemStack(event.block, 1, event.blockMetadata)) + ".name", 1);
+		if(ReCubedAPI.validatePlayer(event.getPlayer()) && event.state.getBlock() != null && Item.getItemFromBlock(event.state.getBlock()) != null)
+			ReCubedAPI.addValueToCategory(LibCategories.BLOCKS_BROKEN, event.getPlayer().getGameProfile().getName(), Item.getItemFromBlock(event.state.getBlock()).getUnlocalizedName(stackFromState(event.state)) + ".name", 1);
 	}
 
 
@@ -82,11 +86,11 @@ public final class GeneralEventHandler {
 			ItemStack currentItem = event.entityPlayer.getCurrentEquippedItem();
 			if(currentItem != null && currentItem.getItem() == Items.bucket && event.target instanceof EntityCow)
 				ReCubedAPI.addValueToCategory(LibCategories.COWS_MILKED, event.entityPlayer.getGameProfile().getName(), "item.milk.name", 1);
-
-			if(currentItem != null && currentItem.getItem() == Items.shears && event.target instanceof IShearable && ((IShearable) event.target).isShearable(currentItem, event.target.worldObj, (int) event.target.posX, (int) event.target.posY, (int) event.target.posZ))
+	
+			if(currentItem != null && currentItem.getItem() == Items.shears && event.target instanceof IShearable && ((IShearable) event.target).isShearable(currentItem, event.target.worldObj, new BlockPos(event.target)))
 				ReCubedAPI.addValueToCategory(LibCategories.ANIMALS_SHEARED, event.entityPlayer.getGameProfile().getName(), MiscHelper.getEntityString(event.target), 1);
 
-			if(currentItem != null && currentItem.getItem() instanceof ItemDye && event.target instanceof EntitySheep && !((EntitySheep) event.target).getSheared() && 15 - ((EntitySheep) event.target).getFleeceColor() != currentItem.getItemDamage())
+			if(currentItem != null && currentItem.getItem() instanceof ItemDye && event.target instanceof EntitySheep && !((EntitySheep) event.target).getSheared() && 15 - ((EntitySheep) event.target).getFleeceColor().getDyeDamage() != currentItem.getItemDamage())
 				ReCubedAPI.addValueToCategory(LibCategories.SHEEP_DYED, event.entityPlayer.getGameProfile().getName(), MiscHelper.getStackName(currentItem), 1);
 		}
 	}
@@ -151,27 +155,29 @@ public final class GeneralEventHandler {
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onMessageReceived(CommandEvent event) {
 		if(event.sender instanceof EntityPlayer && ReCubedAPI.validatePlayer((EntityPlayer) event.sender)) {
-			ReCubedAPI.addValueToCategory(LibCategories.MESSAGES_SENT, event.sender.getCommandSenderName(), "/" + event.command.getCommandName(), 1);
+			ReCubedAPI.addValueToCategory(LibCategories.MESSAGES_SENT, event.sender.getName(), "/" + event.command.getCommandName(), 1);
 
-			if(event.command instanceof CommandGive) {
-				String name = event.parameters[1];
-				Item item = CommandBase.getItemByText(event.sender, name);
-				int j = 1;
-				int k = 0;
+			try {
+				if(event.command instanceof CommandGive) {
+					String name = event.parameters[1];
+					Item item = CommandBase.getItemByText(event.sender, name);
+					int j = 1;
+					int k = 0;
 
-				if(item == null)
-					return;
+					if(item == null)
+						return;
 
-				if(event.parameters.length >= 3)
-					j = CommandBase.parseIntBounded(event.sender, event.parameters[2], 1, 64);
+					if(event.parameters.length >= 3)
+						j = CommandBase.parseInt(event.parameters[2], 1, 64);
 
-				if(event.parameters.length >= 4)
-					k = CommandBase.parseInt(event.sender, event.parameters[3]);
+					if(event.parameters.length >= 4)
+						k = CommandBase.parseInt(event.parameters[3]);
 
-				ItemStack stack = new ItemStack(item, j, k);
+					ItemStack stack = new ItemStack(item, j, k);
 
-				ReCubedAPI.addValueToCategory(LibCategories.ITEMS_SPAWNED, event.sender.getCommandSenderName(), MiscHelper.getStackName(stack), 1);
-			}
+					ReCubedAPI.addValueToCategory(LibCategories.ITEMS_SPAWNED, event.sender.getName(), MiscHelper.getStackName(stack), 1);
+				}
+			} catch(NumberInvalidException e) { }
 		}
 	}
 
@@ -230,7 +236,7 @@ public final class GeneralEventHandler {
 				if(!event.entityPlayer.capabilities.isCreativeMode && stack.getItem() == Items.ender_pearl)
 					ReCubedAPI.addValueToCategory(LibCategories.ENDER_PEARLS_THROWN, event.entityPlayer.getGameProfile().getName(), "item.enderPearl.name", 1);
 
-				if(stack.getItem() instanceof ItemRecord && event.action == Action.RIGHT_CLICK_BLOCK && event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z) == Blocks.jukebox)
+				if(stack.getItem() instanceof ItemRecord && event.action == Action.RIGHT_CLICK_BLOCK && event.entityPlayer.worldObj.getBlockState(event.pos).getBlock() == Blocks.jukebox)
 					ReCubedAPI.addValueToCategory(LibCategories.DISCS_PLAYED, event.entityPlayer.getGameProfile().getName(), ((ItemRecord) stack.getItem()).recordName, 1);
 
 				if(event.entityPlayer.dimension == 0 && stack.getItem() == Items.ender_eye)
@@ -276,14 +282,14 @@ public final class GeneralEventHandler {
 					break findStatus;
 				}
 
-				if (Math.abs(event.entityPlayer.posX - event.x) > 3D || Math.abs(event.entityPlayer.posY - event.y) > 3D || Math.abs(event.entityPlayer.posZ - event.z) > 3D) {
+				if (Math.abs(event.entityPlayer.posX - event.pos.getX()) > 3D || Math.abs(event.entityPlayer.posY - event.pos.getY()) > 3D || Math.abs(event.entityPlayer.posZ - event.pos.getZ()) > 3D) {
 					status = EnumStatus.TOO_FAR_AWAY;
 					break findStatus;
 				}
 
 				double d0 = 8.0D;
 				double d1 = 5.0D;
-				List list = event.entityPlayer.worldObj.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox(event.x - d0, event.y - d1, event.z - d0, event.x + d0, event.y + d1, event.z + d0));
+				List list = event.entityPlayer.worldObj.getEntitiesWithinAABB(EntityMob.class, new AxisAlignedBB(event.pos.getX() - d0, event.pos.getY() - d1, event.pos.getZ() - d0, event.pos.getX() + d0, event.pos.getY() + d1, event.pos.getZ() + d0));
 
 				if (!list.isEmpty()) {
 					status = EnumStatus.NOT_SAFE;

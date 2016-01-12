@@ -13,6 +13,8 @@ package vazkii.recubed.client.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import vazkii.recubed.client.core.helper.SafeCallable;
@@ -40,16 +42,16 @@ public class GuiCheckboxButton extends GuiButton {
 			int y = yPosition + 2;
 
 			zLevel += 1;
-			Tessellator tess = Tessellator.instance;
-			tess.startDrawingQuads();
-			tess.addVertexWithUV(x, y + 16, zLevel, 0, 1);
-			tess.addVertexWithUV(x + 16, y + 16, zLevel, 1, 1);
-			tess.addVertexWithUV(x + 16, y, zLevel, 1, 0);
-			tess.addVertexWithUV(x, y, zLevel, 0, 0);
-			tess.draw();
+			WorldRenderer wr = Tessellator.getInstance().getWorldRenderer();
+	        wr.begin(7, DefaultVertexFormats.POSITION_TEX);
+			wr.pos(x, y + 16, zLevel).tex(0, 1).endVertex();
+			wr.pos(x + 16, y + 16, zLevel).tex(1, 1).endVertex();
+			wr.pos(x + 16, y, zLevel).tex(1, 0).endVertex();
+			wr.pos(x, y, zLevel).tex(0, 0).endVertex();
+			Tessellator.getInstance().draw();
 			zLevel -= 1;
 		}
 
-		par1Minecraft.fontRenderer.drawStringWithShadow(StatCollector.translateToLocal(text), xPosition + 25, yPosition + 7, 0xFFFFFF);
+		par1Minecraft.fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal(text), xPosition + 25, yPosition + 7, 0xFFFFFF);
 	}
 }

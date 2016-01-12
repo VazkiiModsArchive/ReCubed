@@ -42,7 +42,7 @@ public final class Category {
 	}
 
 	public void loadFromNBT(NBTTagCompound cmp) {
-		Set<String> names = cmp.func_150296_c();
+		Set<String> names = cmp.getKeySet();
 		for(String name : names) {
 			cmp.getTag(name);
 			if(name.equals("isFrozen"))

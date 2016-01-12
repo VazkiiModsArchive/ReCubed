@@ -21,10 +21,10 @@ import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.common.lib.LibCategories;
 import vazkii.recubed.common.lib.LibObfuscation;
-import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public final class PlayerLastTickData {
 

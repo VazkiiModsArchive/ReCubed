@@ -1,19 +1,18 @@
 package vazkii.recubed.common.network;
 
-import io.netty.buffer.ByteBuf;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.ServerData;
 import vazkii.recubed.common.ReCubed;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 public class PacketCategory implements IMessage, IMessageHandler<PacketCategory, IMessage> {
 
@@ -33,12 +32,8 @@ public class PacketCategory implements IMessage, IMessageHandler<PacketCategory,
 
 		NBTTagCompound cmp = new NBTTagCompound();
 		category.writeToNBT(cmp);
-		try {
-			packet.writeStringToBuffer(name);
-			packet.writeNBTTagCompoundToBuffer(cmp);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		packet.writeString(name);
+		packet.writeNBTTagCompoundToBuffer(cmp);
 	}
 
 	public static Collection<PacketCategory> allCategoryPackets() {

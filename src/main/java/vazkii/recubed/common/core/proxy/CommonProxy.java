@@ -11,6 +11,10 @@
 package vazkii.recubed.common.core.proxy;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.api.internal.ServerData;
 import vazkii.recubed.common.command.CommandCategoryFreeze;
@@ -31,10 +35,6 @@ import vazkii.recubed.common.core.helper.CacheHelper;
 import vazkii.recubed.common.lib.LibCategories;
 import vazkii.recubed.common.network.PacketCategory;
 import vazkii.recubed.common.network.PacketHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 public class CommonProxy {
 

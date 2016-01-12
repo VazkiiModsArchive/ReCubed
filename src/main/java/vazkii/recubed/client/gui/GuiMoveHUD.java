@@ -10,6 +10,8 @@
  */
 package vazkii.recubed.client.gui;
 
+import java.io.IOException;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.StatCollector;
 import vazkii.recubed.client.core.handler.ClientCacheHandler;
@@ -62,7 +64,7 @@ public class GuiMoveHUD extends GuiScreen {
 	}
 
 	@Override
-	protected void mouseClicked(int par1, int par2, int par3) {
+	protected void mouseClicked(int par1, int par2, int par3) throws IOException {
 		if(par3 == 0) {
 			ClientCacheHandler.findCompoundAndWrite();
 			mc.displayGuiScreen(new GuiReCubedMenu());

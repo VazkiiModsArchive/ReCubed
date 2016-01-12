@@ -10,15 +10,16 @@
  */
 package vazkii.recubed.client.gui;
 
+import java.io.IOError;
+import java.io.IOException;
 import java.util.Map;
+
+import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
-
-import org.lwjgl.opengl.GL11;
-
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.PlayerCategoryData;
 import vazkii.recubed.client.renders.PieChartRender;
@@ -42,7 +43,7 @@ public class GuiStatViewer extends GuiCategoryList {
 		buttonList.add(new GuiButton(1, x + 310, y + 170, 80, 20, StatCollector.translateToLocal("recubed.misc.your_stats")));
 
 		String search = StatCollector.translateToLocal("recubed.misc.search");
-		searchBar = new GuiTextField(fontRendererObj, x + fontRendererObj.getStringWidth(search) + 5, y - 20, 150, 18);
+		searchBar = new GuiTextField(0, fontRendererObj, x + fontRendererObj.getStringWidth(search) + 5, y - 20, 150, 18);
 		searchBar.setFocused(true);
 		searchBar.setCanLoseFocus(false);
 		searchBar.setMaxStringLength(32);
@@ -153,7 +154,7 @@ public class GuiStatViewer extends GuiCategoryList {
 	}
 
 	@Override
-	protected void keyTyped(char par1, int par2) {
+	protected void keyTyped(char par1, int par2) throws IOException {
 		super.keyTyped(par1, par2);
 
 		searchBar.textboxKeyTyped(par1, par2);
@@ -194,7 +195,7 @@ public class GuiStatViewer extends GuiCategoryList {
 	}
 
 	@Override
-	protected void mouseClicked(int par1, int par2, int par3) {
+	protected void mouseClicked(int par1, int par2, int par3) throws IOException {
 		if(category instanceof Category && par3 == 0 && hoveredEntry != null && shouldVisitStats() && !hoveredEntry.name.equals("recubed.misc.others")) {
 			Category category = (Category) this.category;
 			this.category = category.playerData.get(hoveredEntry.name);

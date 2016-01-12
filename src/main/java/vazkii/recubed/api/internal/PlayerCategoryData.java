@@ -30,18 +30,18 @@ public final class PlayerCategoryData {
 		int val = 0;
 		for(int i : stats.values())
 			val += i;
-
+	
 		return val;
 	}
 
 	public void loadFromNBT(NBTTagCompound cmp) {
 		stats.clear();
 
-		Set<String> names = cmp.func_150296_c();
+		Set<String> names = cmp.getKeySet();
 		for(String name : names) {
 			NBTBase nbt = cmp.getTag(name);
 			if(nbt instanceof NBTTagInt) {
-				int val = ((NBTTagInt) nbt).func_150287_d();
+				int val = ((NBTTagInt) nbt).getInt();
 				stats.put(name, val);
 			}
 		}

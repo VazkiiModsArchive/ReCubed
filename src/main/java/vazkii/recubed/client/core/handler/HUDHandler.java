@@ -15,12 +15,12 @@ import java.awt.Point;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.ClientData;
 import vazkii.recubed.api.internal.PlayerCategoryData;
 import vazkii.recubed.client.gui.GuiMoveHUD;
 import vazkii.recubed.client.renders.StatBarsRender;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public final class HUDHandler {
 
