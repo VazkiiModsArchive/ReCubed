@@ -23,7 +23,7 @@ import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import vazkii.recubed.common.core.proxy.CommonProxy;
 import vazkii.recubed.common.lib.LibMisc;
 
-@Mod(modid = LibMisc.MOD_ID, name = LibMisc.MOD_NAME, version = LibMisc.MOD_VERSION)
+@Mod(modid = LibMisc.MOD_ID, name = LibMisc.MOD_NAME, version = LibMisc.VERSION)
 public class ReCubed {
 
 	@SidedProxy(clientSide = LibMisc.CLIENT_PROXY, serverSide = LibMisc.COMMON_PROXY)
