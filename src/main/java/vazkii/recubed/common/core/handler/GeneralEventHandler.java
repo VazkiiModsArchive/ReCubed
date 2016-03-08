@@ -249,8 +249,9 @@ public final class GeneralEventHandler {
 					ItemPotion potion = (ItemPotion) stack.getItem();
 					if(ItemPotion.isSplash(stack.getItemDamage())) {
 						List<PotionEffect> effects = potion.getEffects(stack);
-						for(PotionEffect effect : effects)
-							ReCubedAPI.addValueToCategory(LibCategories.POTIONS_THROWN, event.entityPlayer.getGameProfile().getName(), Potion.potionTypes[effect.getPotionID()].getName(), 1);
+						if(effects != null)
+							for(PotionEffect effect : effects)
+								ReCubedAPI.addValueToCategory(LibCategories.POTIONS_THROWN, event.entityPlayer.getGameProfile().getName(), Potion.potionTypes[effect.getPotionID()].getName(), 1);
 					}
 				}
 			}
