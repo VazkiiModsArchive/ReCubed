@@ -10,7 +10,6 @@
  */
 package vazkii.recubed.client.gui;
 
-import java.io.IOError;
 import java.io.IOException;
 import java.util.Map;
 
@@ -18,8 +17,8 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.util.text.TextFormatting;
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.PlayerCategoryData;
 import vazkii.recubed.client.renders.PieChartRender;
@@ -39,17 +38,17 @@ public class GuiStatViewer extends GuiCategoryList {
 		super.initGui();
 
 		buttonList.clear();
-		buttonList.add(new GuiButton(0, x + 340, y + 145, 50, 20, StatCollector.translateToLocal("recubed.misc.back")));
-		buttonList.add(new GuiButton(1, x + 310, y + 170, 80, 20, StatCollector.translateToLocal("recubed.misc.your_stats")));
+		buttonList.add(new GuiButton(0, x + 340, y + 145, 50, 20, I18n.format("recubed.misc.back")));
+		buttonList.add(new GuiButton(1, x + 310, y + 170, 80, 20, I18n.format("recubed.misc.your_stats")));
 
-		String search = StatCollector.translateToLocal("recubed.misc.search");
+		String search = I18n.format("recubed.misc.search");
 		searchBar = new GuiTextField(0, fontRendererObj, x + fontRendererObj.getStringWidth(search) + 5, y - 20, 150, 18);
 		searchBar.setFocused(true);
 		searchBar.setCanLoseFocus(false);
 		searchBar.setMaxStringLength(32);
 		searchBar.setVisible(false);
 
-		buttonList.add(visit = new GuiButton(2, x + guiWidth - 70, y - 20, 70, 20, StatCollector.translateToLocal("recubed.misc.see_stats")));
+		buttonList.add(visit = new GuiButton(2, x + guiWidth - 70, y - 20, 70, 20, I18n.format("recubed.misc.see_stats")));
 		visit.visible = false;
 	}
 
@@ -60,17 +59,17 @@ public class GuiStatViewer extends GuiCategoryList {
 		hoveredEntry = null;
 		PieChartRender pie = category instanceof Category ? PieChartRender.fromCategory((Category) category) : PieChartRender.fromPlayerData((PlayerCategoryData) category);
 		if(pie == null)
-			drawCenteredString(fontRendererObj, StatCollector.translateToLocal("recubed.no_data"), x + 250, y + 95, 0xFF7777);
+			drawCenteredString(fontRendererObj, I18n.format("recubed.no_data"), x + 250, y + 95, 0xFF7777);
 		else{
 			hoveredEntry = pie.renderChart(80, x + 250, y + 100, par1, par2);
-			String text = String.format(StatCollector.translateToLocal("recubed.misc.total"), pie.totalVal);
+			String text = I18n.format("recubed.misc.total", pie.totalVal);
 			if(fromCurrentCategoryInt().isFrozen)
-				text = text + EnumChatFormatting.AQUA + StatCollector.translateToLocal("recubed.misc.frozen_suffix");
+				text = text + TextFormatting.AQUA + I18n.format("recubed.misc.frozen_suffix");
 
 			fontRendererObj.drawStringWithShadow(text, x + 134, y + 188, 0xFFFFFF);
 		}
 
-		String displayString = StatCollector.translateToLocal(fromCurrentCategoryInt().name);
+		String displayString = I18n.format(fromCurrentCategoryInt().name);
 		int width = fontRendererObj.getStringWidth(displayString);
 		int xPos = x + 250 - width / 2;
 
@@ -88,13 +87,13 @@ public class GuiStatViewer extends GuiCategoryList {
 
 		searchBar.drawTextBox();
 
-		String search = StatCollector.translateToLocal("recubed.misc.search");
+		String search = I18n.format("recubed.misc.search");
 		int length = fontRendererObj.getStringWidth(search);
 		String text = searchBar.getText();
 
 		if(text.isEmpty()) {
 			GL11.glEnable(GL11.GL_BLEND);
-			fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal("recubed.misc.type_to_search"), x + length + 10, y- 15, 0x66FFFFFF);
+			fontRendererObj.drawStringWithShadow(I18n.format("recubed.misc.type_to_search"), x + length + 10, y- 15, 0x66FFFFFF);
 			GL11.glDisable(GL11.GL_BLEND);
 			visit.visible = false;
 		} else {
@@ -133,7 +132,7 @@ public class GuiStatViewer extends GuiCategoryList {
 				visit.visible = category instanceof Category;
 
 				if(mc.gameSettings.advancedItemTooltips)
-					fontRendererObj.drawStringWithShadow(EnumChatFormatting.ITALIC + unlocalized, x + length + 10, y - 32, 0xFFFFFF);
+					fontRendererObj.drawStringWithShadow(TextFormatting.ITALIC + unlocalized, x + length + 10, y - 32, 0xFFFFFF);
 
 			} else {
 				fontRendererObj.drawStringWithShadow("0 (0%)", x + length + 160, y - 15, 0xFFFFFF);
@@ -145,7 +144,7 @@ public class GuiStatViewer extends GuiCategoryList {
 	String unlocalized;
 	public <T> T getValueFromCaseInsensitveString(Map<String, T> map, String key) {
 		for(String k : map.keySet())
-			if(StatCollector.translateToLocal(k).compareToIgnoreCase(key) == 0) {
+			if(I18n.format(k).compareToIgnoreCase(key) == 0) {
 				unlocalized = k;
 				return map.get(k);
 			}

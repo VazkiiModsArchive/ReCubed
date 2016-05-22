@@ -19,7 +19,6 @@ import vazkii.recubed.client.core.handler.ClientCacheHandler;
 import vazkii.recubed.client.core.handler.ClientTickHandler;
 import vazkii.recubed.client.core.handler.HUDHandler;
 import vazkii.recubed.client.core.handler.KeybindHandler;
-import vazkii.recubed.client.core.handler.LocalizationHandler;
 import vazkii.recubed.common.core.handler.ConfigHandler;
 import vazkii.recubed.common.core.proxy.CommonProxy;
 import vazkii.recubed.common.network.PacketCategory;
@@ -31,14 +30,13 @@ public class ClientProxy extends CommonProxy {
 		super.preInit(event);
 
 		if(!ConfigHandler.useCogwheel)
-			FMLCommonHandler.instance().bus().register(new KeybindHandler());
+			MinecraftForge.EVENT_BUS.register(new KeybindHandler());
 	}
 
 	@Override
 	public void init(FMLInitializationEvent event) {
 		super.init(event);
-		LocalizationHandler.loadLangs();
-		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
+		MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
 		MinecraftForge.EVENT_BUS.register(new HUDHandler());
 
 		ClientCacheHandler.findCompoundAndLoad();

@@ -12,8 +12,8 @@ package vazkii.recubed.client.gui;
 
 import java.io.IOException;
 
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.util.text.TextFormatting;
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.PlayerCategoryData;
 import vazkii.recubed.client.core.handler.ClientCacheHandler;
@@ -24,7 +24,7 @@ public class GuiStatSelector extends GuiStatViewer {
 	public void drawScreen(int par1, int par2, float par3) {
 		super.drawScreen(par1, par2, par3);
 
-		drawCenteredString(fontRendererObj, EnumChatFormatting.GOLD + StatCollector.translateToLocal("recubed.misc.enter"), x + guiWidth / 2, y + guiHeight + 5, 0xFFFFFF);
+		drawCenteredString(fontRendererObj, TextFormatting.GOLD + I18n.format("recubed.misc.enter"), x + guiWidth / 2, y + guiHeight + 5, 0xFFFFFF);
 	}
 
 	@Override

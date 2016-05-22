@@ -18,7 +18,8 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.text.TextComponentTranslation;
 import vazkii.recubed.common.core.helper.CacheHelper;
 import vazkii.recubed.common.core.helper.MiscHelper;
 import vazkii.recubed.common.lib.LibMisc;
@@ -36,7 +37,7 @@ public class CommandDelBackup extends CommandBase {
 	}
 
 	@Override
-	public void processCommand(ICommandSender icommandsender, String[] astring) throws CommandException {
+	public void execute(MinecraftServer server, ICommandSender icommandsender, String[] astring) throws CommandException {
 		if(astring.length != 1)
 			throw new WrongUsageException(getCommandUsage(icommandsender), (Object[]) astring);
 
@@ -51,7 +52,7 @@ public class CommandDelBackup extends CommandBase {
 				throw new CommandException("recubed.commands.no_backup");
 
 			file.delete();
-			icommandsender.addChatMessage(new ChatComponentTranslation("recubed.commands.command_sucessful"));
+			icommandsender.addChatMessage(new TextComponentTranslation("recubed.commands.command_sucessful"));
 		} catch (IOException e) {
 			throw new CommandException(e.getMessage(), (Object[]) e.getStackTrace());
 		}

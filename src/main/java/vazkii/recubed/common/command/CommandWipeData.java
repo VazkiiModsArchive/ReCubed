@@ -14,7 +14,8 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.text.TextComponentTranslation;
 import vazkii.recubed.api.internal.ServerData;
 import vazkii.recubed.common.core.helper.MiscHelper;
 
@@ -31,12 +32,12 @@ public class CommandWipeData extends CommandBase {
 	}
 
 	@Override
-	public void processCommand(ICommandSender icommandsender, String[] astring) throws CommandException {
+	public void execute(MinecraftServer server, ICommandSender icommandsender, String[] astring) throws CommandException {
 		if(icommandsender instanceof EntityPlayer && !MiscHelper.isPlayerAllowedToUseCommands(icommandsender.getName()))
 			throw new CommandException("recubed.commands.no_perms");
 
 		ServerData.wipe();
-		icommandsender.addChatMessage(new ChatComponentTranslation("recubed.commands.command_sucessful"));
+		icommandsender.addChatMessage(new TextComponentTranslation("recubed.commands.command_sucessful"));
 	}
 
 	@Override

@@ -54,7 +54,6 @@ public class CommonProxy {
 		registerCategory(LibCategories.ENDER_PEARLS_THROWN);
 		registerCategory(LibCategories.ENTITIES_RIDDEN);
 		registerCategory(LibCategories.EXPERIENCE_GATHERED);
-		registerCategory(LibCategories.FOOD_EATEN);
 		registerCategory(LibCategories.ITEMS_BROKEN);
 		registerCategory(LibCategories.ITEMS_DROPPED);
 		registerCategory(LibCategories.ITEMS_PICKED_UP);
@@ -64,7 +63,6 @@ public class CommonProxy {
 		registerCategory(LibCategories.MOBS_KILLED);
 		registerCategory(LibCategories.MESSAGES_SENT);
 		registerCategory(LibCategories.PLAYER_KILLS);
-		registerCategory(LibCategories.POTIONS_DRANK);
 		registerCategory(LibCategories.POTIONS_GOTTEN);
 		registerCategory(LibCategories.POTIONS_THROWN);
 		registerCategory(LibCategories.SHEEP_DYED);
@@ -84,8 +82,8 @@ public class CommonProxy {
 	}
 
 	public void init(FMLInitializationEvent event) {
-		FMLCommonHandler.instance().bus().register(new ServerTickHandler());
-		FMLCommonHandler.instance().bus().register(new PlayerTracker());
+		MinecraftForge.EVENT_BUS.register(new ServerTickHandler());
+		MinecraftForge.EVENT_BUS.register(new PlayerTracker());
 
 		MinecraftForge.EVENT_BUS.register(new WorldSaveHandler());
 		MinecraftForge.EVENT_BUS.register(new GeneralEventHandler());

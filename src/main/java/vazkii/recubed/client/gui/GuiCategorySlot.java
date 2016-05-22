@@ -12,7 +12,7 @@ package vazkii.recubed.client.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.StatCollector;
+import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.client.GuiScrollingList;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.api.internal.Category;
@@ -62,6 +62,6 @@ public class GuiCategorySlot extends GuiScrollingList {
 		if(category.playerData.get(mc.thePlayer.getGameProfile().getName()).getTotalValue() == 0)
 			color = 0x777777;
 
-		mc.fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal(categoryName), j - 110, k + 2, color);
+		mc.fontRendererObj.drawStringWithShadow(I18n.format(categoryName), j - 110, k + 2, color);
 	}
 }

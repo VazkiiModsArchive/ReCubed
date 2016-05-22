@@ -20,14 +20,12 @@ import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.renderer.vertex.VertexFormat;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
+import net.minecraft.util.text.TextFormatting;
 import vazkii.recubed.client.core.helper.TransientScaledResolution;
 import vazkii.recubed.client.gui.GuiReCubedMenu;
 import vazkii.recubed.client.lib.LibResources;
@@ -47,7 +45,7 @@ public final class InventoryCogwheelRender {
 
 			if(creative) {
 				GuiContainerCreative container = (GuiContainerCreative) mc.currentScreen;
-				if(container.getSelectedTabIndex() == CreativeTabs.tabInventory.getTabIndex()) {
+				if(container.getSelectedTabIndex() == CreativeTabs.INVENTORY.getTabIndex()) {
 					x -= 7;
 					y += 13;
 				} else return;
@@ -60,7 +58,7 @@ public final class InventoryCogwheelRender {
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
 			mc.renderEngine.bindTexture(cogwheel);
-			WorldRenderer wr = Tessellator.getInstance().getWorldRenderer();
+			VertexBuffer wr = Tessellator.getInstance().getBuffer();
 
 			wr.begin(7, DefaultVertexFormats.POSITION_TEX);
 			wr.pos(x * 2, y * 2 + 16, 0).tex(0, 1).endVertex();
@@ -76,7 +74,7 @@ public final class InventoryCogwheelRender {
 			int mouseY = res.getScaledHeight() - Mouse.getY() * res.getScaledHeight() / mc.displayHeight;
 
 			if(mouseX >= x && mouseX < x + 8 && mouseY >= y && mouseY < y + 8) {
-				vazkii.recubed.client.core.helper.RenderHelper.renderTooltip(mouseX, mouseY, Arrays.asList(EnumChatFormatting.RED + StatCollector.translateToLocal("recubed.misc.openMenu")));
+				vazkii.recubed.client.core.helper.RenderHelper.renderTooltip(mouseX, mouseY, Arrays.asList(TextFormatting.RED + I18n.format("recubed.misc.openMenu")));
 
 				if(Mouse.isButtonDown(0))
 					mc.displayGuiScreen(new GuiReCubedMenu());

@@ -18,7 +18,7 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.StatCollector;
+import net.minecraft.client.resources.I18n;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.ClientData;
@@ -76,8 +76,8 @@ public class GuiCategoryList extends GuiScreen {
 
 			@Override
 			public int compare(Integer a, Integer b) {
-				String categoryA = StatCollector.translateToLocal(ReCubedAPI.categories.get(a));
-				String categoryB = StatCollector.translateToLocal(ReCubedAPI.categories.get(b));
+				String categoryA = I18n.format(ReCubedAPI.categories.get(a));
+				String categoryB = I18n.format(ReCubedAPI.categories.get(b));
 
 				return categoryA.compareTo(categoryB);
 			}

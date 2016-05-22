@@ -48,7 +48,7 @@ public final class PlayerTracker {
 	@SubscribeEvent
 	public void onPlayerChangedDimension(PlayerChangedDimensionEvent event) {
 		if(ReCubedAPI.validatePlayer(event.player))
-			ReCubedAPI.addValueToCategory(LibCategories.DIMENSIONS_CHANGED, event.player.getGameProfile().getName(), event.player.worldObj.provider.getDimensionName(), 1);
+			ReCubedAPI.addValueToCategory(LibCategories.DIMENSIONS_CHANGED, event.player.getGameProfile().getName(), event.player.worldObj.provider.getDimensionType().getName(), 1);
 	}
 
 }

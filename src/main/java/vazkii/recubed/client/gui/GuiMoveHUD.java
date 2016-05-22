@@ -13,7 +13,7 @@ package vazkii.recubed.client.gui;
 import java.io.IOException;
 
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.StatCollector;
+import net.minecraft.client.resources.I18n;
 import vazkii.recubed.client.core.handler.ClientCacheHandler;
 
 public class GuiMoveHUD extends GuiScreen {
@@ -33,8 +33,8 @@ public class GuiMoveHUD extends GuiScreen {
 		int my = par2;
 		int quadrant = getQuadrant(width, height, mx, my);
 
-		drawCenteredString(fontRendererObj, StatCollector.translateToLocal("recubed.misc.click_to_set"), width / 2, 10, 0xFFFFFF);
-		drawCenteredString(fontRendererObj, StatCollector.translateToLocal("recubed.misc.escape_to_reset"), width / 2, 21, 0xFFFFFF);
+		drawCenteredString(fontRendererObj, I18n.format("recubed.misc.click_to_set"), width / 2, 10, 0xFFFFFF);
+		drawCenteredString(fontRendererObj, I18n.format("recubed.misc.escape_to_reset"), width / 2, 21, 0xFFFFFF);
 
 		switch(quadrant) {
 		case 0 : {

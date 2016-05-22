@@ -1,7 +1,7 @@
 package vazkii.recubed.client.core.helper;
 
 import net.minecraft.client.settings.GameSettings;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 
 // Copy of ScaledResolution with 1.7.2 and 1.7.10 support. Will drop once 1.7.10 is in full use
 public class TransientScaledResolution {

@@ -19,6 +19,7 @@ import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import vazkii.recubed.api.internal.ServerData;
 import vazkii.recubed.common.lib.LibMisc;
 
@@ -29,7 +30,7 @@ public class CacheHelper {
 	}
 
 	public static File getCacheFile(String loc_, String name, boolean create) throws IOException{
-		MinecraftServer server = MinecraftServer.getServer();
+		MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 
 		WorldServer world = server.worldServers[0];
 		File loc = world.getChunkSaveLocation();

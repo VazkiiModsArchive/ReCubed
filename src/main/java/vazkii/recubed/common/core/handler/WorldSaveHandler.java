@@ -12,6 +12,7 @@ package vazkii.recubed.common.core.handler;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import vazkii.recubed.common.core.helper.CacheHelper;
 import vazkii.recubed.common.network.PacketCategory;
@@ -21,9 +22,9 @@ public final class WorldSaveHandler {
 
 	@SubscribeEvent
 	public void onWorldSave(WorldEvent.Save event) {
-		MinecraftServer server = MinecraftServer.getServer();
+		MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 
-		if(event.world == server.worldServers[0]) {
+		if(event.getWorld() == server.worldServers[0]) {
 			CacheHelper.findCompoundAndWrite();
 
 			for(PacketCategory packet : PacketCategory.allCategoryPackets())

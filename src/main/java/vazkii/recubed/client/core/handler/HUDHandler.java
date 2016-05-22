@@ -26,8 +26,8 @@ public final class HUDHandler {
 
 	@SubscribeEvent
 	public void onDrawScreen(RenderGameOverlayEvent.Post event) {
-		if(event.type == ElementType.ALL && shouldRenderHUD()) {
-			Point coords = getCoords(event.resolution.getScaledWidth(), event.resolution.getScaledHeight(), ClientCacheHandler.hudRelativeTo, ClientCacheHandler.hudPosX, ClientCacheHandler.hudPosY);
+		if(event.getType() == ElementType.ALL && shouldRenderHUD()) {
+			Point coords = getCoords(event.getResolution().getScaledWidth(), event.getResolution().getScaledHeight(), ClientCacheHandler.hudRelativeTo, ClientCacheHandler.hudPosX, ClientCacheHandler.hudPosY);
 
 			String categoryName = ClientCacheHandler.hudCategory;
 

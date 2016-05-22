@@ -23,10 +23,10 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.PlayerCategoryData;
 import vazkii.recubed.client.core.handler.ClientCacheHandler;
@@ -72,7 +72,7 @@ public final class StatBarsRender {
 		if(category == null)
 			return null;
 
-		StatBarsRender render = new StatBarsRender(true, StatCollector.translateToLocal(category.name));
+		StatBarsRender render = new StatBarsRender(true, I18n.format(category.name));
 		for(String s : category.playerData.keySet())
 			render.entries.add(new Entry(category.getTotalValueFromPlayerData(s), s));
 
@@ -88,7 +88,7 @@ public final class StatBarsRender {
 		if(data == null || category == null)
 			return null;
 
-		StatBarsRender render = new StatBarsRender(false, StatCollector.translateToLocal(category.name) + " - " + data.name);
+		StatBarsRender render = new StatBarsRender(false, I18n.format(category.name) + " - " + data.name);
 		if(data != null) {
 			for(String s : data.stats.keySet())
 				render.entries.add(new Entry(data.stats.get(s), s));
@@ -216,8 +216,8 @@ public final class StatBarsRender {
 		mc.renderEngine.bindTexture(hudBar);
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		
-		float f = 1F;
-		WorldRenderer wr = Tessellator.getInstance().getWorldRenderer();
+		float f = 1F;	
+		VertexBuffer wr = Tessellator.getInstance().getBuffer();
 		wr.begin(7, DefaultVertexFormats.POSITION_TEX);
 		wr.pos(x * 2, (y + 8) * 2, 0).tex(0, 1).endVertex();
 		wr.pos((x + width) * 2, (y + 8) * 2, 0).tex(1, 1).endVertex();
@@ -243,8 +243,8 @@ public final class StatBarsRender {
 			String valAndPercentageStr = ": " + entry.val + " (" + entry.percentage + "%)";
 			int remainingLenght = width * 2 - 4 - (mc.fontRendererObj.getStringWidth(posStr) + mc.fontRendererObj.getStringWidth(valAndPercentageStr));
 
-			String name = StatCollector.translateToLocal(entry.name);
-			String nameStr = mc.fontRendererObj.trimStringToWidth(StatCollector.translateToLocal(entry.name), remainingLenght);
+			String name = I18n.format(entry.name);
+			String nameStr = mc.fontRendererObj.trimStringToWidth(I18n.format(entry.name), remainingLenght);
 			if(!name.equals(nameStr)) {
 				String elipsis = "(...)";
 				remainingLenght -= mc.fontRendererObj.getStringWidth(elipsis);

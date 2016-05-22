@@ -13,10 +13,10 @@ package vazkii.recubed.client.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 import vazkii.recubed.client.core.helper.SafeCallable;
 import vazkii.recubed.client.lib.LibResources;
 
@@ -42,7 +42,7 @@ public class GuiCheckboxButton extends GuiButton {
 			int y = yPosition + 2;
 
 			zLevel += 1;
-			WorldRenderer wr = Tessellator.getInstance().getWorldRenderer();
+			VertexBuffer wr = Tessellator.getInstance().getBuffer();
 	        wr.begin(7, DefaultVertexFormats.POSITION_TEX);
 			wr.pos(x, y + 16, zLevel).tex(0, 1).endVertex();
 			wr.pos(x + 16, y + 16, zLevel).tex(1, 1).endVertex();
@@ -52,6 +52,6 @@ public class GuiCheckboxButton extends GuiButton {
 			zLevel -= 1;
 		}
 
-		par1Minecraft.fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal(text), xPosition + 25, yPosition + 7, 0xFFFFFF);
+		par1Minecraft.fontRendererObj.drawStringWithShadow(I18n.format(text), xPosition + 25, yPosition + 7, 0xFFFFFF);
 	}
 }

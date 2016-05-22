@@ -21,17 +21,17 @@ import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionUtils;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.common.lib.LibCategories;
-import vazkii.recubed.common.lib.LibObfuscation;
 
 public final class PlayerLastTickData {
 
 	int xp;
 	int level;
 	boolean riding;
-	List<Integer> potionEffects = new ArrayList();
+	List<Potion> potionEffects = new ArrayList();
 
 	public void tickPlayer(EntityPlayer player) {
 		if(!ReCubedAPI.validatePlayer(player))
@@ -39,30 +39,13 @@ public final class PlayerLastTickData {
 		String name = player.getGameProfile().getName();
 
 		// ENTITIES RIDDEN
-		if(!riding && player.ridingEntity != null)
-			ReCubedAPI.addValueToCategory(LibCategories.ENTITIES_RIDDEN, name, MiscHelper.getEntityString(player.ridingEntity), 1);
+		if(!riding && player.getRidingEntity() != null)
+			ReCubedAPI.addValueToCategory(LibCategories.ENTITIES_RIDDEN, name, MiscHelper.getEntityString(player.getRidingEntity()), 1);
 
 		// EXPERIENCE GATHERED
 		if(player.experienceTotal > xp) {
 			int extra = player.experienceTotal - xp;
 			ReCubedAPI.addValueToCategory(LibCategories.EXPERIENCE_GATHERED, name, "recubed.misc.experience", extra);
-		}
-
-		// FOOD EATEN + POTIONS DRANK
-		ItemStack itemInUse = ReflectionHelper.getPrivateValue(EntityPlayer.class, player, LibObfuscation.ITEM_IN_USE);
-		int itemInUseCount = ReflectionHelper.getPrivateValue(EntityPlayer.class, player, LibObfuscation.ITEM_IN_USE_COUNT);
-		if(itemInUse != null && itemInUseCount == 1) {
-			Item item = itemInUse.getItem();
-
-			if(item instanceof ItemFood)
-				ReCubedAPI.addValueToCategory(LibCategories.FOOD_EATEN, name, MiscHelper.getStackName(itemInUse), 1);
-
-			if(item instanceof ItemPotion) {
-				List<PotionEffect> effects = ((ItemPotion) item).getEffects(itemInUse);
-				if(effects != null)
-					for(PotionEffect effect : effects)
-						ReCubedAPI.addValueToCategory(LibCategories.POTIONS_DRANK, name, Potion.potionTypes[effect.getPotionID()].getName(), 1);
-			}
 		}
 
 		// LEVELS GAINED
@@ -74,8 +57,8 @@ public final class PlayerLastTickData {
 		// POTIONS AFFECTED BY
 		Collection<PotionEffect> effects = player.getActivePotionEffects();
 		for(PotionEffect effect : effects) {
-			if(!potionEffects.contains(effect.getPotionID()))
-				ReCubedAPI.addValueToCategory(LibCategories.POTIONS_GOTTEN, name, Potion.potionTypes[effect.getPotionID()].getName(), 1);
+			if(!potionEffects.contains(effect.getPotion()))
+				ReCubedAPI.addValueToCategory(LibCategories.POTIONS_GOTTEN, name, effect.getPotion().getName(), 1);
 		}
 
 		setData(player);
@@ -84,13 +67,13 @@ public final class PlayerLastTickData {
 	public void setData(EntityPlayer player) {
 		xp = player.experienceTotal;
 		level = player.experienceLevel;
-		riding = player.ridingEntity != null;
+		riding = player.getRidingEntity() != null;
 
 		potionEffects.clear();
 		Collection<PotionEffect> effects = player.getActivePotionEffects();
 		if(effects != null)
 			for(PotionEffect effect : effects)
-				potionEffects.add(effect.getPotionID());
+				potionEffects.add(effect.getPotion());
 	}
 
 }

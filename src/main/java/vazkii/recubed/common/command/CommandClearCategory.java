@@ -15,7 +15,8 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.text.TextComponentTranslation;
 import vazkii.recubed.api.ReCubedAPI;
 import vazkii.recubed.api.internal.Category;
 import vazkii.recubed.api.internal.PlayerCategoryData;
@@ -35,7 +36,7 @@ public class CommandClearCategory extends CommandBase {
 	}
 
 	@Override
-	public void processCommand(ICommandSender icommandsender, String[] astring)  throws CommandException  {
+	public void execute(MinecraftServer server, ICommandSender icommandsender, String[] astring)  throws CommandException  {
 		if(astring.length != 1)
 			throw new WrongUsageException(getCommandUsage(icommandsender), (Object[]) astring);
 
@@ -48,7 +49,7 @@ public class CommandClearCategory extends CommandBase {
 
 		for(String s : category.playerData.keySet())
 			category.playerData.put(s, new PlayerCategoryData(s));
-		icommandsender.addChatMessage(new ChatComponentTranslation("recubed.commands.command_sucessful"));
+		icommandsender.addChatMessage(new TextComponentTranslation("recubed.commands.command_sucessful"));
 	}
 
 	@Override

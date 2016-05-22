@@ -35,11 +35,11 @@ public final class ConfigHandler {
 		config.load();
 
 		Property propPacketInterval = config.get(CATEGORY_SERVER, "packet_interval", packetInterval);
-		propPacketInterval.comment = "The interval in which packets are sent to client, default is 40 ticks (2 secs)";
+		propPacketInterval.setComment("The interval in which packets are sent to client, default is 40 ticks (2 secs)");
 		packetInterval = propPacketInterval.getInt(packetInterval);
 
 		Property propCommandPlayers = config.get(CATEGORY_SERVER, "command_players", "");
-		propCommandPlayers.comment = "A comma separated list of players allowed to use comamnds. Leave empty for all OPs";
+		propCommandPlayers.setComment("A comma separated list of players allowed to use comamnds. Leave empty for all OPs");
 		String commandPlayersStr = propCommandPlayers.getString().trim();
 		if(!commandPlayersStr.isEmpty()) {
 			List<String> commandPlayers = Arrays.asList(commandPlayersStr.split(","));
@@ -48,7 +48,7 @@ public final class ConfigHandler {
 		}
 
 		Property propUseCogwheel = config.get(CATEGORY_CLIENT, "use_cogwheel", useCogwheel);
-		propUseCogwheel.comment = "Set to true to use the cogwheel button in the inventory, false to register a keybind";
+		propUseCogwheel.setComment("Set to true to use the cogwheel button in the inventory, false to register a keybind");
 		useCogwheel = propUseCogwheel.getBoolean(useCogwheel);
 
 
