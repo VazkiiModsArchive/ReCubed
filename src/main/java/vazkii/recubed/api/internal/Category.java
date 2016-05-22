@@ -42,6 +42,9 @@ public final class Category {
 	}
 
 	public void loadFromNBT(NBTTagCompound cmp) {
+		if(cmp == null)
+			return;
+		
 		Set<String> names = cmp.getKeySet();
 		for(String name : names) {
 			cmp.getTag(name);
